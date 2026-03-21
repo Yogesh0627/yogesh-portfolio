@@ -6,7 +6,7 @@ const ContactPage = () => {
     return (
         <div className="flex min-h-screen items-start justify-start">
             <Container className="min-h-screen pt-10 px-8 md:pt-20 md:pb-10">
-                <Scales/>
+                <Scales />
                 <Heading >Contact Me</Heading>
                 <SubHeading>
                     I'm open to freelancing offers. Reach  out to me to inquire more about my work.

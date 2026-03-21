@@ -9,11 +9,11 @@ const MyPortfolio = () => {
   return (
     <div className="flex min-h-screen items-start justify-start">
       <Container className="min-h-screen px-4 md:px-8 pt-10 md:pt-20 md:pb-10">
-        <Scales/>
+        <Scales />
         <div className="flex flex-col sm:flex-row sm:items-center">
           <Heading>Yogesh Chauhan</Heading>
           <LayoutTextFlip
-            words = {[
+            words={[
               "Software Engineer",
               "Front-end Engineer",
               "Design Engineer",
@@ -22,15 +22,15 @@ const MyPortfolio = () => {
           />
         </div>
         <SubHeading>
-          I'm a software engineer with passion for building scalable and efficient
-          systems. I'm currently as a software engineer at WorkCompanion.
+          I&apos;m a software engineer with a passion for building scalable and efficient
+          systems. I&apos;m currently working as a software engineer at WorkCompanion.
         </SubHeading>
 
         <Projects projects={projectsData.slice(0, 3)} />
         <LandingBlogs />
-        <Experience/>
+        <Experience />
         <Testimonials />
-        <GetInTouch/>
+        <GetInTouch />
       </Container>
 
     </div>

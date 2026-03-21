@@ -108,7 +108,7 @@ const Timeline = () => {
             </SectionHeading>
             {timelineData.map((year, index) => (
             <div key={year.title} className="mb-4">
-                <motion.h2 className="font-bold text-primary px-2 py-0.5 mb-2 rounded-md w-fit shadow-custom"
+                <motion.h3 className="font-bold text-primary px-2 py-0.5 mb-2 rounded-md w-fit shadow-custom"
                     // style={{ boxShadow: "var(--shadow1)" }}
 
                     initial={{
@@ -125,14 +125,14 @@ const Timeline = () => {
                         delay: 0.1 * index
 
                     }}
-                >{year.title}</motion.h2>
+                >{year.title}</motion.h3>
 
                 <div className="flex flex-col gap-4">
 
                     {year.content.map((item, idx) => <div key={item.title} className="pl-4">
 
                         <Step isInView={isInView} idx={idx}>
-                            <motion.h3
+                            <motion.h4
                                 initial={{
                                     opacity: 0,
                                     y: -10
@@ -147,7 +147,7 @@ const Timeline = () => {
                                     delay: 0.2 * idx
                                 }}
                                 className="text-neutral-600 dark:text-neutral-400"
-                            >{item.title}</motion.h3>
+                            >{item.title}</motion.h4>
                         </Step>
 
 

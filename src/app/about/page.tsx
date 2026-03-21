@@ -1,26 +1,35 @@
 import { Collage, Timeline, Scales } from "@/components"
 import { Container, Heading, SectionHeading, SubHeading } from "@/components/ui"
+import { Metadata } from "next"
 
 
+// Unique metadata for the About page
+export const metadata: Metadata = {
+    title: "About",
+    description: "Learn more about Yogesh Chauhan, his journey to Software Engineering, and his passion for travel and scalable systems.",
+}
 
 const About = () => {
     return (
         <div className="flex min-h-screen items-start justify-start">
             <Container className="min-h-screen pt-10 px-8 md:pt-20 md:pb-10">
-                <Scales/>
+                <Scales />
                 <Heading>About Me</Heading>
                 <SubHeading>
-                    I'm a software engineer with passion for building scalable and efficient
-                    systems. I'm currently as a software engineer at WorkCompanion.
+                    I&apos;m a software engineer with a passion for building scalable and efficient
+                    systems. I&apos;m currently working as a software engineer at WorkCompanion.
                 </SubHeading>
-                <div className="px-4 py-6">
+                <section className="px-4 py-6">
                     <SectionHeading >
                         Travelling is in my blood
                     </SectionHeading>
 
                     <Collage />
-                </div>
-                <Timeline />
+                </section>
+
+                <section>
+                    <Timeline />
+                </section>
 
             </Container>
         </div>

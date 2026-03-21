@@ -1,6 +1,13 @@
 "use client"
+import { Metadata } from 'next'
 import React, { useState } from 'react'
 import { toast } from 'sonner'
+
+
+export const metadata: Metadata = {
+    title: "Contact",
+    description: "Get in touch with Yogesh Chauhan for software engineering opportunities, freelancing, or collaboration.",
+}
 
 const ContactForm = () => {
 
@@ -40,15 +47,15 @@ const ContactForm = () => {
             <div className="flex flex-col gap-5 max-w-lg mx-auto ">
                 <div className='flex flex-col gap-2'>
                     <label htmlFor="name" className='text-sm font-medium tracking-tight text-neutral-600'>Full name</label>
-                    <input id='name' type="text" name='name' placeholder='Yogesh Chauhan' className='px-2 py-2 rounded-md text-sm focus:ring-primary focus:ring-2  focus:outline-none shadow-custom' onChange={handleChange} />
+                    <input id='name' type="text" name='name' required value={formData.name} placeholder='Yogesh Chauhan' className='px-2 py-2 rounded-md text-sm focus:ring-primary focus:ring-2  focus:outline-none shadow-custom' onChange={handleChange} />
                 </div>
                 <div className='flex flex-col gap-2'>
                     <label htmlFor="email" className='text-sm font-medium tracking-tight text-neutral-600'>Email</label>
-                    <input id='email' type="text" name='email' placeholder='yogesh@gmail.com' className='px-2 py-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-custom' onChange={handleChange} />
+                    <input id='email' type="email" required name='email' value={formData.email} placeholder='yogesh@gmail.com' className='px-2 py-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-custom' onChange={handleChange} />
                 </div>
                 <div className='flex flex-col gap-2'>
                     <label htmlFor="message" className='text-sm font-medium tracking-tight text-neutral-600'>Message</label>
-                    <textarea id='message' name='message' placeholder='Write a message ...' rows={5} className='resize-none px-2 py-1 rounded-md text-sm  focus:ring-2 focus:ring-primary focus:outline-none shadow-custom' onChange={handleChange} />
+                    <textarea id='message' name='message' required value={formData.message} placeholder='Write a message ...' rows={5} className='resize-none px-2 py-1 rounded-md text-sm  focus:ring-2 focus:ring-primary focus:outline-none shadow-custom' onChange={handleChange} />
                 </div>
 
                 {/* <button type='submit' className='rounded-md bg-text-primary px-4 py-2 text-white cursor-pointer'>Send message</button> */}

@@ -20,11 +20,12 @@ const LayoutTextFlip = ({ words }: Props) => {
   return (
     <motion.div
       layout
+      aria-live="polite"
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
       className="text-secondary relative order-first mx-4 mb-2 flex w-fit justify-center overflow-hidden rounded-md px-2 py-0.5 pt-0 text-sm shadow-custom sm:order-last sm:mx-0 sm:mb-0"
     >
       <AnimatePresence mode="wait">
-        <motion.span
+        <motion.h2
           key={words[index]}
           initial={{
             y: -20,
@@ -55,7 +56,7 @@ const LayoutTextFlip = ({ words }: Props) => {
           className="whitespace-nowrap"
         >
           {words[index]}
-        </motion.span>
+        </motion.h2>
       </AnimatePresence>
     </motion.div>
   )

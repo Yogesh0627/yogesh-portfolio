@@ -83,17 +83,19 @@ const Testimonials = () => {
         },
     ];
     return (
-        <div className='px-4 py-4 my-4'>
-            <SectionHeading className='mb-4' delay={0.8}>People love my work</SectionHeading>
-            <div className='flex [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]'>
+        <section id='testimonials'>
+            <div className='px-4 py-4 my-4'>
+                <SectionHeading className='mb-4' delay={0.8}>People love my work</SectionHeading>
+                <div className='flex [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]'>
 
-                <Marquee speed={20} pauseOnHover={true} className='py-4'>
-                    {testimonials.map((item, idx) => <TestimonialCard key={`testimonial-${idx}`} {...item} />)}
+                    <Marquee speed={20} pauseOnHover={true} className='py-4'>
+                        {testimonials.map((item, idx) => <TestimonialCard key={`testimonial-${idx}`} {...item} />)}
 
-                </Marquee>
+                    </Marquee>
+                </div>
+
             </div>
-
-        </div>
+        </section>
     )
 }
 
@@ -103,12 +105,12 @@ export {Testimonials}
 const TestimonialCard = ({ quote, name, avatar }: TestimonialDatatype) => {
 
     return (
-        <div className='flex mx-4 flex-col justify-between gap-4 p-4 h-50 w-full max-w-60 rounded-xl hover:shadow-md transition duration-300 shadow-custom'>
-            <p className='text-sm text-neutral-700 dark:text-neutral-200'>{quote}</p>
-            <div className='flex items-center gap-4'>
+        <figure className='flex mx-4 flex-col justify-between gap-4 p-4 h-50 w-full max-w-60 rounded-xl hover:shadow-md transition duration-300 shadow-custom'>
+            <blockquote className='text-sm text-neutral-700 dark:text-neutral-200'>{quote}</blockquote>
+            <figcaption className='flex items-center gap-4'>
                 <img src={avatar} alt={name} className='size-4 rounded-full object-cover' />
                 <p className='text-sm text-neutral-500 dark:text-neutral-300'>{name}</p>
-            </div>
-        </div>
+            </figcaption>
+        </figure>
     )
 }

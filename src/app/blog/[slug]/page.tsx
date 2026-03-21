@@ -9,7 +9,7 @@ import { BlogFrontMatterType } from '@/types'
 import { Scales } from '@/components'
 
 
-export async function generateMetaData({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
     const resolvedParams = await params;
     const slug = resolvedParams.slug;
     const frontmatter = await getBlogFrontMatterBySlug(slug)
@@ -40,6 +40,36 @@ const Blog = async ({ params }: {
     const { content, frontmatter } = blog
 
     return (
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "BlogPosting",
+                        "mainEntityOfPage": {
+                            "@type": "WebPage",
+                            "@id": `https://yourportfolio.com/blog/${resolvedParams.slug}`
+                        },
+                        "headline": frontmatter.title,
+                        "description": frontmatter.description,
+                        "datePublished": frontmatter.date,
+                        "author": {
+                            "@type": "Person",
+                            "name": "Yogesh Chauhan",
+                            "url": "https://yourportfolio.com"
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "Yogesh Chauhan",
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": "https://yourportfolio.com/logo.png"
+                            }
+                        }
+                    })
+                }}
+            />
         <div className="flex min-h-screen items-start justify-start">
             <Container className="min-h-screen pt-10 px-8 md:pt-20 md:pb-10">
                 <Scales/>
@@ -48,16 +78,28 @@ const Blog = async ({ params }: {
                 alt={frontmatter.title}
                 className='mx-auto  mb-20 max-h-96 w-full max-w-2xl rounded-2xl object-cover shadow-xl'
                 /> */}
-                <div className="prose mx-auto">
-                    {/* <MDXRemote
+
+                <article>
+                    <div className="prose mx-auto prose-neutral dark:prose-invert prose-headings:scroll-mt-20">
+                        {/* <MDXRemote
                       source={blog}
                   /> */}
 
-                    {content}
+                        {content}
+                    </div>
+                </article>
+
+
+                {/* Optional: Footer Divider */}
+                <div className="max-w-3xl mx-auto mt-20 border-t border-neutral-100 dark:border-neutral-800 pt-10">
+                    <p className="text-sm text-neutral-500 italic">
+                        Thanks for reading! If you enjoyed this post, feel free to reach out.
+                    </p>
                 </div>
 
             </Container>
         </div>
+        </>
     )
 }
 
