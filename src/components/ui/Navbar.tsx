@@ -21,7 +21,7 @@ const Navbar = () => {
     useEffect(() => setMounted(true), [])
 
     const y = useTransform(scrollY, [0, 100], [0, 10])
-    const width = useTransform(scrollY, [0, 100], ["55%", "45%"])
+    const width = useTransform(scrollY, [0, 100], ["92%", "85%"])
 
     const switchTheme = () => {
         setTheme(resolvedTheme === "dark" ? "light" : "dark")
@@ -62,9 +62,10 @@ const Navbar = () => {
                         boxShadow: scrolled ? "var(--shadow1)" : "none",
                         width,
                         y,
+                        maxWidth: '56rem'
                     }}
                     className={cn(
-                        "fixed inset-x-0 top-0 z-50 mx-auto flex max-w-4xl items-center justify-between rounded-full backdrop-blur-sm bg-white/50 px-3 py-2 dark:bg-neutral-900/50"
+                        "mx-auto flex max-w-4xl items-center justify-between rounded-full backdrop-blur-sm bg-white/50 px-3 py-2 dark:bg-neutral-900/50"
                     )}
                 >
                     <img
@@ -140,7 +141,7 @@ const Navbar = () => {
 
                     <button
                     onClick={()=>setIsOpen(true)}
-                    className="flex h-10 w-10 items-center justify-center rounded-md text-neutral-700 dark:text-neutral-190 cursor-pointer">
+                    className="flex h-10 w-10 items-center justify-center rounded-md text-neutral-700 dark:text-neutral-200 cursor-pointer">
 
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg>
 
