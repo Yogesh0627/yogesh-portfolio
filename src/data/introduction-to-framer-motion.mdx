@@ -1,0 +1,176 @@
+---
+
+title: "Introduction to Framer Motion"
+description: "Learn the basics of Framer Motion and how to create smooth animations in React applications."
+date: "2026-03-14"
+tags:
+  - react
+  - animation
+  - framer-motion
+  - frontend
+
+---
+
+# Introduction to Framer Motion
+
+Animations can greatly enhance the user experience of a web application. Smooth transitions, interactive effects, and subtle motion can make an interface feel modern and intuitive.
+
+**Framer Motion** is one of the most popular animation libraries for React that makes it extremely easy to create beautiful animations with minimal code.
+
+In this article, we will explore the basics of Framer Motion and how to use it in a React or Next.js project.
+
+---
+
+## What is Framer Motion?
+
+Framer Motion is a **production-ready animation library for React** that allows developers to create complex animations using simple and declarative syntax.
+
+It provides features such as:
+
+* Simple animation APIs
+* Gesture support
+* Layout animations
+* Scroll animations
+* Exit animations
+
+Because of its simplicity and flexibility, it is widely used in modern frontend applications.
+
+---
+
+## Installing Framer Motion
+
+To start using Framer Motion in your React or Next.js project, install the library with npm:
+
+```bash
+npm install framer-motion
+```
+
+Once installed, you can import it into your components.
+
+```jsx
+import { motion } from "framer-motion"
+```
+
+---
+
+## Your First Animation
+
+Framer Motion works by replacing standard HTML elements with **motion components**.
+
+Example:
+
+```jsx
+import { motion } from "framer-motion"
+
+export default function Example() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      Hello Framer Motion
+    </motion.div>
+  )
+}
+```
+
+### Explanation
+
+* **initial** → starting animation state
+* **animate** → final state
+* **transition** → animation timing
+
+When the component loads, the element will **fade in smoothly**.
+
+---
+
+## Animating Position
+
+Framer Motion also makes it easy to animate movement.
+
+```jsx
+<motion.div
+  initial={{ x: -100 }}
+  animate={{ x: 0 }}
+  transition={{ duration: 0.6 }}
+>
+  Slide In Animation
+</motion.div>
+```
+
+This example moves the element from **left to right** when it appears.
+
+---
+
+## Hover Animations
+
+Interactive animations are very easy to implement.
+
+```jsx
+<motion.button
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.95 }}
+>
+  Hover Me
+</motion.button>
+```
+
+Here:
+
+* **whileHover** → triggers animation on hover
+* **whileTap** → triggers animation when clicking
+
+This creates a smooth and interactive button effect.
+
+---
+
+## Scroll-Based Animations
+
+Framer Motion also supports animations that trigger when elements enter the viewport.
+
+```jsx
+<motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.4 }}
+>
+  Scroll Animation
+</motion.div>
+```
+
+This is commonly used for:
+
+* Portfolio sections
+* Feature cards
+* Landing page animations
+
+---
+
+## Why Developers Love Framer Motion
+
+Framer Motion has become extremely popular in modern web development because it offers:
+
+* Easy-to-use animation API
+* Excellent performance
+* Perfect integration with React
+* Powerful gesture and layout animations
+
+It is widely used in modern interfaces such as **landing pages, dashboards, and interactive UI components**.
+
+---
+
+## Conclusion
+
+Framer Motion provides a simple yet powerful way to add animations to React applications. With just a few lines of code, developers can create engaging and interactive user interfaces.
+
+If you're building a **modern portfolio or frontend application**, learning Framer Motion is definitely worth your time.
+
+In future articles, we will explore:
+
+* Advanced Framer Motion animations
+* Page transitions in Next.js
+* Creating reusable animation components
+* Scroll-based storytelling effects
+
+Stay tuned!

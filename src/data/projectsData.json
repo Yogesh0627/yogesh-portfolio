@@ -1,0 +1,39 @@
+[
+    {   "id":1,
+        "title": "Portfolio Website",
+        "description": "A personal portfolio website showcasing my projects and skills.",
+        "src": "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/09/dragon-ball-z.jpg",
+        "href": "https://myportfolio.com"
+    },
+    {   "id": 2,
+        "title": "E-commerce Store",
+        "description": "A full-stack e-commerce store with shopping cart and payment integration.",
+        "src": "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/09/naruto.jpg",
+        "href": "https://mystore.com"
+    },
+    {   "id": 3,
+        "title": "Blog Platform",
+        "description": "A dynamic blog platform with rich-text editor and user authentication.",
+        "src": "https://th.bing.com/th/id/R.4770fc7d68fab35647a02bff71283fd4?rik=P2vmoNI9dGgQhA&riu=http%3a%2f%2fecx.images-amazon.com%2fimages%2fI%2f81dC73CrSUL._SL1500_.jpg&ehk=lzVll%2fcvmWoRniTaFvEpRXnB5paot6ILcW5h%2bT5qb7o%3d&risl=&pid=ImgRaw&r=0",
+        "href": "https://myblog.com"
+    },
+    {   "id": 4,
+        "title": "Task Manager App",
+        "description": "A productivity app to manage daily tasks with deadlines and priorities.",
+        "src": "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/07/one-piece-franchise-poster.jpg",
+        "href": "https://taskapp.com"
+    },
+    {   "id": 5,
+        "title": "Weather Dashboard",
+        "description": "A weather forecasting dashboard showing real-time weather data worldwide.",
+        "src": "https://www.justwatch.com/images/poster/47162404/s718/black-clover.jpg",
+        "href": "https://weatherapp.com"
+    },
+    {   "id": 6,
+        "title": "Skill Sync",
+        "description": "A weather forecasting dashboard showing real-time weather data worldwide.",
+        "src": "https://tse2.mm.bing.net/th/id/OIP.kDypla1prjThbmEAfthi6AHaKj?rs=1&pid=ImgDetMain&o=7&rm=3",
+        "href": "https://weatherapp.com"
+    }
+    
+]

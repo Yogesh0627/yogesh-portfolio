@@ -1,0 +1,170 @@
+---
+
+title: "Getting Started with Tailwind CSS"
+description: "Learn the fundamentals of Tailwind CSS and how it helps build modern, responsive interfaces quickly."
+date: "2026-03-14"
+tags:
+  - tailwind
+  - css
+  - frontend
+  - web-development
+
+---
+
+# Getting Started with Tailwind CSS
+
+ Tailwind CSS is a **utility-first CSS framework** that allows developers to build modern user interfaces directly inside their markup. Instead of writing custom CSS classes for every component, Tailwind provides small utility classes that can be combined to create complex designs quickly.
+ In this article, we will explore the **basics of Tailwind CSS** and how you can start using it in your projects.
+
+
+## What is Tailwind CSS?
+
+Traditional CSS frameworks like Bootstrap provide predefined components such as buttons, cards, and navigation bars. Tailwind takes a different approach by giving you **low-level utility classes** that help you style elements without leaving your HTML.
+
+Example of traditional CSS:
+
+```css
+.button {
+  background-color: blue;
+  padding: 10px 16px;
+  border-radius: 6px;
+}
+```
+
+With Tailwind, the same design can be written directly in HTML:
+
+```html
+<button class="bg-blue-500 px-4 py-2 rounded-md text-white">
+  Click Me
+</button>
+```
+
+This approach helps developers **build faster and maintain consistent styling across the application**.
+
+---
+
+## Installing Tailwind CSS
+
+If you are using a modern framework like **Next.js**, installing Tailwind is straightforward.
+
+```bash
+npm install tailwindcss @tailwindcss/postcss postcss
+```
+
+Then create the Tailwind configuration:
+
+```bash
+npx tailwindcss init
+```
+
+After that, include Tailwind in your global CSS:
+
+```css
+@import "tailwindcss";
+```
+
+---
+
+## Utility Classes in Tailwind
+
+Tailwind provides utility classes for almost every styling need.
+
+### Spacing
+
+```html
+<div class="p-4 m-2 bg-gray-100">
+  Spacing example
+</div>
+```
+
+* `p-4` → padding
+* `m-2` → margin
+
+---
+
+### Typography
+
+```html
+<h1 class="text-3xl font-bold text-gray-800">
+  Hello Tailwind
+</h1>
+```
+
+Common typography utilities include:
+
+* `text-xl`, `text-2xl`, `text-3xl`
+* `font-semibold`, `font-bold`
+* `tracking-wide`
+
+---
+
+### Flexbox Layout
+
+Tailwind makes layout management extremely simple.
+
+```html
+<div class="flex items-center justify-between">
+  <span>Logo</span>
+  <button class="bg-indigo-500 text-white px-4 py-2 rounded">
+    Login
+  </button>
+</div>
+```
+
+Useful flex utilities:
+
+* `flex`
+* `items-center`
+* `justify-between`
+* `gap-4`
+
+---
+
+## Responsive Design
+
+Tailwind includes **built-in responsive breakpoints**.
+
+```html
+<div class="text-sm md:text-lg lg:text-xl">
+  Responsive text
+</div>
+```
+
+Breakpoints include:
+
+* `sm`
+* `md`
+* `lg`
+* `xl`
+* `2xl`
+
+This allows you to easily build **mobile-first layouts**.
+
+---
+
+## Why Developers Love Tailwind
+
+Tailwind has become extremely popular in modern web development because it provides several advantages:
+
+* Faster UI development
+* Consistent design system
+* Smaller CSS bundles with tree-shaking
+* Excellent integration with frameworks like Next.js
+
+It is widely used in production by companies such as **Vercel, GitHub, and Netflix**.
+
+---
+
+## Conclusion
+
+Tailwind CSS simplifies frontend development by providing a powerful set of utility classes that eliminate the need for writing large CSS files. By combining these utilities, developers can quickly build responsive and modern user interfaces.
+
+If you are building a **developer portfolio or a production web application**, Tailwind CSS is an excellent choice for creating clean and scalable designs.
+
+In future articles, we will explore:
+
+* Tailwind Layout Patterns
+* Dark Mode Implementation
+* Creating Design Systems with Tailwind
+
+Stay tuned!
