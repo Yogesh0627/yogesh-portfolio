@@ -15,6 +15,7 @@ const Navbar = () => {
     const router = useRouter();
     const { theme, setTheme, resolvedTheme } = useTheme()
     const [mounted, setMounted] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
 
     // Wait for mount to avoid hydration mismatch
     useEffect(() => setMounted(true), [])
@@ -37,6 +38,22 @@ const Navbar = () => {
         { title: "Contact", href: "/contact" }
     ];
 
+
+    const containerVariants = {
+        hidden: {},
+        show: {
+            transition: {
+                staggerChildren: 0.1,
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { y: 20, opacity: 0 },
+        show: { y: 0, opacity: 1 },
+    };
+
+    
     return (
         <Container className="pt-10 md:pt-0 ">
             <div className="fixed inset-x-0 top-0 z-50 mx-auto hidden max-w-4xl md:block">
@@ -121,64 +138,67 @@ const Navbar = () => {
                         onClick={() => router.push("/")}
                     />
 
-                    <button className="flex h-10 w-10 items-center justify-center rounded-md text-neutral-700 dark:text-neutral-190 cursor-pointer">
+                    <button
+                    onClick={()=>setIsOpen(true)}
+                    className="flex h-10 w-10 items-center justify-center rounded-md text-neutral-700 dark:text-neutral-190 cursor-pointer">
 
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg>
 
                     </button>
                 </div>
 
-                <div className="fixed inset-0 z-50 flex flex-col bg-white dark:bg-neutral-900">
-                    <div className="flex w-full items-center justify-end p-4">
-                        <button className="flex h-10 w-10 items-center justify-center rounded-md text-neutral-700 dark:text-neutral-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
-                        </button>
-                    </div>
-                    <div className="flex flex-1 flex-col items-center justify-center gap-8">
-                        {navItems.map((nav, index) => (
-                            <Link
-                                key={nav.href}
-                                href={nav.href}
-                                className="relative px-2 py-1 text-sm transition-colors"
-                                onMouseEnter={() => setHovered(index)}
-                                onMouseLeave={() => setHovered(null)}
-                            >
-                                <span className="text-2xl font-medium text-neutral-800 transition-colors hover:text-neutral-500 dark:text-neutral-200 dark:hover:text-neutral-400">{nav.title}</span>
-                            </Link>
-                        ))}
 
-                        <div>
-                            <button
-                            onClick={switchTheme}
-                            className="flex items-center rounded-md px-2 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800">
-                                <AnimatePresence mode="wait" initial={false}>
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1}}
+                            // exit={{ opacity: 0, y: "-100%" }}
+                            transition={{ duration: 0.2 }}
+
+                            className="fixed inset-0 z-50 flex flex-col bg-white dark:bg-neutral-900"
+                        >
+                            {/* Close */}
+                            <div className="flex w-full items-center justify-end p-4 cursor-pointer">
+                                <button onClick={() => setIsOpen(false)} className="flex h-10 w-10 items-center justify-center rounded-md text-neutral-700 dark:text-neutral-200 cursor-pointer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                </button>
+                            </div>
+
+                            {/* Menu */}
+                            <motion.div
+                                variants={containerVariants}
+                                initial="hidden"
+                                animate="show"
+
+                             className="flex flex-1 flex-col items-center justify-center gap-8">
+                                {navItems.map((nav) => (
+                                    <motion.a
+                                        key={nav.href}
+                                        href={nav.href}
+                                        onClick={() => setIsOpen(false)}
+                                        variants={itemVariants}
+                                        className="text-2xl font-medium text-neutral-800 transition-colors hover:text-neutral-500 dark:text-neutral-200 dark:hover:text-neutral-400"
+
+                                    >
+                                        {nav.title}
+                                    </motion.a>
+                                ))}
+
+                                {/* Theme */}
+                                <motion.button
+                                variants={itemVariants}
+                                onClick={switchTheme} className="flex items-center rounded-md px-2 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800">
                                     {mounted && resolvedTheme !== "dark" ? (
-                                        <motion.span
-                                            key="moon"
-                                            initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
-                                            animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                                            exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
-                                            transition={{ duration: 0.2 }}
-                                        >
-                                            <IconMoon className="size-4 dark:text-secondary text-neutral-700" />
-                                        </motion.span>
+                                        <IconMoon className="size-4 dark:text-secondary text-neutral-700"/>
                                     ) : (
-                                        <motion.span
-                                            key="sun"
-                                            initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
-                                            animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                                            exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
-                                            transition={{ duration: 0.2 }}
-                                        >
-                                            <IconSun className="size-4 text-neutral-700 dark:text-secondary" />
-                                        </motion.span>
+                                        <IconSun className="size-4 dark:text-secondary text-neutral-700" />
                                     )}
-                                </AnimatePresence>
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
+                                </motion.button>
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </nav>
         </Container>
     );
