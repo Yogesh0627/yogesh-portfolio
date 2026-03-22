@@ -59,7 +59,7 @@ const ContactForm = () => {
     }
 
     return (
-        <form action="" method="post" onSubmit={handleSubmit} className='py-12 border-y border-neutral-100 shadow-section-inset dark:border-neutral-800 dark:shadow-section-inset my-6'>
+        <form action="" method="post" onSubmit={handleSubmit} className='px-4 py-12 border-y border-neutral-100 shadow-section-inset dark:border-neutral-800 dark:shadow-section-inset my-6 mx-auto'>
             <div className="flex flex-col gap-5 max-w-lg mx-auto ">
                 <div className='flex flex-col gap-2'>
                     <label htmlFor="name" className='text-sm font-medium tracking-tight text-neutral-600'>Full name</label>
