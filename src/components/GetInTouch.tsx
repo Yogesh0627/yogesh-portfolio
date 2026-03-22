@@ -18,8 +18,8 @@ const GetInTouch = () => {
         <div className="relative mt-4 max-w-lg">
           <input type="email" value={email} readOnly
             // onChange={(e) => setEmail(e.target.value)}
-            placeholder="Your email" className="w-full rounded-lg bg-white px-1 sm:px-4 py-3 sm:pr-30 text-sm text-neutral-700 shadow-custom focus:ring-2 focus:ring-neutral-300 focus:outline-none dark:bg-neutral-800 dark:text-neutral-200" />
-          <a href={mailtoLink} className="absolute top-1/2 right-1 -translate-y-1/2 rounded-md border border-neutral-200 bg-neutral-100 px-0.5 sm:px-4 py-1 sm:py-1.5 text-[10px] sm:text-sm text-neutral-700 shadow-[0px_4px_8px_0px_var(--color-neutral-200)_inset] transition-colors hover:bg-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:shadow-[0px_4px_8px_0px_var(--color-neutral-700)_inset] hover:dark:bg-neutral-700">Send Enquiry</a>
+            placeholder="Your email" className="w-full rounded-lg bg-white px-2 sm:px-4 py-3 sm:pr-30 text-sm text-neutral-700 shadow-custom focus:ring-2 focus:ring-neutral-300 focus:outline-none dark:bg-neutral-800 dark:text-neutral-200" />
+          <a href={mailtoLink} className="absolute top-1/2 right-1 -translate-y-1/2 rounded-md border border-neutral-200 bg-neutral-100 px-1.5 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm text-neutral-700 shadow-[0px_4px_8px_0px_var(--color-neutral-200)_inset] transition-colors hover:bg-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:shadow-[0px_4px_8px_0px_var(--color-neutral-700)_inset] hover:dark:bg-neutral-700">Send Enquiry</a>
         </div>
       </div>
     </section>
