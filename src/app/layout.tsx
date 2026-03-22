@@ -8,6 +8,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes'
 const inter = Inter({
   weight: ["400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
+  display: 'swap',
 });
 
 
