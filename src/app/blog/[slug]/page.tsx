@@ -76,7 +76,7 @@ const Blog = async ({ params }: {
                 }}
             />
         <div className="flex min-h-screen items-start justify-start">
-            <Container className="min-h-screen pt-10 px-8 md:pt-20 md:pb-10">
+            <Container className="min-h-screen pt-10 pb-5 px-8 md:pt-20 md:pb-10">
                 <Scales/>
                 {/* <img
                 src={frontmatter.image}
@@ -96,7 +96,7 @@ const Blog = async ({ params }: {
 
 
                 {/* Optional: Footer Divider */}
-                <div className="max-w-3xl mx-auto mt-20 border-t border-neutral-100 dark:border-neutral-800 pt-10">
+                <div className="max-w-3xl mx-auto mt-10 md:mt-20 border-t border-neutral-100 dark:border-neutral-800 pt-5 md:pt-10">
                     <p className="text-sm text-neutral-500 italic">
                         Thanks for reading! If you enjoyed this post, feel free to reach out.
                     </p>
