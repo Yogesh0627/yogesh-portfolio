@@ -1,4 +1,5 @@
 "use client"
+import { sendEmailAction } from '@/app/actions/email'
 import { Metadata } from 'next'
 import React, { useState } from 'react'
 import { toast } from 'sonner'
@@ -18,30 +19,34 @@ const ContactForm = () => {
     })
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        const { name, email, message } = formData
-        if (!name || !email || !message) {
-            toast.error("Please fill in all the details");
-            return
+        try {
+            const { name, email, message } = formData;
+
+            if (!name || !email || !message) {
+                toast.error("Please fill in all the details");
+                return;
+            }
+            
+            const response = await sendEmailAction(formData);
+
+            if (response?.success) {
+                toast.success("Form Submitted Successfully");
+            } else {
+                toast.error("Something went wrong");
+            }
+
+        } catch (error) {
+            console.error("Submit Error:", error);
+            toast.error("Failed to send message. Please try again.");
         }
-
-        const response = await new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve("API  Call Successfull")
-            }, 1000)
-        })
-
-        if (response) {
-            toast.success("Form Submitted Successfully")
-        } else {
-            toast.error("Something went wrong")
-        }
-    }
+    };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
+
     return (
         <form action="" method="post" onSubmit={handleSubmit} className='py-12 border-y border-neutral-100 shadow-section-inset dark:border-neutral-800 dark:shadow-section-inset my-6'>
             <div className="flex flex-col gap-5 max-w-lg mx-auto ">
@@ -65,4 +70,4 @@ const ContactForm = () => {
     )
 }
 
-export {ContactForm}
+export { ContactForm }

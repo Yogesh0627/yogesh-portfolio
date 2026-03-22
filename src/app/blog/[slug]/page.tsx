@@ -1,11 +1,6 @@
-import { Container, Heading, SubHeading } from '@/components/ui'
-import { compileMDX, MDXRemote } from 'next-mdx-remote/rsc'
-import { promises as fs } from "fs"
-import path from "path"
-import React from 'react'
+import { Container } from '@/components/ui'
 import { redirect } from 'next/navigation'
-import { getBlogFrontMatterBySlug, getSingleBlog } from '@/utils/mdx'
-import { BlogFrontMatterType } from '@/types'
+import { getBlogFrontMatterBySlug, getBlogs, getSingleBlog } from '@/utils/mdx'
 import { Scales } from '@/components'
 
 
@@ -24,6 +19,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         title: frontmatter.title + "Yogesh",
         description: frontmatter.description,
     }
+}
+
+export async function generateStaticParams() {
+    const blogs = await getBlogs();
+
+    if (!blogs || blogs.length === 0) return [];
+    // This tells Next.js exactly which pages to build statically
+    return blogs.map((blog) => ({
+        slug: blog.slug,
+    }));
 }
 const Blog = async ({ params }: {
     params: Promise<{ slug: string }>; // Update type to a Promise

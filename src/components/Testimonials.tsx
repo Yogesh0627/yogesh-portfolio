@@ -99,7 +99,7 @@ const Testimonials = () => {
     )
 }
 
-export {Testimonials}
+export { Testimonials }
 
 
 const TestimonialCard = ({ quote, name, avatar }: TestimonialDatatype) => {

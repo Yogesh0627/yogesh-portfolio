@@ -7,21 +7,12 @@ import ExpandableChip from "./ExpandableChip";
 import { IconBrandMongodb, IconBrandReact, IconBrandVercel } from "@tabler/icons-react";
 
 
-
-
-
 export const Projects = ({ projects = projectsData }: { projects?: ProjectType[] }) => {
-
-    // className = "relative isolate overflow-hidden bg-gradient-to-b from-white/20 to-[125%] dark:from-gray-500/2 shadow-section"
-
 
 
     return (
         <section id="projects" className="py-1">
             <div className="border-y border-neutral-100 my-4 px-4 py-6 shadow-section-inset dark:border-neutral-800 dark:shadow-section-inset">
-                {/* <p className="max-w-lg pt-4 text-sm md:text-sm text-secondary">
-              I love building web apps and products  that can impact million of lives.
-          </p> */}
                 <SectionHeading delay={0.2} >A lifetime in projects</SectionHeading>
 
                 <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-3">

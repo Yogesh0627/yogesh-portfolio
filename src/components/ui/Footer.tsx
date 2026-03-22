@@ -7,8 +7,8 @@ const Footer = () => {
     return (
         <footer className="w-full mx-auto">
             <Container
-            role="contentinfo"
-            className="relative mx-auto h-full w-full max-w-4xl bg-white dark:bg-neutral-900 flex justify-between border-t border-neutral-100 px-10 py-3 md:py-3 dark:border-neutral-800">
+                role="contentinfo"
+                className="relative mx-auto h-full w-full max-w-4xl bg-white dark:bg-neutral-900 flex justify-between border-t border-neutral-100 px-10 py-3 md:py-3 dark:border-neutral-800">
                 <p className=" text-xs text-neutral-500">Built with love by Yogesh</p>
                 <div className="flex items-center justify-center gap-4">
 
@@ -27,4 +27,4 @@ const Footer = () => {
     )
 }
 
-export { Footer}
+export { Footer }

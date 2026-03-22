@@ -1,8 +1,4 @@
-import { getBlogs } from '@/utils/mdx'
-import { Link } from 'next-view-transitions'
-import React from 'react'
 import { SectionHeading } from './ui'
-import MotionDiv from './MotionDiv'
 import { IconBrandMongodb, IconBrandNextjs, IconBrandNodejs, IconBrandReact, IconBrandRedux, IconBrandTypescript } from '@tabler/icons-react'
 import ExpandableChip from './ExpandableChip'
 

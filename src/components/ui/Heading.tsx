@@ -28,4 +28,4 @@ const Heading = ({ as: Tag = "h1", children, className }: { as?: "h1" | "h2" | "
     )
 }
 
-export {Heading}
+export { Heading }

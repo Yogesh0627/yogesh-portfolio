@@ -13,10 +13,11 @@ const Blogs = async () => {
 
     const blogs = await getBlogs()
 
-
     const truncate = (str: string, length: number) => {
         return str.length > length ? str.substring(0, length) + "..." : str;
     }
+
+
     return (
         <div className="flex min-h-screen items-start justify-start">
             <Container className="min-h-screen pt-10 px-8 md:pt-20 md:pb-10">

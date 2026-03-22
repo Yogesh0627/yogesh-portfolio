@@ -1,7 +1,7 @@
 'use client'
 import type React from "react"
 import { motion, useInView } from "framer-motion"
-import { Children, useRef } from "react";
+import { useRef } from "react";
 import { IconCircleCheckFilled } from "@tabler/icons-react";
 import { cn } from "@/utils";
 import { SectionHeading } from "./ui";
@@ -107,32 +107,51 @@ const Timeline = () => {
                 Here's the timeline of my achievements.
             </SectionHeading>
             {timelineData.map((year, index) => (
-            <div key={year.title} className="mb-4">
-                <motion.h3 className="font-bold text-primary px-2 py-0.5 mb-2 rounded-md w-fit shadow-custom"
-                    // style={{ boxShadow: "var(--shadow1)" }}
+                <div key={year.title} className="mb-4">
+                    <motion.h3 className="font-bold text-primary px-2 py-0.5 mb-2 rounded-md w-fit shadow-custom"
+                        // style={{ boxShadow: "var(--shadow1)" }}
 
-                    initial={{
-                        filter: 'blur(100)px',
-                        opacity: 0
-                    }}
-                    animate={{
-                        filter: isInView ? 'blur(0px)' : 'blur(10px)',
-                        opacity: isInView ? 1 : 0
-                    }}
-                    transition={{
-                        duration: 0.3,
-                        ease: "easeInOut",
-                        delay: 0.1 * index
+                        initial={{
+                            filter: 'blur(100)px',
+                            opacity: 0
+                        }}
+                        animate={{
+                            filter: isInView ? 'blur(0px)' : 'blur(10px)',
+                            opacity: isInView ? 1 : 0
+                        }}
+                        transition={{
+                            duration: 0.3,
+                            ease: "easeInOut",
+                            delay: 0.1 * index
 
-                    }}
-                >{year.title}</motion.h3>
+                        }}
+                    >{year.title}</motion.h3>
 
-                <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-4">
 
-                    {year.content.map((item, idx) => <div key={item.title} className="pl-4">
+                        {year.content.map((item, idx) => <div key={item.title} className="pl-4">
 
-                        <Step isInView={isInView} idx={idx}>
-                            <motion.h4
+                            <Step isInView={isInView} idx={idx}>
+                                <motion.h4
+                                    initial={{
+                                        opacity: 0,
+                                        y: -10
+                                    }}
+                                    animate={{
+                                        opacity: isInView ? 1 : 0,
+                                        y: isInView ? 0 : -10
+                                    }}
+                                    transition={{
+                                        duration: 0.3,
+                                        ease: "easeInOut",
+                                        delay: 0.2 * idx
+                                    }}
+                                    className="text-neutral-600 dark:text-neutral-400"
+                                >{item.title}</motion.h4>
+                            </Step>
+
+
+                            {item.description && <motion.p
                                 initial={{
                                     opacity: 0,
                                     y: -10
@@ -144,38 +163,19 @@ const Timeline = () => {
                                 transition={{
                                     duration: 0.3,
                                     ease: "easeInOut",
-                                    delay: 0.2 * idx
+                                    delay: 0.3 * idx
                                 }}
-                                className="text-neutral-600 dark:text-neutral-400"
-                            >{item.title}</motion.h4>
-                        </Step>
+                                className="pt-1 pl-6 text-sm text-neutral-400 dark:text-neutral-500">{item.description}</motion.p>}
+                        </div>)}
+                    </div>
 
 
-                        {item.description && <motion.p
-                            initial={{
-                                opacity: 0,
-                                y: -10
-                            }}
-                            animate={{
-                                opacity: isInView ? 1 : 0,
-                                y: isInView ? 0 : -10
-                            }}
-                            transition={{
-                                duration: 0.3,
-                                ease: "easeInOut",
-                                delay: 0.3 * idx
-                            }}
-                            className="pt-1 pl-6 text-sm text-neutral-400 dark:text-neutral-500">{item.description}</motion.p>}
-                    </div>)}
                 </div>
-
-
-            </div>
-        ))}</div>
+            ))}</div>
     )
 }
 
-export {Timeline}
+export { Timeline }
 
 
 const Step = ({ className, children, isInView, idx }: { className?: string, children?: React.ReactNode, isInView: boolean, idx: number }) => {

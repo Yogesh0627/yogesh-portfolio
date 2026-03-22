@@ -6,7 +6,7 @@ import { Container } from "./Container";
 import { Link } from "next-view-transitions"
 import { useRouter } from 'next/navigation';
 import { useTheme } from "next-themes";
-import { IconMoon, IconSun } from "@tabler/icons-react";
+import { IconMoon, IconSun, IconDeviceLaptop } from "@tabler/icons-react";
 
 const Navbar = () => {
     const [hovered, setHovered] = useState<number | null>(null);
@@ -24,8 +24,14 @@ const Navbar = () => {
     const width = useTransform(scrollY, [0, 100], ["92%", "85%"])
 
     const switchTheme = () => {
-        setTheme(resolvedTheme === "dark" ? "light" : "dark")
-    }
+        if (theme === "light") {
+            setTheme("dark");
+        } else if (theme === "dark") {
+            setTheme("system"); // Return control to the OS
+        } else {
+            setTheme("light");
+        }
+    };
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         setScrolled(latest > 20);
@@ -53,7 +59,7 @@ const Navbar = () => {
         show: { y: 0, opacity: 1 },
     };
 
-    
+
     return (
         <Container className="pt-10 md:pt-0 ">
             <div className="fixed inset-x-0 top-0 z-50 mx-auto hidden max-w-4xl md:block">
@@ -82,17 +88,7 @@ const Navbar = () => {
                             className="relative flex h-8 w-8 items-center justify-center rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                         >
                             <AnimatePresence mode="wait" initial={false}>
-                                {mounted && resolvedTheme !== "dark" ? (
-                                    <motion.span
-                                        key="moon"
-                                        initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
-                                        animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                                        exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
-                                        transition={{ duration: 0.2 }}
-                                    >
-                                        <IconMoon className="size-4 dark:text-secondary text-neutral-700" />
-                                    </motion.span>
-                                ) : (
+                                {mounted && theme === "light" && (
                                     <motion.span
                                         key="sun"
                                         initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
@@ -101,6 +97,30 @@ const Navbar = () => {
                                         transition={{ duration: 0.2 }}
                                     >
                                         <IconSun className="size-4 text-neutral-700 dark:text-secondary" />
+                                    </motion.span>
+                                )}
+
+                                {mounted && theme === "dark" && (
+                                    <motion.span
+                                        key="moon"
+                                        initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                                        animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                                        exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                        <IconMoon className="size-4 text-neutral-700 dark:text-secondary" />
+                                    </motion.span>
+                                )}
+
+                                {mounted && theme === "system" && (
+                                    <motion.span
+                                        key="laptop"
+                                        initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                                        animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                                        exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                        <IconDeviceLaptop className="size-4 text-neutral-700 dark:text-secondary" />
                                     </motion.span>
                                 )}
                             </AnimatePresence>
@@ -140,8 +160,8 @@ const Navbar = () => {
                     />
 
                     <button
-                    onClick={()=>setIsOpen(true)}
-                    className="flex h-10 w-10 items-center justify-center rounded-md text-neutral-700 dark:text-neutral-200 cursor-pointer">
+                        onClick={() => setIsOpen(true)}
+                        className="flex h-10 w-10 items-center justify-center rounded-md text-neutral-700 dark:text-neutral-200 cursor-pointer">
 
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg>
 
@@ -153,7 +173,7 @@ const Navbar = () => {
                     {isOpen && (
                         <motion.div
                             initial={{ opacity: 0 }}
-                            animate={{ opacity: 1}}
+                            animate={{ opacity: 1 }}
                             // exit={{ opacity: 0, y: "-100%" }}
                             transition={{ duration: 0.2 }}
 
@@ -172,7 +192,7 @@ const Navbar = () => {
                                 initial="hidden"
                                 animate="show"
 
-                             className="flex flex-1 flex-col items-center justify-center gap-8">
+                                className="flex flex-1 flex-col items-center justify-center gap-8">
                                 {navItems.map((nav) => (
                                     <motion.a
                                         key={nav.href}
@@ -188,12 +208,45 @@ const Navbar = () => {
 
                                 {/* Theme */}
                                 <motion.button
-                                variants={itemVariants}
-                                onClick={switchTheme} className="flex items-center rounded-md px-2 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800">
-                                    {mounted && resolvedTheme !== "dark" ? (
-                                        <IconMoon className="size-4 dark:text-secondary text-neutral-700"/>
-                                    ) : (
-                                        <IconSun className="size-4 dark:text-secondary text-neutral-700" />
+                                    variants={itemVariants}
+                                    onClick={switchTheme} className="flex items-center rounded-md px-2 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800">
+                                    {mounted && theme === "light" && (
+                                        <motion.span
+                                            key="sun-mobile"
+                                            variants={itemVariants}
+                                            initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                                            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                                            exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            <IconSun className="size-5 text-neutral-700 dark:text-secondary" />
+                                        </motion.span>
+                                    )}
+
+                                    {mounted && theme === "dark" && (
+                                        <motion.span
+                                            key="moon-mobile"
+                                            variants={itemVariants}
+                                            initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                                            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                                            exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            <IconMoon className="size-5 text-neutral-700 dark:text-secondary" />
+                                        </motion.span>
+                                    )}
+
+                                    {mounted && theme === "system" && (
+                                        <motion.span
+                                            key="laptop-mobile"
+                                            variants={itemVariants}
+                                            initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                                            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                                            exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            <IconDeviceLaptop className="size-5 text-neutral-700 dark:text-secondary" />
+                                        </motion.span>
                                     )}
                                 </motion.button>
                             </motion.div>
