@@ -81,6 +81,7 @@ const container = {
     maxWidth: "100%",
     border: "1px solid #E5E5E5",
     borderRadius: "8px",
+    textAlign: "left" as const, // ✅ Force children to start at the left edge
 };
 
 const h1 = {
@@ -116,8 +117,10 @@ const senderInfo = {
 const messageBox = {
     backgroundColor: "#F9FAFB",
     borderLeft: "2px solid #000000",
-    padding: "18px", // reduced from 24 → more compact
-    borderRadius: "0 4px 4px 0",
+    padding: "16px",
+    margin: "0",          // ✅ add this
+    width: "100%",        // ✅ add this
+    boxSizing: "border-box" as const // ✅ important
 };
 
 const messageContent = {
@@ -127,6 +130,8 @@ const messageContent = {
     margin: "0",
     textAlign: "left" as const, // ✅ ensures left alignment
     whiteSpace: "pre-wrap" as const,
+    display: "block", // ✅ add this
+
 };
 
 const footerSection = {
