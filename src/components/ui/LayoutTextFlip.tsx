@@ -21,6 +21,7 @@ const LayoutTextFlip = ({ words }: Props) => {
     <motion.div
       layout
       aria-live="polite"
+      aria-atomic="true"
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
       className="text-secondary relative order-first mx-4 mb-2 flex w-fit justify-center overflow-hidden rounded-md px-2 py-0.5 pt-0 text-sm shadow-custom sm:order-last sm:mx-0 sm:mb-0"
     >

@@ -42,15 +42,17 @@ const ExpandableChip = ({
     };
 
     return (
-        <div className="mt-2 max-w-56 flex flex-wrap gap-1">
+        <div className="mt-2 max-w-56 flex flex-wrap gap-1" aria-label="Technologies used">
             {chipData.map((chip) => (
                 <motion.div
                     key={chip.id}
                     initial="initial"
                     whileHover="hover"
+                    tabIndex={0} // ✅ Makes the chip focusable
+                    role="listitem" // ✅ Semantic marker
                     className="flex items-center rounded-full border border-neutral-200 bg-neutral-100 p-1 text-xs text-neutral-500 dark:border-neutral-700 dark:bg-neutral-800 -mr-3 hover:z-10"
                 >
-                    <motion.span variants={childVariant}>
+                    <motion.span variants={childVariant} aria-hidden="true">
                         {chip.logo}
                     </motion.span>
 

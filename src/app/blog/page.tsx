@@ -28,10 +28,10 @@ const Blogs = async () => {
                     systems. I&apos;m currently working as a software engineer at WorkCompanion.
                 </SubHeading>
 
-                <div className="shadow-section-inset dark:shadow-section-inset-dark my-4 flex flex-col gap-8 border-y border-neutral-100 px-4 py-6 dark:border-neutral-800">
+                <div role="list" className="shadow-section-inset dark:shadow-section-inset-dark my-4 flex flex-col gap-8 border-y border-neutral-100 px-4 py-6 dark:border-neutral-800">
                     {blogs?.map((blog, idx) => (
                         <article key={blog.title} className='cursor-pointer'>
-                            <Link href={`/blog/${blog.slug}`}>
+                            <Link href={`/blog/${blog.slug}`} aria-label={`Read more about ${blog.title}`}>
                                 <div className='flex items-center justify-between'>
                                     <h2 className='text-primary text-base font-bold tracking-tight'>
                                         {blog.title}

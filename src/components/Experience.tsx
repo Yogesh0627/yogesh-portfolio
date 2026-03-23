@@ -106,10 +106,10 @@ const Experience = async () => {
                 }}
             />
 
-            <section id='experience' className='py-1'>
+            <section id='experience' className='py-1' aria-labelledby="experience-heading">
                 <div className='py-6 px-4 my-10 border-y border-neutral-100 shadow-section-inset dark:border-neutral-800 dark:shadow-section-inset'>
                     <SectionHeading delay={0.4}>Worked at reputed firms</SectionHeading>
-                    <div className='flex flex-col gap-6 py-10'>
+                    <div className='flex flex-col gap-6 py-10' role="list">
                         {experienceData.map((exp, idx) => (
                             <div key={exp.id}>
                                 <div className='flex flex-col justify-between md:flex-row md:items-start'>

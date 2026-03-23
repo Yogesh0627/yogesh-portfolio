@@ -7,6 +7,7 @@ import { Link } from "next-view-transitions"
 import { useRouter } from 'next/navigation';
 import { useTheme } from "next-themes";
 import { IconMoon, IconSun, IconDeviceLaptop } from "@tabler/icons-react";
+import Image from "next/image";
 
 const Navbar = () => {
     const [hovered, setHovered] = useState<number | null>(null);
@@ -73,10 +74,21 @@ const Navbar = () => {
                     className={cn(
                         "mx-auto flex max-w-4xl items-center justify-between rounded-full backdrop-blur-sm bg-white/50 px-3 py-2 dark:bg-neutral-900/50"
                     )}
+                    aria-label="Main Navigation"
                 >
-                    <img
+                    {/* <img
                         src="/luffy.jpg"
                         alt="Luffy"
+                        className="h-10 w-10 rounded-full cursor-pointer object-cover"
+                        onClick={() => router.push("/")}
+                    /> */}
+
+                    <Image
+                        src="/luffy.jpg"
+                        alt="Yogesh Chauhan"
+                        width={40}
+                        height={40}
+                        priority // ✅ Performance: Loads avatar immediately
                         className="h-10 w-10 rounded-full cursor-pointer object-cover"
                         onClick={() => router.push("/")}
                     />
@@ -85,6 +97,7 @@ const Navbar = () => {
                         {/* --- Theme Toggle Start --- */}
                         <button
                             onClick={switchTheme}
+                            aria-label="Toggle color theme"
                             className="relative flex h-8 w-8 items-center justify-center rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                         >
                             <AnimatePresence mode="wait" initial={false}>
@@ -149,18 +162,32 @@ const Navbar = () => {
                 </motion.nav>
             </div>
 
-            <nav className="fixed top-0 left-0 z-50 block w-full border-b border-neutral-100 bg-white md:hidden dark:border-neutral-800 dark:bg-neutral-900">
+            <nav
+                aria-label="Mobile Navigation"
+                className="fixed top-0 left-0 z-50 block w-full border-b border-neutral-100 bg-white md:hidden dark:border-neutral-800 dark:bg-neutral-900">
 
                 <div className="flex w-full items-center justify-between px-4 py-3">
-                    <img
+                    {/* <img
                         src="/luffy.jpg"
                         alt="Luffy"
+                        className="h-10 w-10 rounded-full cursor-pointer object-cover"
+                        onClick={() => router.push("/")}
+                    /> */}
+
+                    <Image
+                        src="/luffy.jpg"
+                        alt="Yogesh Chauhan"
+                        width={40}
+                        height={40}
+                        priority
                         className="h-10 w-10 rounded-full cursor-pointer object-cover"
                         onClick={() => router.push("/")}
                     />
 
                     <button
                         onClick={() => setIsOpen(true)}
+                        aria-label="Open navigation menu" // ✅ Accessibility
+                        aria-expanded={isOpen}
                         className="flex h-10 w-10 items-center justify-center rounded-md text-neutral-700 dark:text-neutral-200 cursor-pointer">
 
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg>
@@ -176,12 +203,16 @@ const Navbar = () => {
                             animate={{ opacity: 1 }}
                             // exit={{ opacity: 0, y: "-100%" }}
                             transition={{ duration: 0.2 }}
+                            role="dialog" // ✅ Semantic Role
+                            aria-modal="true"
 
                             className="fixed inset-0 z-50 flex flex-col bg-white dark:bg-neutral-900"
                         >
                             {/* Close */}
                             <div className="flex w-full items-center justify-end p-4 cursor-pointer">
-                                <button onClick={() => setIsOpen(false)} className="flex h-10 w-10 items-center justify-center rounded-md text-neutral-700 dark:text-neutral-200 cursor-pointer">
+                                <button
+                                aria-label="Close menu"
+                                onClick={() => setIsOpen(false)} className="flex h-10 w-10 items-center justify-center rounded-md text-neutral-700 dark:text-neutral-200 cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
                                 </button>
                             </div>
@@ -209,6 +240,7 @@ const Navbar = () => {
                                 {/* Theme */}
                                 <motion.button
                                     variants={itemVariants}
+                                    aria-label="Change theme"
                                     onClick={switchTheme} className="flex items-center rounded-md px-2 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800">
                                     {mounted && theme === "light" && (
                                         <motion.span

@@ -102,7 +102,7 @@ const Timeline = () => {
 
 
     return (
-        <div ref={ref} className="py-6 px-4 my-6 border-y border-neutral-100 shadow-section-inset dark:border-neutral-800 dark:shadow-section-inset">
+        <div ref={ref} aria-label="Professional Timeline" className="py-6 px-4 my-6 border-y border-neutral-100 shadow-section-inset dark:border-neutral-800 dark:shadow-section-inset">
             <SectionHeading className="mb-10">
                 Here's the timeline of my achievements.
             </SectionHeading>
@@ -194,7 +194,7 @@ const Step = ({ className, children, isInView, idx }: { className?: string, chil
             delay: 0.2 * idx
         }}
         className={cn("flex items-start gap-2", className)}>
-        <IconCircleCheckFilled className="h-4 w-4 mt-1 text-neutral-500" />
+        <IconCircleCheckFilled className="h-4 w-4 mt-1 text-neutral-500" aria-hidden="true" />
         {children}
     </motion.div>
 }

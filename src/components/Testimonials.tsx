@@ -83,7 +83,7 @@ const Testimonials = () => {
         },
     ];
     return (
-        <section id='testimonials'>
+        <section id='testimonials' aria-labelledby="testimonials-heading">
             <div className='px-4 py-4 my-4'>
                 <SectionHeading className='mb-4' delay={0.8}>People love my work</SectionHeading>
                 <div className='flex [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]'>
@@ -109,7 +109,7 @@ const TestimonialCard = ({ quote, name, avatar }: TestimonialDatatype) => {
             <blockquote className='text-sm text-neutral-700 dark:text-neutral-200'>{quote}</blockquote>
             <figcaption className='flex items-center gap-4'>
                 <img src={avatar} alt={name} className='size-4 rounded-full object-cover' />
-                <p className='text-sm text-neutral-500 dark:text-neutral-300'>{name}</p>
+                <cite className='text-sm not-italic text-neutral-500 dark:text-neutral-300'>{name}</cite>
             </figcaption>
         </figure>
     )

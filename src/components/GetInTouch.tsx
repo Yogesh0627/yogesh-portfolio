@@ -9,7 +9,7 @@ const GetInTouch = () => {
   const mailtoLink = `mailto:chauhanyogesh950@gmail.com?subject=Enquiry from ${email || 'Portfolio Visitor'}`;
 
   return (
-    <section id='get-in-touch'>
+    <section id='get-in-touch' aria-labelledby="get-in-touch-heading">
       <div className="my-4 px-4 py-6">
         <SectionHeading>Get in touch</SectionHeading>
 

@@ -19,7 +19,7 @@ const About = () => {
                     I&apos;m a software engineer with a passion for building scalable and efficient
                     systems. I&apos;m currently working as a software engineer at WorkCompanion.
                 </SubHeading>
-                <section className="px-4 py-6">
+                <section className="px-4 py-6" aria-labelledby="travel-heading">
                     <SectionHeading >
                         Travelling is in my blood
                     </SectionHeading>
@@ -27,7 +27,7 @@ const About = () => {
                     <Collage />
                 </section>
 
-                <section>
+                <section aria-labelledby="timeline-heading">
                     <Timeline />
                 </section>
 
