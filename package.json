@@ -2,6 +2,17 @@
   "name": "yogesh-portfolio",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Yogesh Chauhan",
+    "url": "https://yogeshchauhan.dev",
+    "email": "chauhanyogesh950@gmail.com"
+  },
+  "description": "Full-stack portfolio of a Node.js & AWS Specialist built with Next.js 16 and Tailwind CSS 4.",
+  "homepage": "https://yogeshchauhan.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Yogesh0627/yogesh-portfolio"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
