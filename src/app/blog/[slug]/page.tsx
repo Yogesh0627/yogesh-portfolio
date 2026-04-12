@@ -54,7 +54,7 @@ const Blog = async ({ params }: {
                         "@type": "BlogPosting",
                         "mainEntityOfPage": {
                             "@type": "WebPage",
-                            "@id": `https://yourportfolio.com/blog/${resolvedParams.slug}`
+                            "@id": `https://yogeshchauhan.dev/blog/${resolvedParams.slug}`
                         },
                         "headline": frontmatter.title,
                         "description": frontmatter.description,
@@ -62,14 +62,14 @@ const Blog = async ({ params }: {
                         "author": {
                             "@type": "Person",
                             "name": "Yogesh Chauhan",
-                            "url": "https://yourportfolio.com"
+                            "url": "https://yogeshchauhan.dev"
                         },
                         "publisher": {
                             "@type": "Organization",
                             "name": "Yogesh Chauhan",
                             "logo": {
                                 "@type": "ImageObject",
-                                "url": "https://yourportfolio.com/logo.png"
+                                "url": "https://yogeshchauhan.dev/luffy.jpg"
                             }
                         }
                     })

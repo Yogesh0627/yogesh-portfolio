@@ -13,7 +13,7 @@ const inter = Inter({
 
 
 export const metadata: Metadata = {
-  // metadataBase: new URL("https://yogeshchauhan.dev"),
+  metadataBase: new URL("https://yogeshchauhan.dev"),
   title: {
     default: 'Yogesh Chauhan | Full Stack Developer | Node.js & AWS Specialist',
     template: '%s | Yogesh Chauhan'
@@ -29,15 +29,15 @@ export const metadata: Metadata = {
     'Software Engineer',
     'Backend Developer'
   ],
-  // alternates: {
-  //   canonical: "/",
-  // },
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: 'Yogesh Chauhan | Portfolio',
     description: 'Portfolio of a Full Stack Developer.',
     type: 'website',
-    // url: 'https://yogeshchauhan.dev',
-    // siteName: 'Yogesh Chauhan Portfolio',
+    url: 'https://yogeshchauhan.dev',
+    siteName: 'Yogesh Chauhan Portfolio',
     locale: 'en_IN',
   },
 }
@@ -60,9 +60,9 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "Person",
                 "name": "Yogesh Chauhan",
-                "url": "https://yourportfolio.com", // Replace with your actual domain
-                "logo": "https://yourportfolio.com/logo.png",
-                "image": "https://yourportfolio.com/avatar.png",
+                "url": "https://yogeshchauhan.dev", // Replace with your actual domain
+                "logo": "https://yogeshchauhan.dev/luffy.jpg",
+                "image": "https://yogeshchauhan.dev/luffy.jpg",
                 "jobTitle": "Software Engineer",
                 "worksFor": [
                   { "@type": "Organization", "name": "Google" },
@@ -71,9 +71,9 @@ export default function RootLayout({
                   { "@type": "Organization", "name": "WorkCompanion" }
                 ],
                 "sameAs": [
-                  "https://github.com/your-username",
-                  "https://linkedin.com/in/your-profile",
-                  "https://twitter.com/your-handle"
+                  "https://github.com/Yogesh0627",
+                  "https://www.linkedin.com/in/yogesh-chauhan-318172119/",
+                  "https://x.com/Yogesh0130"
                 ],
                 "email": "chauhanyogesh950@gmail.com",
                 "description": "Software Engineer specializing in scalable backend systems, AWS, and AI-powered SaaS development."

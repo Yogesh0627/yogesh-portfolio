@@ -31,7 +31,7 @@ const ProjectPage = () => {
                                 "description": project.description,
                                 "applicationCategory": "DeveloperApplication",
                                 "operatingSystem": "Web, Windows, MacOS",
-                                // "url": project.link || "https://yourportfolio.com/projects",
+                                // "url": project.link || "https://yogeshchauhan.dev/projects",
                                 "author": {
                                     "@type": "Person",
                                     "name": "Yogesh Chauhan"
