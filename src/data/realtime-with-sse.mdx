@@ -1,0 +1,118 @@
+---
+
+title: "Real-Time Updates with Server-Sent Events"
+description: "You don't always need WebSockets. How Server-Sent Events give you live, one-way updates over plain HTTP — and when to reach for them."
+date: "2026-05-18"
+image: "/blog/realtime-with-sse.png"
+tags:
+  - realtime
+  - sse
+  - backend
+  - web
+
+---
+
+# Real-Time Updates with Server-Sent Events
+
+When people want "live" features — a notification badge, a feed that updates itself, a progress bar — they reach for WebSockets by reflex. But WebSockets are a bidirectional, stateful protocol, and most "live" features only need updates flowing *one way*: server to client. For those, **Server-Sent Events (SSE)** are simpler, lighter, and built right into the browser.
+
+---
+
+## What SSE is
+
+SSE is a long-lived HTTP response that never closes. The server keeps the connection open and streams text events down it whenever something happens. The browser exposes it through a tiny built-in API:
+
+```ts
+const events = new EventSource("/api/notifications");
+
+events.onmessage = (e) => {
+  const data = JSON.parse(e.data);
+  console.log("New event:", data);
+};
+```
+
+That's the entire client side. No library, no handshake, no connection management — the browser even **reconnects automatically** if the connection drops.
+
+---
+
+## The server side
+
+An SSE endpoint is just an HTTP handler that sets the right headers and writes events in a simple text format:
+
+```ts
+export async function GET() {
+  const stream = new ReadableStream({
+    start(controller) {
+      const send = (data: unknown) => {
+        controller.enqueue(`data: ${JSON.stringify(data)}\n\n`);
+      };
+
+      // push an event whenever something happens
+      const unsubscribe = onNewNotification(send);
+
+      // clean up when the client disconnects
+      return () => unsubscribe();
+    },
+  });
+
+  return new Response(stream, {
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      "Connection": "keep-alive",
+    },
+  });
+}
+```
+
+The wire format is deliberately trivial: each message is `data: <payload>\n\n`. You can also send named events and an `id:` for resumption, but `data:` is all you need to start.
+
+---
+
+## Wiring it to your data
+
+The interesting question is: how does the server know when to push? For a real-time inbox, you want to emit an event the moment a new message hits the database. Databases like MongoDB expose exactly this via **change streams**:
+
+```ts
+const changeStream = db.collection("messages").watch([
+  { $match: { "fullDocument.userId": userId } },
+]);
+
+for await (const change of changeStream) {
+  send(change.fullDocument);   // push straight to the SSE client
+}
+```
+
+Now a write anywhere in your system — even from another service — flows through the change stream and out to the user's browser in real time, with no polling.
+
+---
+
+## SSE vs WebSockets — how to choose
+
+Reach for **SSE** when:
+
+- Updates flow **one way** (server → client): notifications, feeds, live dashboards, streaming AI responses, job progress.
+- You want to ride on plain HTTP/2, existing auth, and automatic reconnection.
+
+Reach for **WebSockets** when:
+
+- You need **bidirectional, low-latency** messaging: chat, multiplayer games, collaborative editing (cursors flying both ways).
+
+A good rule: *if the client mostly listens, use SSE. If the client and server are in constant back-and-forth, use WebSockets.* Most "real-time" product features are actually the former.
+
+---
+
+## Gotchas worth knowing
+
+- **Connection limits.** Over HTTP/1.1 a browser allows only ~6 connections per domain; one SSE stream eats one. Serve over **HTTP/2** (default on most hosts) and this effectively disappears.
+- **Proxies and buffering.** Some proxies buffer responses and break streaming — disable buffering (e.g. `X-Accel-Buffering: no` on nginx).
+- **Heartbeats.** Send a comment line (`: ping\n\n`) every 20–30s to keep idle connections and load balancers from timing out.
+- **Serverless caveat.** Long-lived streams fight short function timeouts — run SSE on a platform that supports streaming/edge runtimes.
+
+---
+
+## Conclusion
+
+SSE is the forgotten middle ground between polling and WebSockets. For the huge class of features where the server just needs to *tell the client something changed*, it gives you real-time updates with a few lines on each side, native browser support, and automatic reconnection.
+
+Before you spin up a WebSocket server for your next "live" feature, ask which way the data actually flows. If it's mostly one way, SSE will get you there with a fraction of the complexity.

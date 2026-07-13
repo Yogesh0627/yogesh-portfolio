@@ -15,7 +15,13 @@ export const getSingleBlog = async (slug: string) => {
             source: singleBlog,
             options: { parseFrontmatter: true }
         })
-        return {content, frontmatter}
+
+        // Reading time from the raw body (frontmatter stripped), ~200 words/min
+        const body = singleBlog.replace(/^---[\s\S]*?---/, "")
+        const words = body.trim().split(/\s+/).filter(Boolean).length
+        const readingTime = Math.max(1, Math.round(words / 200))
+
+        return { content, frontmatter, readingTime }
     } catch (error) {
         console.warn(`Error reading blog file for slug "${slug}" : `, error)
         return null
@@ -39,7 +45,14 @@ export const getBlogs = async ()=>{
             }
         }))
 
-        return allBlogs
+        // Sort newest-first by date (invalid/missing dates sink to the bottom)
+        const sortedBlogs = allBlogs.sort((a, b) => {
+            const timeA = a?.date ? new Date(a.date).getTime() : 0
+            const timeB = b?.date ? new Date(b.date).getTime() : 0
+            return timeB - timeA
+        })
+
+        return sortedBlogs
     } catch (error) {
         console.warn("Error while fetching blogs", error)
         return null

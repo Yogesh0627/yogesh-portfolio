@@ -16,7 +16,8 @@ const ContactForm = () => {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
-        message: ""
+        message: "",
+        honeypot: ""
     })
 
     const [sending, setSending] = useState(false)
@@ -39,11 +40,12 @@ const ContactForm = () => {
                 setFormData({
                     name: "",
                     email: "",
-                    message: ""
+                    message: "",
+                    honeypot: ""
                 })
                 toast.success("Form Submitted Successfully");
             } else {
-                toast.error("Something went wrong");
+                toast.error(response?.error ?? "Something went wrong");
             }
 
         } catch (error) {
@@ -73,6 +75,18 @@ const ContactForm = () => {
                     <label htmlFor="message" className='text-sm font-medium tracking-tight text-neutral-600'>Message</label>
                     <textarea id='message' name='message' required value={formData.message} placeholder='Write a message ...' rows={5} className='resize-none px-2 py-1 rounded-md text-sm  focus:ring-2 focus:ring-primary focus:outline-none shadow-custom' onChange={handleChange} />
                 </div>
+
+                {/* Honeypot: hidden from real users; bots that fill it are silently rejected. */}
+                <input
+                    type='text'
+                    name='honeypot'
+                    value={formData.honeypot}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete='off'
+                    aria-hidden='true'
+                    className='absolute -left-[9999px] h-0 w-0 opacity-0'
+                />
 
                 {/* <button type='submit' className='rounded-md bg-text-primary px-4 py-2 text-white cursor-pointer'>Send message</button> */}
                 <button type='submit'

@@ -16,8 +16,9 @@ const About = () => {
                 <Scales />
                 <Heading>About Me</Heading>
                 <SubHeading>
-                    I&apos;m a software engineer with a passion for building scalable and efficient
-                    systems. I&apos;m currently working as a software engineer at WorkCompanion.
+                    I&apos;m a full-stack engineer based in Delhi, India, who loves turning messy
+                    problems into clean, performant systems. When I&apos;m not shipping code,
+                    I&apos;m usually planning my next trip.
                 </SubHeading>
                 <section className="px-4 py-6" aria-labelledby="travel-heading">
                     <SectionHeading >

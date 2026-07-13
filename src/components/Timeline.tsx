@@ -18,19 +18,28 @@ interface TimelineDataType {
 
 const timelineData: TimelineDataType[] = [
     {
+        title: "2026",
+        content: [
+            {
+                title: "Led a backend performance overhaul at WoCo",
+                description: "Refactored god-controllers into a clean layered architecture, raised the codebase's documented quality score from 4.5 to 8.6/10, and cut authenticated-request overhead ~4× with a Redis cache and 44 MongoDB indexes."
+            },
+            {
+                title: "Relaunched Candor — an AI-coached feedback platform",
+                description: "Completely rebuilt a project I first started in 2024 — anonymous feedback with Gemini-powered moderation and an AI growth coach (Next.js, MongoDB, Redis)."
+            },
+            {
+                title: "Rebuilt InsightBlog — an AI publishing platform",
+                description: "Revamped my developer publishing platform end-to-end, adding an AI writing assistant and analytics on Hono + Prisma + Cloudflare Workers."
+            }
+        ]
+    },
+    {
         title: "2025",
         content: [
             {
-                title: "Reached 20K MRR with my VS Code fork",
-                description: "Reached the revenue milestone of $20k MRR with my VSCode fork."
-            },
-            {
-                title: "Launched AI-powered PMS Cycle Creator",
-                description: "Integrated an intelligent AI agent that automates performance cycle creation using natural language prompts."
-            },
-            {
-                title: "Scaled my SaaS to 10,000 active users",
-                description: "Optimized infrastructure and onboarding flows to achieve 10K+ monthly active users."
+                title: "Became the top frontend contributor on WoCo PMS",
+                description: "Owned the frontend architecture of the multi-tenant HR platform — a typed API service layer, route-level code-splitting, and skeleton loaders for a fast, polished UI."
             }
         ]
     },
@@ -38,16 +47,16 @@ const timelineData: TimelineDataType[] = [
         title: "2024",
         content: [
             {
-                title: "Built and launched PMS SaaS MVP",
-                description: "Developed and deployed the initial version of my performance management system with dynamic review cycles."
+                title: "Joined Work Companion (WoCo) as a Software Engineer",
+                description: "Started as a core engineer on WoCo PMS, a multi-tenant HR performance-management platform built with React, TypeScript, and Node.js."
             },
             {
-                title: "Introduced AI-driven FAQ chatbot",
-                description: "Built a modular FAQ chatbot that helps users explore system features interactively."
+                title: "Software Specialist at Agami Technologies",
+                description: "Integrated OpenAI into the BeGenieus platform and delivered features across modules while collaborating closely with QA and product teams."
             },
             {
-                title: "Adopted a microservices architecture",
-                description: "Refactored monolithic backend into independent microservices for better scalability."
+                title: "Completed my B.Tech in Mechanical Engineering",
+                description: "Graduated from Ganga Institute of Technology & Management (MDU) while transitioning full-time into software engineering."
             }
         ]
     },
@@ -55,42 +64,12 @@ const timelineData: TimelineDataType[] = [
         title: "2023",
         content: [
             {
-                title: "Developed teacher portfolio app",
-                description: "Built a full-stack application allowing teachers to manage lectures, blogs, and student feedback."
+                title: "Completed intensive full-stack training",
+                description: "Sharpened my engineering fundamentals through the Masai School scholar program and the 100x Devs full-stack program — React, Node.js, and MongoDB."
             },
             {
-                title: "Improved workflow automation at Agami Technologies",
-                description: "Implemented scalable front-end solutions and optimized performance across multiple projects."
-            },
-            {
-                title: "Earned multiple HackerRank certifications",
-                description: "Completed problem-solving and full-stack certifications to strengthen coding foundations."
-            }
-        ]
-    },
-    {
-        title: "2022",
-        content: [
-            {
-                title: "Graduated from Masai School",
-                description: "Completed intensive full-stack web development training, focusing on React, Node.js, and MongoDB."
-            },
-            {
-                title: "Started my first professional development role",
-                description: "Joined a growing tech startup and began building real-world SaaS applications."
-            }
-        ]
-    },
-    {
-        title: "2021",
-        content: [
-            {
-                title: "Started learning full-stack development",
-                description: "Began my journey into web development, exploring JavaScript, React, and Express."
-            },
-            {
-                title: "Built my first personal project",
-                description: "Created a task management web app using HTML, CSS, and vanilla JavaScript."
+                title: "Built my first full-stack projects",
+                description: "Started shipping real-world web applications end-to-end, from database schema and APIs to the UI."
             }
         ]
     }

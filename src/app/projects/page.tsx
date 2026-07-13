@@ -7,8 +7,8 @@ import projectsData from "@/data/projectsData.json"
 
 export const metadata: Metadata = {
     title: "Projects",
-    description: "Explore the portfolio of Yogesh Chauhan, featuring a $20K MRR VS Code fork, AI-powered SaaS applications, and scalable backend systems.",
-    keywords: ["Software Projects", "React Portfolio", "Node.js Projects", "AWS Cloud Solutions", "SaaS Development"]
+    description: "Explore Yogesh Chauhan's projects — Candor (AI-coached feedback), SQLPlay (an in-browser SQL playground on npm), InsightBlog (AI publishing platform), and WoCo PMS (multi-tenant HR platform).",
+    keywords: ["Software Projects", "React Projects", "Node.js Projects", "Next.js", "AI Integration", "Full Stack Developer"]
 }
 
 const ProjectPage = () => {
@@ -47,8 +47,9 @@ const ProjectPage = () => {
                     <Scales />
                     <Heading >Projects</Heading>
                     <SubHeading>
-                        I&apos;m a software engineer with a passion for building scalable and efficient
-                        systems. I&apos;m currently working as a software engineer at WorkCompanion.
+                        A selection of things I&apos;ve built — from AI-powered products to a
+                        multi-tenant enterprise platform. Each one taught me something about
+                        shipping real software end-to-end.
                     </SubHeading>
 
                     <Projects />

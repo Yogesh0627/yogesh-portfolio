@@ -2,6 +2,8 @@ import { Container } from '@/components/ui'
 import { redirect } from 'next/navigation'
 import { getBlogFrontMatterBySlug, getBlogs, getSingleBlog } from '@/utils/mdx'
 import { Scales } from '@/components'
+import { formatDate } from '@/utils'
+import Image from 'next/image'
 
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -16,8 +18,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
 
     return {
-        title: frontmatter.title + "Yogesh",
+        title: frontmatter.title,
         description: frontmatter.description,
+        openGraph: {
+            title: frontmatter.title,
+            description: frontmatter.description,
+            type: "article",
+            publishedTime: frontmatter.date,
+            images: frontmatter.image ? [{ url: frontmatter.image }] : undefined,
+        },
     }
 }
 
@@ -42,7 +51,7 @@ const Blog = async ({ params }: {
         redirect("/blog")
     }
 
-    const { content, frontmatter } = blog
+    const { content, frontmatter, readingTime } = blog
 
     return (
         <>
@@ -58,6 +67,7 @@ const Blog = async ({ params }: {
                         },
                         "headline": frontmatter.title,
                         "description": frontmatter.description,
+                        "image": frontmatter.image ? `https://yogeshchauhan.dev${frontmatter.image}` : undefined,
                         "datePublished": frontmatter.date,
                         "author": {
                             "@type": "Person",
@@ -69,7 +79,7 @@ const Blog = async ({ params }: {
                             "name": "Yogesh Chauhan",
                             "logo": {
                                 "@type": "ImageObject",
-                                "url": "https://yogeshchauhan.dev/luffy.jpg"
+                                "url": "https://yogeshchauhan.dev/yogesh.jpg"
                             }
                         }
                     })
@@ -78,11 +88,36 @@ const Blog = async ({ params }: {
         <div className="flex min-h-screen items-start justify-start">
             <Container className="min-h-screen pt-10 pb-5 px-8 md:pt-20 md:pb-10">
                 <Scales/>
-                {/* <img
-                src={frontmatter.image}
-                alt={frontmatter.title}
-                className='mx-auto  mb-20 max-h-96 w-full max-w-2xl rounded-2xl object-cover shadow-xl'
-                /> */}
+                {frontmatter.image && (
+                    <Image
+                        src={frontmatter.image}
+                        alt={frontmatter.title}
+                        width={1200}
+                        height={630}
+                        priority
+                        className='mx-auto mb-12 max-h-96 w-full max-w-3xl rounded-2xl border border-neutral-200 object-cover dark:border-neutral-800'
+                    />
+                )}
+
+                <div className="mx-auto mb-8 flex max-w-3xl flex-col gap-3">
+                    <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400">
+                        <time dateTime={frontmatter.date}>{formatDate(frontmatter.date)}</time>
+                        <span aria-hidden="true">·</span>
+                        <span>{readingTime} min read</span>
+                    </div>
+                    {frontmatter.tags && frontmatter.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                            {frontmatter.tags.map((tag) => (
+                                <span
+                                    key={tag}
+                                    className="rounded-full border border-neutral-200 bg-neutral-100 px-2.5 py-0.5 text-xs text-neutral-600 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300"
+                                >
+                                    #{tag}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+                </div>
 
                 <article>
                     <div className="prose mx-auto prose-neutral dark:prose-invert prose-headings:scroll-mt-20">

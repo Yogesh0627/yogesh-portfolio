@@ -4,5 +4,6 @@ export * from "./SectionHeading"
 export * from "./SubHeading"
 export * from "./Footer"
 export * from "./Navbar"
+export * from "./ResumeButton"
 
 export * from "./LayoutTextFlip"

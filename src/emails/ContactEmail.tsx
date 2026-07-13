@@ -8,6 +8,7 @@ import {
     Text,
     Preview,
 } from "@react-email/components";
+import dayjs from "dayjs";
 
 interface ContactEmailProps {
     name: string;
@@ -16,7 +17,8 @@ interface ContactEmailProps {
 }
 
 export const ContactEmail = ({ name, email, message }: ContactEmailProps) => {
-    const timestamp = new Date().toLocaleString();
+    const now = dayjs();
+    const timestamp = now.format("MMM D, YYYY h:mm A");
 
     return (
         <Html lang="en">
@@ -56,7 +58,7 @@ export const ContactEmail = ({ name, email, message }: ContactEmailProps) => {
                             Received on {timestamp}
                         </Text>
                         <Text style={footerText}>
-                            © {new Date().getFullYear()} Yogesh Chauhan
+                            © {now.year()} Yogesh Chauhan
                         </Text>
                     </Section>
 

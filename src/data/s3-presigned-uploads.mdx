@@ -1,0 +1,130 @@
+---
+
+title: "Secure File Uploads with S3 Pre-Signed URLs"
+description: "Why you should never proxy file uploads through your server — and how S3 pre-signed URLs let clients upload directly, securely, and at scale."
+date: "2026-06-20"
+image: "/blog/s3-presigned-uploads.png"
+tags:
+  - aws
+  - s3
+  - backend
+  - security
+
+---
+
+# Secure File Uploads with S3 Pre-Signed URLs
+
+Almost every app needs file uploads — avatars, documents, exports. The naive approach is to send the file to your server, then have the server forward it to storage. It works in a demo and falls apart in production: your server burns memory and bandwidth buffering large files, requests time out, and one big upload can starve every other user.
+
+**S3 pre-signed URLs** solve this elegantly: the browser uploads *directly* to S3, and your server never touches the bytes.
+
+---
+
+## The problem with proxying uploads
+
+```
+Browser ─(50MB)─▶ Your Server ─(50MB)─▶ S3
+```
+
+Every uploaded byte crosses your server twice. Under load, that's doubled bandwidth, exhausted memory, and blocked event-loop time on a Node.js API. You're paying compute to be a dumb pipe.
+
+Pre-signed URLs flip it:
+
+```
+Browser ──── PUT (50MB) ────▶ S3
+   ▲
+   └── short-lived signed URL from your server (a few hundred bytes)
+```
+
+Your server's only job is to hand out a temporary, cryptographically-signed permission slip. S3 handles the heavy lifting.
+
+---
+
+## How a pre-signed URL works
+
+A pre-signed URL is a normal S3 object URL with an authenticated signature baked into the query string. It encodes:
+
+- **which operation** is allowed (e.g. `PutObject`),
+- **which exact object key**,
+- **an expiry** (say 60 seconds),
+
+all signed with your AWS credentials. Anyone holding the URL can perform *only* that operation, on *only* that key, *only* until it expires. No AWS credentials ever reach the client.
+
+---
+
+## Step 1: Generate the URL on the server
+
+```ts
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+
+const s3 = new S3Client({ region: "ap-south-1" });
+
+export async function createUploadUrl(userId: string, fileName: string) {
+  const key = `uploads/${userId}/${Date.now()}-${fileName}`;
+
+  const command = new PutObjectCommand({
+    Bucket: "my-app-uploads",
+    Key: key,
+    ContentType: "image/png",
+  });
+
+  const url = await getSignedUrl(s3, command, { expiresIn: 60 });
+  return { url, key };
+}
+```
+
+Notice the server decides the key — namespacing it under `userId` so a user can't overwrite someone else's files.
+
+---
+
+## Step 2: Upload directly from the client
+
+```ts
+const { url, key } = await fetch("/api/upload-url", {
+  method: "POST",
+  body: JSON.stringify({ fileName: file.name }),
+}).then(r => r.json());
+
+// The file goes straight to S3 — never through your API.
+await fetch(url, {
+  method: "PUT",
+  headers: { "Content-Type": file.type },
+  body: file,
+});
+
+// Then tell your API the upload succeeded, and save `key` in your DB.
+```
+
+---
+
+## Step 3: Reading files back
+
+Keep the bucket **private**. To let a user view their file, generate a pre-signed `GetObject` URL the same way:
+
+```ts
+const command = new GetObjectCommand({ Bucket, Key: key });
+const viewUrl = await getSignedUrl(s3, command, { expiresIn: 300 });
+```
+
+Now even file *reads* are access-controlled by your server, and links expire on their own.
+
+---
+
+## Hardening it for production
+
+The happy path is easy; these are the details that keep it safe:
+
+- **Constrain uploads.** Set `ContentType` and use an S3 bucket policy to cap object size, so a signed URL can't be abused to dump a 10GB file.
+- **Short expiry.** 60 seconds is plenty for a PUT. The smaller the window, the smaller the risk if a URL leaks.
+- **Validate ownership.** Always derive the key prefix from the authenticated user server-side — never trust a key sent by the client.
+- **Verify after upload.** S3 can fire an event (or you can `HeadObject`) to confirm the file really landed before you mark it done.
+- **Block public access** at the bucket level and serve everything through signed URLs or a CDN with signed cookies.
+
+---
+
+## Conclusion
+
+Pre-signed URLs move file transfer off your server and onto infrastructure built for exactly that job. Your API shrinks to a small, fast broker of permissions, uploads scale independently of your compute, and every object stays private by default.
+
+It's one of those patterns that feels like a small trick but changes how an entire system scales — the first time a user uploads a 200MB file without touching your Node process, you'll never proxy an upload again.

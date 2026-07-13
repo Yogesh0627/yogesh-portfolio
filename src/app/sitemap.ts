@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next'
+import projectsData from '@/data/projectsData.json'
+import { getBlogs } from '@/utils/mdx'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://yogeshchauhan.dev'
 
     // Define your main pages
@@ -13,5 +15,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
         })
     )
 
-    return [...routes]
+    // Per-project case-study pages
+    const projectRoutes = projectsData
+        .filter((project) => project.slug)
+        .map((project) => ({
+            url: `${baseUrl}/projects/${project.slug}`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.7,
+        }))
+
+    // Individual blog posts
+    const blogs = (await getBlogs()) ?? []
+    const blogRoutes = blogs.map((blog) => ({
+        url: `${baseUrl}/blog/${blog.slug}`,
+        lastModified: blog.date ? new Date(blog.date) : new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }))
+
+    return [...routes, ...projectRoutes, ...blogRoutes]
 }

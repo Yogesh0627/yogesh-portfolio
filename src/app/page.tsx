@@ -1,5 +1,5 @@
-import { Experience, GetInTouch, Projects, Scales, Testimonials } from "@/components";
-import { Container, Heading, LayoutTextFlip, SubHeading } from "@/components/ui";
+import { Experience, GetInTouch, Projects, Scales, Skills, Testimonials } from "@/components";
+import { Container, Heading, LayoutTextFlip, ResumeButton, SubHeading } from "@/components/ui";
 import projectsData from "@/data/projectsData.json"
 import LandingBlogs from "@/components/LandingBlogs";
 
@@ -22,13 +22,19 @@ const MyPortfolio = () => {
           />
         </div>
         <SubHeading>
-          I&apos;m a software engineer with a passion for building scalable and efficient
-          systems. I&apos;m currently working as a software engineer at WorkCompanion.
+          I&apos;m a full-stack developer who builds scalable web apps end-to-end — from
+          database schemas and Node.js APIs to polished React interfaces. Currently a
+          Software Engineer at Work Companion.
         </SubHeading>
+
+        <div className="px-4 pt-6">
+          <ResumeButton />
+        </div>
 
         <Projects projects={projectsData.slice(0, 3)} />
         <LandingBlogs />
         <Experience />
+        <Skills />
         <Testimonials />
         <GetInTouch />
       </Container>

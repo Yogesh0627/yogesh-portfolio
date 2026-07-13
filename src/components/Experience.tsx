@@ -1,71 +1,43 @@
 import { SectionHeading } from './ui'
-import { IconBrandMongodb, IconBrandNextjs, IconBrandNodejs, IconBrandReact, IconBrandRedux, IconBrandTypescript } from '@tabler/icons-react'
+import { IconBrandMongodb, IconBrandNodejs, IconBrandOpenai, IconBrandReact, IconBrandRedux, IconBrandTypescript, IconBrandVue, IconPlugConnected, IconServer } from '@tabler/icons-react'
 import ExpandableChip from './ExpandableChip'
 
-
+const techClass = 'size-4 shrink-0 dark:text-neutral-200'
 
 const Experience = async () => {
     const experienceData = [
         {
             id: 1,
-            company: "Google",
-            role: "Senior Frontend Engineer",
-            duration: "June 2020 - Present",
+            company: "Work Companion (WoCo)",
+            role: "Software Engineer",
+            duration: "Oct 2024 - Present",
             description:
-                "Led the development of key features for Google Cloud Platform's web console while improving performance metrics by 35%.",
-            logo: "/images/logos/google-logo.png",
+                "Core engineer on WoCo PMS, a multi-tenant HR performance-management platform. Top frontend contributor, and led a backend optimization program that raised the codebase's quality score from 4.5 to 8.6/10 and cut authenticated-request overhead ~4×.",
+            logo: "/logos/woco.png",
             technologies: [
-                { id: 1, logo: <IconBrandReact className='size-4 shrink-0 dark:text-neutral-200' />, title: "React" },
-                { id: 2, logo: <IconBrandTypescript className='size-4 shrink-0 dark:text-neutral-200' />, title: "TypeScript" },
-                { id: 3, logo: <IconBrandRedux className='size-4 shrink-0 dark:text-neutral-200' />, title: "Redux" },
-                { id: 4, logo: <span>GQL</span>, title: "GraphQL" },
-                { id: 5, logo: <span>Jest</span>, title: "Jest" },
-                { id: 6, logo: <span>Cypress</span>, title: "Cypress" }
+                { id: 1, logo: <IconBrandReact className={techClass} />, title: "React" },
+                { id: 2, logo: <IconBrandTypescript className={techClass} />, title: "TypeScript" },
+                { id: 3, logo: <IconBrandRedux className={techClass} />, title: "Redux Toolkit" },
+                { id: 4, logo: <IconBrandNodejs className={techClass} />, title: "Node.js" },
+                { id: 5, logo: <IconBrandMongodb className={techClass} />, title: "MongoDB" },
+                { id: 6, logo: <IconServer className={techClass} />, title: "Redis" }
             ]
         },
 
         {
             id: 2,
-            company: "Microsoft",
-            role: "Frontend Developer",
-            duration: "Jan 2018 - May 2020",
+            company: "Agami Technologies",
+            role: "Software Specialist",
+            duration: "Jun 2024 - Oct 2024",
             description:
-                "Worked on scalable UI systems for Microsoft Azure dashboards with a focus on accessibility and performance.",
-            logo: "/images/logos/microsoft-logo.png",
+                "Worked on the BeGenieus platform — integrated OpenAI-powered chat and image generation, and delivered features across modules while collaborating closely with QA and product teams.",
+            logo: "/logos/agami.png",
             technologies: [
-                { id: 1, logo: <IconBrandReact className='size-4 shrink-0 dark:text-neutral-200' />, title: "React" },
-                { id: 2, logo: <IconBrandTypescript className='size-4 shrink-0 dark:text-neutral-200' />, title: "TypeScript" },
-                { id: 3, logo: <IconBrandRedux className='size-4 shrink-0 dark:text-neutral-200' />, title: "Redux" }
-            ]
-        },
-
-        {
-            id: 3,
-            company: "Amazon",
-            role: "Software Engineer",
-            duration: "July 2016 - Dec 2017",
-            description:
-                "Built high-performance internal tools and optimized UI rendering for large-scale e-commerce systems.",
-            logo: "/images/logos/amazon-logo.png",
-            technologies: [
-                { id: 1, logo: <IconBrandReact className='size-4 shrink-0 dark:text-neutral-200' />, title: "React" },
-                { id: 2, logo: <IconBrandNodejs className='size-4 shrink-0 dark:text-neutral-200' />, title: "Node.js" },
-                { id: 3, logo: <IconBrandMongodb className='size-4 shrink-0 dark:text-neutral-200' />, title: "MongoDB" }
-            ]
-        },
-
-        {
-            id: 4,
-            company: "Netflix",
-            role: "UI Engineer",
-            duration: "Aug 2015 - June 2016",
-            description:
-                "Designed and developed responsive UI components for streaming platforms ensuring smooth user experience across devices.",
-            logo: "/images/logos/netflix-logo.png",
-            technologies: [
-                { id: 1, logo: <IconBrandReact className='size-4 shrink-0 dark:text-neutral-200' />, title: "React" },
-                { id: 2, logo: <IconBrandNextjs className='size-4 shrink-0 dark:text-neutral-200' />, title: "Next.js" },
-                { id: 3, logo: <span>CSS</span>, title: "CSS" }
+                { id: 1, logo: <IconBrandVue className={techClass} />, title: "Vue.js" },
+                { id: 2, logo: <IconBrandNodejs className={techClass} />, title: "Node.js" },
+                { id: 3, logo: <IconBrandMongodb className={techClass} />, title: "MongoDB" },
+                { id: 4, logo: <IconPlugConnected className={techClass} />, title: "Socket.io" },
+                { id: 5, logo: <IconBrandOpenai className={techClass} />, title: "OpenAI" }
             ]
         }
     ];
@@ -108,7 +80,7 @@ const Experience = async () => {
 
             <section id='experience' className='py-1' aria-labelledby="experience-heading">
                 <div className='py-6 px-4 my-10 border-y border-neutral-100 shadow-section-inset dark:border-neutral-800 dark:shadow-section-inset'>
-                    <SectionHeading delay={0.4}>Worked at reputed firms</SectionHeading>
+                    <SectionHeading delay={0.4}>Where I&apos;ve worked</SectionHeading>
                     <div className='flex flex-col gap-6 py-10' role="list">
                         {experienceData.map((exp, idx) => (
                             <div key={exp.id}>
@@ -125,7 +97,9 @@ const Experience = async () => {
                                             chipData={exp.technologies}
                                         />
                                     </div>
-                                    <img src={exp.logo} alt={exp.company} width={100} height={100} className='hidden md:block' />
+                                    <div className='hidden items-center rounded-lg bg-white px-2 py-1.5 shadow-custom md:inline-flex'>
+                                        <img src={exp.logo} alt={exp.company} className='h-8 w-auto max-w-[130px] object-contain' />
+                                    </div>
                                 </div>
                             </div>
                         ))}

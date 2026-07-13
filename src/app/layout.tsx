@@ -5,6 +5,7 @@ import { Footer, Navbar } from "@/components/ui";
 import { ViewTransitions } from "next-view-transitions";
 import { Toaster } from "sonner";
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
+import { Analytics } from "@vercel/analytics/next";
 const inter = Inter({
   weight: ["400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
@@ -15,30 +16,39 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://yogeshchauhan.dev"),
   title: {
-    default: 'Yogesh Chauhan | Full Stack Developer | Node.js & AWS Specialist',
+    default: 'Yogesh Chauhan | Full Stack Developer (React & Node.js)',
     template: '%s | Yogesh Chauhan'
   },
-  description: 'Full Stack Developer with experience in Quality Analysis. Specialized in building scalable backend systems with Node.js, MongoDB, and AWS cloud integration.',
+  description: 'Full-stack developer who ships web apps end-to-end — from MongoDB schemas and Node.js APIs to polished React interfaces. Software Engineer at Work Companion.',
   keywords: [
     'Full Stack Developer',
     'Node.js',
     'React',
     'Next.js',
+    'TypeScript',
     'MongoDB',
-    'QA Analyst',
     'Software Engineer',
     'Backend Developer'
   ],
   alternates: {
     canonical: "/",
+    types: {
+      'application/rss+xml': [{ url: '/rss.xml', title: 'Yogesh Chauhan — Blog' }],
+    },
   },
   openGraph: {
     title: 'Yogesh Chauhan | Portfolio',
-    description: 'Portfolio of a Full Stack Developer.',
+    description: 'Full-stack developer building scalable web apps with React, Node.js, and TypeScript.',
     type: 'website',
     url: 'https://yogeshchauhan.dev',
     siteName: 'Yogesh Chauhan Portfolio',
     locale: 'en_IN',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Yogesh Chauhan | Portfolio',
+    description: 'Full-stack developer building scalable web apps with React, Node.js, and TypeScript.',
+    creator: '@Yogesh0130',
   },
 }
 
@@ -61,22 +71,26 @@ export default function RootLayout({
                 "@type": "Person",
                 "name": "Yogesh Chauhan",
                 "url": "https://yogeshchauhan.dev", // Replace with your actual domain
-                "logo": "https://yogeshchauhan.dev/luffy.jpg",
-                "image": "https://yogeshchauhan.dev/luffy.jpg",
+                "logo": "https://yogeshchauhan.dev/yogesh.jpg",
+                "image": "https://yogeshchauhan.dev/yogesh.jpg",
                 "jobTitle": "Software Engineer",
-                "worksFor": [
-                  { "@type": "Organization", "name": "Google" },
-                  { "@type": "Organization", "name": "Microsoft" },
-                  { "@type": "Organization", "name": "Amazon" },
-                  { "@type": "Organization", "name": "WorkCompanion" }
-                ],
+                "worksFor": {
+                  "@type": "Organization",
+                  "name": "Work Companion (WoCo)",
+                  "url": "https://woco.co.in"
+                },
+                "alumniOf": {
+                  "@type": "Organization",
+                  "name": "Agami Technologies",
+                  "url": "https://www.agamitechnologies.com"
+                },
                 "sameAs": [
                   "https://github.com/Yogesh0627",
                   "https://www.linkedin.com/in/yogesh-chauhan-318172119/",
                   "https://x.com/Yogesh0130"
                 ],
                 "email": "chauhanyogesh950@gmail.com",
-                "description": "Software Engineer specializing in scalable backend systems, AWS, and AI-powered SaaS development."
+                "description": "Full-stack software engineer specializing in scalable web applications with React, Node.js, TypeScript, and MongoDB."
               })
             }}
           />
@@ -86,6 +100,7 @@ export default function RootLayout({
             {children}
             <Footer />
           </NextThemesProvider>
+          <Analytics />
         </body>
       </html>
     </ViewTransitions>

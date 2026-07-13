@@ -1,0 +1,123 @@
+---
+
+title: "How JWT Authentication Actually Works"
+description: "What a JWT really is, why access and refresh tokens exist, and the security decisions that separate a toy auth system from a production one."
+date: "2026-07-10"
+image: "/blog/how-jwt-auth-works.png"
+tags:
+  - auth
+  - security
+  - jwt
+  - backend
+
+---
+
+# How JWT Authentication Actually Works
+
+Almost every app needs to answer one question on every request: *who is this?* JSON Web Tokens (JWTs) are the most common way to answer it in modern stateless APIs. They're also widely misunderstood — treated as magic, or used insecurely. Let's demystify them.
+
+---
+
+## What a JWT actually is
+
+A JWT is just a string with three base64-encoded parts separated by dots:
+
+```
+header.payload.signature
+```
+
+- **Header** — the algorithm, e.g. `{ "alg": "HS256", "typ": "JWT" }`
+- **Payload** — the claims, e.g. `{ "sub": "user_123", "role": "admin", "exp": 1765432100 }`
+- **Signature** — a hash of the header + payload, signed with a secret only your server knows.
+
+Decode a real one and you'll see this:
+
+```ts
+// The payload is NOT encrypted — just base64. Anyone can read it.
+JSON.parse(atob(token.split(".")[1]));
+// { sub: "user_123", role: "admin", exp: 1765432100 }
+```
+
+This is the single most important thing to understand: **a JWT is signed, not encrypted.** Never put secrets in the payload. Anyone can read it; they just can't *forge* it without your secret.
+
+---
+
+## Why the signature matters
+
+The signature is what makes a JWT trustworthy. When your server issues a token, it signs the payload:
+
+```ts
+import jwt from "jsonwebtoken";
+
+const token = jwt.sign(
+  { sub: user.id, role: user.role },
+  process.env.JWT_SECRET!,
+  { expiresIn: "15m" }
+);
+```
+
+On the next request, it verifies the signature:
+
+```ts
+try {
+  const claims = jwt.verify(token, process.env.JWT_SECRET!);
+  // Signature valid → we trust these claims without a DB lookup.
+} catch {
+  // Tampered or expired → reject.
+}
+```
+
+If an attacker changes `"role": "admin"` in the payload, the signature no longer matches and `verify` throws. That's the whole security model: trust the claims *because* the signature proves you issued them.
+
+---
+
+## Why two tokens: access + refresh
+
+A single long-lived token is dangerous — if it leaks, the attacker has access until it expires. A single short-lived token is annoying — the user gets logged out every few minutes. The standard solution uses **two** tokens:
+
+- **Access token** — short-lived (10–15 min), sent on every request. If stolen, it's only useful briefly.
+- **Refresh token** — long-lived (days/weeks), stored securely, used *only* to get a new access token.
+
+```
+Login ─▶ access (15m) + refresh (7d)
+access expires ─▶ POST /refresh (with refresh token) ─▶ new access token
+```
+
+This gives you the best of both: requests stay stateless and fast, but the exposure window for the token that travels everywhere stays tiny.
+
+---
+
+## Where to store tokens
+
+This is where most tutorials go wrong. `localStorage` is convenient but readable by any JavaScript on the page — one XSS bug and your tokens are stolen.
+
+The safer pattern:
+
+- Store the **refresh token** in an **`httpOnly`, `Secure`, `SameSite` cookie** — JavaScript can't read it, so XSS can't exfiltrate it.
+- Keep the **access token in memory** (a variable), not persisted anywhere.
+
+```ts
+res.cookie("refresh", refreshToken, {
+  httpOnly: true,   // JS can't read it
+  secure: true,     // HTTPS only
+  sameSite: "strict", // CSRF protection
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
+```
+
+---
+
+## Production details that matter
+
+- **Rotate refresh tokens.** Issue a new refresh token on every refresh and invalidate the old one — so a stolen refresh token is only usable once.
+- **Keep a revocation list.** Pure JWTs can't be "logged out" server-side. For logout or ban, store a small deny-list (by token id) in Redis and check it on refresh.
+- **Short access tokens.** 15 minutes limits the blast radius of a leak far more than any other single choice.
+- **Sign with a strong secret** (or asymmetric keys, `RS256`, if multiple services verify tokens).
+
+---
+
+## Conclusion
+
+A JWT is a signed, readable claim about who a user is. Access tokens keep requests stateless and fast; refresh tokens keep sessions long-lived without widening your attack surface; `httpOnly` cookies keep the long-lived token out of reach of XSS.
+
+Get those three ideas right and you have auth that's both convenient and genuinely secure — not just a token that happens to work.

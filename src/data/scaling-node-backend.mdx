@@ -1,0 +1,139 @@
+---
+
+title: "Five Patterns for Scaling a Node.js Backend"
+description: "The distributed-systems fundamentals that turn a slow API fast — caching, the N+1 trap, database indexing, background jobs, and idempotency."
+date: "2026-06-02"
+image: "/blog/scaling-node-backend.png"
+tags:
+  - backend
+  - distributed-systems
+  - performance
+  - nodejs
+
+---
+
+# Five Patterns for Scaling a Node.js Backend
+
+Most backends don't get slow because of one dramatic mistake. They get slow through a hundred small ones — a query in a loop here, a missing index there, a synchronous email send blocking a request. The good news is that a handful of well-understood patterns fix the vast majority of them.
+
+Here are five that consistently move the needle, drawn from real backend optimization work.
+
+---
+
+## 1. Cache the hot path
+
+Some work happens on *every* request. Authentication is the classic example: every protected endpoint decodes a token and loads the user. If that's a database round-trip each time, it's pure overhead on your busiest code path.
+
+A short-lived cache in front of it changes everything:
+
+```ts
+async function getUser(userId: string) {
+  const cached = await redis.get(`user:${userId}`);
+  if (cached) return JSON.parse(cached);      // fast path
+
+  const user = await db.users.findById(userId);
+  await redis.set(`user:${userId}`, JSON.stringify(user), "EX", 300);
+  return user;
+}
+```
+
+Caching auth lookups alone can cut per-request overhead dramatically — often taking a ~145ms middleware down to ~35ms. The key discipline: make the cache **fail-open** (if Redis is down, fall through to the DB) so your cache never becomes a single point of failure.
+
+---
+
+## 2. Kill the N+1 query
+
+The most common performance bug in the world:
+
+```ts
+const orders = await db.orders.find({ userId });      // 1 query
+for (const order of orders) {
+  order.items = await db.items.find({ orderId: order.id }); // N queries
+}
+```
+
+One query becomes 1 + N. With 120 orders that's 121 round-trips. Fetch the related data in **one batched query** and stitch it together in memory:
+
+```ts
+const orders = await db.orders.find({ userId });
+const items = await db.items.find({
+  orderId: { $in: orders.map(o => o.id) },              // 1 query
+});
+const byOrder = Map.groupBy(items, i => i.orderId);
+orders.forEach(o => (o.items = byOrder.get(o.id) ?? []));
+```
+
+Two queries instead of 121. This single change routinely turns a ~2.5s endpoint into ~300ms.
+
+---
+
+## 3. Index what you filter on
+
+A database without indexes scans every row of a table to answer a query — fine at 100 rows, catastrophic at a million. An index is a sorted lookup structure that turns a full scan into a direct jump.
+
+```ts
+// You query users by email constantly:
+db.users.find({ email });
+
+// So index it:
+db.users.createIndex({ email: 1 });
+```
+
+Rule of thumb: **any field you filter, sort, or join on should be indexed.** On indexed fields, queries can go from full collection scans to 100–500× faster. The cost is slightly slower writes and a little disk — almost always worth it for read-heavy APIs.
+
+---
+
+## 4. Offload slow work to the background
+
+When a user triggers an action that sends 50 emails, don't make them wait for it:
+
+```ts
+// ❌ The request hangs for the whole email storm
+await sendEmailsToAllReviewers(reviewers);
+return res.json({ ok: true });
+```
+
+Acknowledge the request immediately and do the slow work afterwards — via a queue, a worker, or at minimum a fire-and-forget after you've responded:
+
+```ts
+// ✅ Respond first, process async
+res.json({ ok: true });
+queue.add("notify-reviewers", { reviewers });
+```
+
+A request that took 3 minutes now returns in milliseconds. Anything that isn't needed to produce the response — emails, exports, webhooks, analytics — belongs off the request path.
+
+---
+
+## 5. Make retries safe with idempotency
+
+In a distributed system, requests get retried — by clients, by proxies, by users double-clicking. If "add 10 credits" runs twice, you have a bug. **Idempotency** means an operation can run any number of times with the same result.
+
+The pattern: give each operation a unique key and refuse to process a key twice.
+
+```ts
+async function grantCredits(userId: string, amount: number, opId: string) {
+  const created = await db.ledger.insertIfAbsent({
+    _id: opId,                    // unique operation id
+    userId, amount,
+  });
+  if (!created) return;           // already applied — do nothing
+  await db.users.increment(userId, "credits", amount);
+}
+```
+
+An append-only ledger keyed by operation id means a retry is a no-op, not a double-charge. This is the backbone of anything touching money, credits, or inventory.
+
+---
+
+## Conclusion
+
+None of these are exotic. They're the fundamentals:
+
+- **Cache** the work you repeat.
+- **Batch** the queries you loop.
+- **Index** the fields you filter.
+- **Defer** the work the user doesn't need to wait for.
+- **Make retries safe** so distribution doesn't corrupt your data.
+
+Reach for them in that rough order when an endpoint is slow, and measure before and after — the numbers are how you know which pattern actually mattered.

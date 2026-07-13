@@ -2,6 +2,7 @@ import { getBlogs } from '@/utils/mdx'
 import { Link } from 'next-view-transitions'
 import { SectionHeading } from './ui'
 import MotionDiv from './MotionDiv'
+import { formatDate, toISODate } from '@/utils'
 
 type Props = {}
 
@@ -35,12 +36,8 @@ const LandingBlogs = async (props: Props) => {
                                         {blog.title}
                                     </h3>
                                     <time
-                                        dateTime={blog.date ? new Date(blog.date).toISOString() : ""}
-                                        className='text-secondary text-sm md:text-sm font-mono'>{blog.date ? new Intl.DateTimeFormat('en-US', {
-                                            day: 'numeric',
-                                            month: 'short',
-                                            year: 'numeric'
-                                        }).format(new Date(blog.date)) : "No Date"}</time>
+                                        dateTime={toISODate(blog.date)}
+                                        className='text-secondary text-sm md:text-sm font-mono'>{formatDate(blog.date)}</time>
                                 </div>
                                 <p className='text-neutral-500 max-w-lg pt-2 text-sm md:text-sm'>{truncate(blog.description ?? "", 150)}</p>
                             </Link>

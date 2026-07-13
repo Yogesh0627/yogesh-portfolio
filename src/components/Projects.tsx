@@ -4,9 +4,55 @@ import { ProjectType } from "@/types";
 import { SectionHeading } from "./ui";
 import projectsData from "@/data/projectsData.json"
 import ExpandableChip from "./ExpandableChip";
-import { IconBrandMongodb, IconBrandReact, IconBrandVercel } from "@tabler/icons-react";
+import {
+    IconBrandGithub,
+    IconBrandMongodb,
+    IconBrandNextjs,
+    IconBrandNodejs,
+    IconBrandOpenai,
+    IconBrandPrisma,
+    IconBrandReact,
+    IconBrandTypescript,
+    IconBrandVite,
+    IconBinary,
+    IconCode,
+    IconDatabase,
+    IconArrowRight,
+    IconExternalLink,
+    IconFlame,
+    IconServer,
+    IconSparkles,
+} from "@tabler/icons-react";
+import { ReactElement } from "react";
 import Image from "next/image";
+import { Link } from "next-view-transitions";
 
+const chipClass = "size-4 shrink-0 dark:text-neutral-200"
+
+const techIcon: Record<string, ReactElement> = {
+    "Next.js": <IconBrandNextjs className={chipClass} aria-hidden="true" />,
+    "React": <IconBrandReact className={chipClass} aria-hidden="true" />,
+    "TypeScript": <IconBrandTypescript className={chipClass} aria-hidden="true" />,
+    "Node.js": <IconBrandNodejs className={chipClass} aria-hidden="true" />,
+    "Express.js": <IconServer className={chipClass} aria-hidden="true" />,
+    "MongoDB": <IconBrandMongodb className={chipClass} aria-hidden="true" />,
+    "PostgreSQL": <IconDatabase className={chipClass} aria-hidden="true" />,
+    "Prisma": <IconBrandPrisma className={chipClass} aria-hidden="true" />,
+    "Redis": <IconDatabase className={chipClass} aria-hidden="true" />,
+    "Hono": <IconFlame className={chipClass} aria-hidden="true" />,
+    "Gemini": <IconSparkles className={chipClass} aria-hidden="true" />,
+    "OpenAI": <IconBrandOpenai className={chipClass} aria-hidden="true" />,
+    "Vite": <IconBrandVite className={chipClass} aria-hidden="true" />,
+    "SQLite": <IconDatabase className={chipClass} aria-hidden="true" />,
+    "WebAssembly": <IconBinary className={chipClass} aria-hidden="true" />,
+}
+
+const buildChips = (tech: string[] = []) =>
+    tech.map((title, idx) => ({
+        id: idx,
+        title,
+        logo: techIcon[title] ?? <IconCode className={chipClass} aria-hidden="true" />,
+    }))
 
 export const Projects = ({ projects = projectsData }: { projects?: ProjectType[] }) => {
 
@@ -41,18 +87,56 @@ export const Projects = ({ projects = projectsData }: { projects?: ProjectType[]
                             }}
                             className="group relative mb-4 rounded-2xl"
                         >
-                            <img src={project.src} alt={project.title} className="w-full h-[300px] rounded-xl object-cover transition duration-200 group-hover:scale-[1.02]" />
-                            {/* ✅ Performance Win: Optimized Image */}
-                            <div className="flex flex-1 flex-col justify-between py-4 transition-all duration-300 group-hover:px-4">
-                                <div><h3 className="z-20 mt-2 font-medium tracking-tight text-neutral-500 dark:text-neutral-200">{project.title}</h3>
-                                    <p className="mt-2 max-w-56 text-sm text-neutral-500 dark:text-neutral-400">{project.description}</p></div>
-                                <ExpandableChip
-                                    chipData={[
-                                        { id: 1, logo: (<IconBrandReact className="size-4 dark:text-neutral-200" aria-hidden="true" />), title: "Next" },
-                                        { id: 2, logo: (<IconBrandVercel className="size-4 dark:text-neutral-200" aria-hidden="true" />), title: "Vercel" },
-                                        { id: 3, logo: (<IconBrandMongodb className="size-4 dark:text-neutral-200" aria-hidden="true" />), title: "MongoDB" },
-                                    ]}
+                            <Link href={project.slug ? `/projects/${project.slug}` : project.href} aria-label={`View ${project.title} case study`}>
+                                <Image
+                                    src={project.src}
+                                    alt={`${project.title} preview`}
+                                    width={640}
+                                    height={400}
+                                    className="aspect-16/10 w-full rounded-xl border border-neutral-200 object-cover object-top transition duration-200 group-hover:scale-[1.02] dark:border-neutral-800"
                                 />
+                            </Link>
+                            <div className="flex flex-1 flex-col justify-between py-4 transition-all duration-300 group-hover:px-4">
+                                <div>
+                                    <Link href={project.slug ? `/projects/${project.slug}` : project.href} className="z-20 mt-2 block w-fit font-medium tracking-tight text-neutral-700 transition-colors hover:text-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-50">
+                                        <h3>{project.title}</h3>
+                                    </Link>
+                                    <p className="mt-2 line-clamp-3 text-sm text-neutral-500 dark:text-neutral-400">{project.description}</p>
+                                </div>
+                                <ExpandableChip chipData={buildChips(project.tech)} />
+                                {project.slug && (
+                                    <Link
+                                        href={`/projects/${project.slug}`}
+                                        className="group/cs mt-4 inline-flex w-fit items-center gap-1 text-sm font-medium text-neutral-700 transition-colors hover:text-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-50"
+                                    >
+                                        View case study
+                                        <IconArrowRight className="size-4 transition-transform group-hover/cs:translate-x-0.5" aria-hidden="true" />
+                                    </Link>
+                                )}
+                                <div className="mt-3 flex items-center gap-4">
+                                    <a
+                                        href={project.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={`Open ${project.title} live`}
+                                        className="flex items-center gap-1.5 text-xs font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+                                    >
+                                        <IconExternalLink className="size-4" aria-hidden="true" />
+                                        Live
+                                    </a>
+                                    {project.github && (
+                                        <a
+                                            href={project.github}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label={`View ${project.title} source on GitHub`}
+                                            className="flex items-center gap-1.5 text-xs font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+                                        >
+                                            <IconBrandGithub className="size-4" aria-hidden="true" />
+                                            Code
+                                        </a>
+                                    )}
+                                </div>
                             </div>
                         </motion.div>
                     </div>))}

@@ -1,6 +1,7 @@
 import { Scales } from '@/components';
 import { Container, Heading, SubHeading } from '@/components/ui';
 import { getBlogs } from '@/utils/mdx';
+import { formatDate, toISODate } from '@/utils';
 import { Metadata } from 'next';
 import { Link } from 'next-view-transitions';
 
@@ -24,8 +25,8 @@ const Blogs = async () => {
                 <Scales />
                 <Heading>All Blogs</Heading>
                 <SubHeading>
-                    I&apos;m a software engineer with a passion for building scalable and efficient
-                    systems. I&apos;m currently working as a software engineer at WorkCompanion.
+                    Notes on the things I&apos;m building and learning — React, Node.js, and the
+                    tools I work with day to day.
                 </SubHeading>
 
                 <div role="list" className="shadow-section-inset dark:shadow-section-inset-dark my-4 flex flex-col gap-8 border-y border-neutral-100 px-4 py-6 dark:border-neutral-800">
@@ -37,12 +38,8 @@ const Blogs = async () => {
                                         {blog.title}
                                     </h2>
                                     <time
-                                        dateTime={blog.date ? new Date(blog.date).toISOString() : ""}
-                                        className='text-secondary text-sm md:text-sm font-mono'>{blog.date ? new Intl.DateTimeFormat('en-US', {
-                                            day: 'numeric',
-                                            month: 'short',
-                                            year: 'numeric'
-                                        }).format(new Date(blog.date)) : "No Date"}</time>
+                                        dateTime={toISODate(blog.date)}
+                                        className='text-secondary text-sm md:text-sm font-mono'>{formatDate(blog.date)}</time>
                                 </div>
                                 <p className='text-secondary max-w-lg pt-2 text-sm md:text-sm'>{truncate(blog.description ?? "", 150)}</p>
                             </Link>

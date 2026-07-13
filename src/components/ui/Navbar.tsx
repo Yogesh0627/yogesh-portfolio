@@ -76,15 +76,8 @@ const Navbar = () => {
                     )}
                     aria-label="Main Navigation"
                 >
-                    {/* <img
-                        src="/luffy.jpg"
-                        alt="Luffy"
-                        className="h-10 w-10 rounded-full cursor-pointer object-cover"
-                        onClick={() => router.push("/")}
-                    /> */}
-
                     <Image
-                        src="/luffy.jpg"
+                        src="/yogesh.jpg"
                         alt="Yogesh Chauhan"
                         width={40}
                         height={40}
@@ -167,15 +160,8 @@ const Navbar = () => {
                 className="fixed top-0 left-0 z-50 block w-full border-b border-neutral-100 bg-white md:hidden dark:border-neutral-800 dark:bg-neutral-900">
 
                 <div className="flex w-full items-center justify-between px-4 py-3">
-                    {/* <img
-                        src="/luffy.jpg"
-                        alt="Luffy"
-                        className="h-10 w-10 rounded-full cursor-pointer object-cover"
-                        onClick={() => router.push("/")}
-                    /> */}
-
                     <Image
-                        src="/luffy.jpg"
+                        src="/yogesh.jpg"
                         alt="Yogesh Chauhan"
                         width={40}
                         height={40}

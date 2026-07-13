@@ -1,39 +1,132 @@
 [
-    {   "id":1,
-        "title": "Portfolio Website",
-        "description": "A personal portfolio website showcasing my projects and skills.",
-        "src": "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/09/dragon-ball-z.jpg",
-        "href": "https://myportfolio.com"
+    {
+        "id": 1,
+        "slug": "candor",
+        "title": "Candor",
+        "tagline": "Honest feedback, real growth.",
+        "year": "2024 – 2026",
+        "role": "Solo project — design, development & deployment",
+        "description": "Anonymous feedback platform that uses AI to moderate messages and turn your inbox into a trackable growth plan, with a real-time inbox.",
+        "src": "/projects/candor.png",
+        "href": "https://candor-cyan.vercel.app",
+        "github": "https://github.com/Yogesh0627/anonymous-message-app",
+        "tech": ["Next.js", "TypeScript", "MongoDB", "Gemini", "Redis"],
+        "overview": "Candor lets anyone collect anonymous feedback through a personal link — but instead of stopping at \"you got a message,\" it uses an AI coach to turn that feedback into a structured, trackable growth plan. It ships with a credit economy, real-time updates, AI moderation, and a full admin console.",
+        "problem": "Most anonymous-message apps dump feedback on you and stop there — no moderation, no structure, and no way to actually act on what you hear. Honest feedback is valuable, but raw and unorganized it rarely turns into real change.",
+        "solution": "Candor treats feedback as the start of a loop, not the end. Incoming messages are screened by Gemini for abuse, then an AI coach clusters your inbox into themes and drafts a concrete growth plan that flows through To Do → In Progress → Completed — every task mapped back to the exact feedback that inspired it. An idempotent credit ledger and per-user AI quotas keep the AI usage sustainable, and a real-time inbox streams new messages the moment they arrive.",
+        "features": [
+            "Anonymous messaging through a shareable personal link, with an accept-messages toggle",
+            "Real-time inbox streamed via Server-Sent Events backed by MongoDB change streams",
+            "AI safety moderation (Gemini) that flags abusive content before it reaches you",
+            "AI Feedback Coach that clusters messages into themes and drafts a trackable growth board",
+            "Idempotent, append-only credit ledger with per-user daily AI quotas and graceful degradation",
+            "NextAuth (email + password and Google OAuth) with email verification and password reset",
+            "Admin console — moderation queue, user management, roadmap editor, and full audit log",
+            "Production-grade SEO, server-side rate limiting, and Zod validation shared across client and API"
+        ],
+        "stack": [
+            { "category": "Frontend", "items": ["Next.js 14 (App Router)", "React 18", "TypeScript", "Tailwind CSS", "shadcn/ui"] },
+            { "category": "Backend", "items": ["Next.js API Routes", "MongoDB + Mongoose", "Upstash Redis", "Zod"] },
+            { "category": "AI", "items": ["Google Gemini (gemini-2.5-flash)", "Vercel AI SDK"] },
+            { "category": "Auth & Email", "items": ["NextAuth", "Resend", "React Email"] },
+            { "category": "Testing & CI", "items": ["Vitest", "Playwright", "GitHub Actions"] }
+        ]
     },
-    {   "id": 2,
-        "title": "E-commerce Store",
-        "description": "A full-stack e-commerce store with shopping cart and payment integration.",
-        "src": "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/09/naruto.jpg",
-        "href": "https://mystore.com"
+    {
+        "id": 5,
+        "slug": "sqlplay",
+        "title": "SQLPlay",
+        "tagline": "An H2-Console-style SQL playground for JavaScript.",
+        "year": "2026",
+        "role": "Solo project — published npm package",
+        "description": "A zero-setup SQL playground that runs a real SQLite database entirely in your browser via WebAssembly. Practice SQL with no server and no install — published on npm.",
+        "src": "/projects/sqlplay.png",
+        "href": "https://sqlplay.vercel.app",
+        "github": "https://github.com/Yogesh0627/sqlplay",
+        "tech": ["React", "TypeScript", "Vite", "SQLite", "WebAssembly"],
+        "overview": "SQLPlay is an H2-Console-style SQL playground for JavaScript. It runs a real in-memory SQLite database — compiled to WebAssembly via sql.js — entirely in the browser, so anyone can practice SQL with zero backend and zero setup. It's published on npm and launches with a single `npx sqlplay`.",
+        "problem": "Java developers have the H2 Console for quickly practicing SQL against a throwaway database. JavaScript had no comparable zero-setup equivalent — you either installed a database locally or signed up for an online sandbox. There was a clear gap for an instant, local, no-install SQL playground.",
+        "solution": "SQLPlay puts a friendly console UI on top of sql.js (SQLite compiled to WebAssembly), so a full SQL database runs client-side in the browser. It ships as an npm package you launch with `npx sqlplay`, loads sample datasets, and offers a query editor, schema browser, ER diagram, and CSV export — all with no server involved.",
+        "features": [
+            "A real in-memory SQLite database running 100% in the browser via WebAssembly (sql.js)",
+            "Zero setup — launch instantly with `npx sqlplay`, or use the hosted live demo",
+            "Query editor with syntax highlighting and keyboard-run (Ctrl / ⌘ + Enter)",
+            "Schema browser, ER-diagram view, and an interactive data editor",
+            "Bundled sample datasets plus SQL challenges to practice against",
+            "Import your own data and export results as CSV or a .sqlite file",
+            "Published and versioned on npm for anyone to install and run"
+        ],
+        "stack": [
+            { "category": "Frontend", "items": ["React 18", "TypeScript", "Vite"] },
+            { "category": "Database", "items": ["SQLite (sql.js)", "WebAssembly"] },
+            { "category": "Tooling & Distribution", "items": ["npm package", "Node.js CLI", "tsup"] }
+        ]
     },
-    {   "id": 3,
-        "title": "Blog Platform",
-        "description": "A dynamic blog platform with rich-text editor and user authentication.",
-        "src": "https://th.bing.com/th/id/R.4770fc7d68fab35647a02bff71283fd4?rik=P2vmoNI9dGgQhA&riu=http%3a%2f%2fecx.images-amazon.com%2fimages%2fI%2f81dC73CrSUL._SL1500_.jpg&ehk=lzVll%2fcvmWoRniTaFvEpRXnB5paot6ILcW5h%2bT5qb7o%3d&risl=&pid=ImgRaw&r=0",
-        "href": "https://myblog.com"
+    {
+        "id": 2,
+        "slug": "insightblog",
+        "title": "InsightBlog",
+        "tagline": "Write better content. Understand your audience.",
+        "year": "2024 – 2026",
+        "role": "Solo project — full-stack architecture & build",
+        "description": "A developer publishing platform with an AI writing assistant, a multi-source trending hub, and built-in creator analytics dashboards.",
+        "src": "/projects/insightblog.png",
+        "href": "https://insightblog-one.vercel.app",
+        "github": "https://github.com/Yogesh0627/Full_Stack_Project",
+        "tech": ["React", "TypeScript", "Hono", "Prisma", "PostgreSQL", "Gemini"],
+        "overview": "InsightBlog is a publishing platform built to feel like a production SaaS product rather than a Medium clone. Beyond writing and publishing, it helps creators discover trending topics, improve drafts with AI, and understand exactly how their content performs.",
+        "problem": "A basic blog app is just CRUD. Real creators need more: to know what to write about, to improve their drafts, and to understand what actually lands with readers — capabilities that generic blogging tools simply don't provide.",
+        "solution": "A domain-driven, serverless platform delivered across five phases. The backend runs on Hono + Prisma + Neon Postgres on Cloudflare Workers, with JWT auth (access/refresh, RBAC), a full blog lifecycle, and a social graph. An AI assistant helps improve writing, suggests SEO and topics, and produces a grounded engagement forecast — a heuristic over readability and history rather than fabricated predictions — with a graceful mock fallback when AI is unavailable.",
+        "features": [
+            "Secure auth — JWT access/refresh tokens, RBAC, email verification, and password reset",
+            "Full blog lifecycle — draft, schedule, publish, version history, categories, and image upload",
+            "Social graph — comments, likes, bookmarks, follows, notifications, and recommendations",
+            "AI assistant — improve-writing, SEO and topic suggestions, cover ideas, and engagement forecast",
+            "Multi-source Trending Hub surfacing what to write next",
+            "Author and admin analytics dashboards with charts",
+            "Shared Zod DTOs across client and server in an npm-workspaces monorepo"
+        ],
+        "stack": [
+            { "category": "Frontend", "items": ["React 18", "Vite", "TypeScript", "Tailwind CSS", "TanStack Query", "Chart.js"] },
+            { "category": "Backend", "items": ["Hono", "Cloudflare Workers", "Prisma (Accelerate)", "Neon PostgreSQL"] },
+            { "category": "Auth & Validation", "items": ["JWT", "Zod"] },
+            { "category": "AI", "items": ["Google Gemini"] }
+        ]
     },
-    {   "id": 4,
-        "title": "Task Manager App",
-        "description": "A productivity app to manage daily tasks with deadlines and priorities.",
-        "src": "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/07/one-piece-franchise-poster.jpg",
-        "href": "https://taskapp.com"
-    },
-    {   "id": 5,
-        "title": "Weather Dashboard",
-        "description": "A weather forecasting dashboard showing real-time weather data worldwide.",
-        "src": "https://www.justwatch.com/images/poster/47162404/s718/black-clover.jpg",
-        "href": "https://weatherapp.com"
-    },
-    {   "id": 6,
-        "title": "Skill Sync",
-        "description": "A weather forecasting dashboard showing real-time weather data worldwide.",
-        "src": "https://tse2.mm.bing.net/th/id/OIP.kDypla1prjThbmEAfthi6AHaKj?rs=1&pid=ImgDetMain&o=7&rm=3",
-        "href": "https://weatherapp.com"
+    {
+        "id": 3,
+        "slug": "woco-pms",
+        "title": "WoCo PMS",
+        "tagline": "Real-time performance intelligence for HR teams.",
+        "year": "2024 – Present",
+        "role": "Software Engineer @ WoCo (enterprise product)",
+        "description": "Multi-tenant HR platform for performance reviews — goal & KPI tracking, 360° feedback, cycle timelines, and AI-generated appraisal questions.",
+        "src": "/projects/woco-pms.png",
+        "href": "https://woco.co.in/performance-management-system/",
+        "tech": ["React", "TypeScript", "Node.js", "Express.js", "MongoDB", "Redis", "OpenAI"],
+        "overview": "WoCo PMS is a multi-tenant HR performance-management platform used by client organizations to run their entire review process — a React SPA backed by a Node/TypeScript API. It replaces slow, spreadsheet-driven annual reviews with a continuous, real-time performance system.",
+        "problem": "Traditional performance reviews are annual, manual, and disconnected — HR teams juggle spreadsheets for goals, 360° feedback, and appraisals across many client organizations, with no single source of truth and no real-time visibility.",
+        "solution": "A multi-tenant platform that runs the full review cycle in one place: goal and KPI tracking, 360° feedback with reviewer-visibility rules, per-cycle performance timelines, and an AI question generator (OpenAI) that drafts weightage-balanced KPI, 360, competency, and PLI questions. Each tenant is isolated with its own data, and a bulk Excel pipeline lets HR import questions at scale.",
+        "features": [
+            "Goal & KPI tracking across review cycles",
+            "360° feedback with configurable reviewer-visibility rules",
+            "Per-cycle performance timelines and evaluation windows",
+            "AI question generator (OpenAI gpt-4.1-mini) for KPI/KRA, 360, competency, and PLI questions",
+            "Bulk Excel upload for question authoring at scale",
+            "Star-rating system with scale normalization across the app",
+            "Multi-tenant architecture with per-tenant data isolation and S3 document uploads"
+        ],
+        "stack": [
+            { "category": "Frontend", "items": ["React 19", "TypeScript", "Redux Toolkit", "MUI", "Vite"] },
+            { "category": "Backend", "items": ["Node.js", "Express", "MongoDB + Mongoose", "MySQL", "Redis"] },
+            { "category": "AI", "items": ["OpenAI (gpt-4.1-mini)"] },
+            { "category": "Infrastructure", "items": ["AWS S3", "GitHub Actions CI"] }
+        ],
+        "contribution": [
+            "Core engineer and #1 frontend contributor — integrated 100+ APIs, built 200+ reusable MUI components, and implemented Redux Toolkit state management",
+            "Led a backend refactoring & performance initiative that raised the codebase's documented quality score from 4.5 to 8.6/10",
+            "Cut authenticated-request overhead ~145ms → ~35ms (~4× faster) with a fail-open Redis cache, and added 44 MongoDB indexes for 100–500× faster indexed queries",
+            "Built the AI question-generator UI and the bulk Excel-upload flow, and hardened the platform — closing 10 SQL-injection points and fixing 25+ critical bugs"
+        ]
     }
-    
 ]
