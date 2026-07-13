@@ -6,10 +6,10 @@ import { cn } from "@/utils"
 const ResumeButton = ({ className }: { className?: string }) => {
     return (
         <motion.a
-            href="/resume.pdf"
+            href="/Yogesh_CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            download
+            download="Yogesh CV.pdf"
             aria-label="Download my resume (PDF)"
             initial={{ opacity: 0, y: 10, filter: "blur(10px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
