@@ -21,7 +21,7 @@ const ResumeButton = ({ className }: { className?: string }) => {
             )}
         >
             <IconDownload className="size-4" aria-hidden="true" />
-            Download Resume
+            Download Resu
         </motion.a>
     )
 }
