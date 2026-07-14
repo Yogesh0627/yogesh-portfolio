@@ -7,7 +7,7 @@ const ResumeButton = ({ className }: { className?: string }) => {
     return (
         <motion.a
             href="/Yogesh_CV.pdf"
-            target="_blank"
+            // target="_blank"
             rel="noopener noreferrer"
             download="Yogesh CV.pdf"
             aria-label="Download my resume (PDF)"
