@@ -3,6 +3,26 @@ export interface ProjectStackGroup {
     items: string[];
 }
 
+export interface ArchitectureStep {
+    title: string;
+    detail?: string;
+}
+
+export interface ProjectArchitecture {
+    summary?: string;
+    flow?: ArchitectureStep[];
+}
+
+export interface MetricItem {
+    label: string;
+    value: string;
+}
+
+export interface ProjectMetrics {
+    note?: string;
+    items: MetricItem[];
+}
+
 export interface ProjectType {
     id: number;
     title: string;
@@ -22,6 +42,8 @@ export interface ProjectType {
     solution?: string;              // how it works / the approach
     features?: string[];            // key feature highlights
     stack?: ProjectStackGroup[];    // grouped tech stack
+    architecture?: ProjectArchitecture; // request-flow diagram
+    metrics?: ProjectMetrics;       // performance / impact metrics
     contribution?: string[];        // my role & impact (esp. for company projects)
 }
 

@@ -1,0 +1,173 @@
+%-------------------------
+% Resume in Latex  --  FRONTEND-leaning variant
+% Author : Jake Gutierrez  |  License : MIT
+% Content: Yogesh Chauhan
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Huge \scshape Yogesh Chauhan} \\ \vspace{1pt}
+    New Delhi, India \\ \vspace{1pt}
+    \small \raisebox{-0.1\height}\faPhone\ 7838780046 ~ \href{mailto:chauhanyogesh950@gmail.com}{\raisebox{-0.2\height}\faEnvelope\  \underline{chauhanyogesh950@gmail.com}} ~
+    \href{https://yogeshchauhan.dev}{\raisebox{-0.2\height}\faGlobe\ \underline{yogeshchauhan.dev}} ~
+    \href{https://www.linkedin.com/in/yogeshchauhan-dev}{\raisebox{-0.2\height}\faLinkedin\ \underline{yogeshchauhan-dev}}  ~
+    \href{https://github.com/Yogesh0627}{\raisebox{-0.2\height}\faGithub\ \underline{Yogesh0627}}
+    \vspace{-8pt}
+\end{center}
+
+%-----------SUMMARY-----------
+\section{Summary}
+\small{Frontend-focused engineer with 2 years building fast, maintainable \textbf{React + TypeScript} apps, plus the APIs behind them. Lead frontend engineer on a multi-tenant HR SaaS, where I built three React/TypeScript portals with \textbf{Redux Toolkit}, route-level code-splitting, skeleton loaders, and a typed API service layer, backed by a Vitest test suite. I care about performance, clean component architecture, and shipping polished UI end-to-end.}
+\vspace{-6pt}
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {WorkCompanion LLP}{Oct 2024 -- Present}
+      {Software Engineer}{Gurugram, Haryana}
+      \resumeItemListStart
+        \resumeItem{Built three \textbf{React/TypeScript} portals (Employee, Manager, HR) as lead frontend engineer: \textbf{Redux Toolkit} state management, route-level \textbf{code-splitting} (React.lazy + Suspense), skeleton loaders, and a \textbf{typed API service layer} for consistent error handling; added a \textbf{Vitest} test suite.}
+        \resumeItem{Shipped features end-to-end from MongoDB models to REST APIs to Redux/React UI on a multi-tenant PMS SaaS (\textbf{$\sim$1,500 commits across 3 repositories}).}
+        \resumeItem{Built AI-powered UI including an \textbf{OpenAI GPT-4.1-mini} appraisal-question generator (prompt + PDF/DOCX/CSV inputs) and \textbf{tl;dv}-driven performance-review summaries.}
+        \resumeItem{Led a backend optimization program that raised documented code quality \textbf{4.5$\rightarrow$8.6/10} and cut authentication latency \textbf{76\% (145$\rightarrow$35ms)} with Redis caching, plus \textbf{44 MongoDB indexes}.}
+        \resumeItem{Delivered core PMS modules end-to-end including the Appraisal Cycle Engine, 360$^{\circ}$ Feedback, RBAC, Timeline Engine, Question Bank, Notifications, and Excel Import/Export.}
+      \resumeItemListEnd
+  \vspace{8pt}
+
+    \resumeSubheading
+      {Agami Technologies}{June 2024 -- Oct 2024}
+      {Software Specialist}{Greater Noida, Uttar Pradesh}
+      \resumeItemListStart
+        \resumeItem{Built UI features across the \textbf{MEVN stack} (MongoDB, Express, \textbf{Vue.js}, Node.js) with Socket.io for real-time updates; resolved \textbf{398+ bugs} with QA and product teams.}
+        \resumeItem{Delivered \textbf{7+ core features} and contributed to \textbf{24+ system improvements}, optimizing UI behavior and usability.}
+        \resumeItem{Integrated \textbf{OpenAI} into the \textbf{BeGenieus} platform: GPT chat, AI-powered image generation, and AI-driven features across multiple modules.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+\vspace{-9pt}
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \vspace{-5pt}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{Candor} $|$ \emph{Next.js, TypeScript, MongoDB, Gemini, Redis}}{\href{https://candor-cyan.vercel.app}{\underline{Live}} $|$ \href{https://github.com/Yogesh0627/anonymous-message-app}{\underline{Code}}}
+          \resumeItemListStart
+            \resumeItem{\textbf{AI growth loop:} Gemini-powered safety moderation + an AI Feedback Coach that clusters anonymous feedback into a trackable growth plan, with AI reply suggestions streamed to senders.}
+            \resumeItem{Polished \textbf{Next.js} UI (dark/light theming, shadcn/ui, skeleton loading, admin console), with a real-time inbox via Server-Sent Events and full production SEO.}
+          \resumeItemListEnd
+          \vspace{-13pt}
+      \resumeProjectHeading
+          {\textbf{SQLPlay} $|$ \emph{React, TypeScript, Vite, SQLite (WebAssembly)}}{\href{https://sqlplay.vercel.app}{\underline{Live}} $|$ \href{https://www.npmjs.com/package/sqlplay}{\underline{npm}} $|$ \href{https://github.com/Yogesh0627/sqlplay}{\underline{Code}}}
+          \resumeItemListStart
+            \resumeItem{A zero-setup, H2-Console-style SQL playground with a query editor, schema browser, and ER-diagram view, running a real SQLite database 100\% in the browser via WebAssembly; \textbf{published on npm}.}
+          \resumeItemListEnd
+          \vspace{-13pt}
+      \resumeProjectHeading
+          {\textbf{InsightBlog} $|$ \emph{React, Vite, TanStack Query, Hono, Prisma}}{\href{https://insightblog-one.vercel.app}{\underline{Live}} $|$ \href{https://github.com/Yogesh0627/Full_Stack_Project}{\underline{Code}}}
+          \resumeItemListStart
+            \resumeItem{\textbf{React + Vite} publishing platform with an AI writing assistant (Gemini), a multi-source Trending Hub, and author/admin analytics dashboards; TanStack Query for data-fetching and a serverless Hono backend.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+\vspace{-9pt}
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: TypeScript, JavaScript (ES2022+), HTML/CSS, SQL} \\
+     \textbf{Frontend}{: React, Next.js, Redux Toolkit, TanStack Query, Vue.js, Tailwind CSS, MUI, shadcn/ui, Vite} \\
+     \textbf{Backend}{: Node.js, Express.js, Hono, Cloudflare Workers, AWS S3, REST APIs, SSE, Socket.io, Zod, JWT / NextAuth} \\
+     \textbf{Databases \& Caching}{: MongoDB / Mongoose, PostgreSQL / Neon, MySQL, Prisma, Redis / Upstash} \\
+     \textbf{AI}{: Google Gemini, OpenAI (GPT), Vercel AI SDK} \\
+     \textbf{Tools \& Testing}{: Git, GitHub Actions (CI/CD), Vitest, Jest, Playwright, ESLint, Prettier} \\
+    }}
+ \end{itemize}
+\vspace{-9pt}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Ganga Institute of Technology \& Management (GITAM)}{Aug. 2021 -- Aug. 2024}
+      {Bachelor of Technology (B.Tech), Mechanical Engineering}{Jhajjar, Haryana}
+  \resumeSubHeadingListEnd
+
+\end{document}

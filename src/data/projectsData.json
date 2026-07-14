@@ -3,7 +3,7 @@
         "id": 1,
         "slug": "candor",
         "title": "Candor",
-        "tagline": "Honest feedback, real growth.",
+        "tagline": "An AI-coached anonymous-feedback platform",
         "year": "2024 – 2026",
         "role": "Solo project — design, development & deployment",
         "description": "Anonymous feedback platform that uses AI to moderate messages and turn your inbox into a trackable growth plan, with a real-time inbox.",
@@ -30,13 +30,22 @@
             { "category": "AI", "items": ["Google Gemini (gemini-2.5-flash)", "Vercel AI SDK"] },
             { "category": "Auth & Email", "items": ["NextAuth", "Resend", "React Email"] },
             { "category": "Testing & CI", "items": ["Vitest", "Playwright", "GitHub Actions"] }
-        ]
+        ],
+        "architecture": {
+            "summary": "A Next.js App Router app where API routes stream a real-time inbox over Server-Sent Events (backed by MongoDB change streams) and call Google Gemini for AI moderation and coaching, with Upstash Redis enforcing per-user AI quotas and rate limits.",
+            "flow": [
+                { "title": "Next.js SPA", "detail": "App Router · shadcn/ui" },
+                { "title": "API Routes + SSE", "detail": "NextAuth · Zod · rate limiting" },
+                { "title": "MongoDB Atlas", "detail": "Mongoose · change streams" },
+                { "title": "Redis + Gemini", "detail": "AI quotas · moderation & coach" }
+            ]
+        }
     },
     {
         "id": 5,
         "slug": "sqlplay",
         "title": "SQLPlay",
-        "tagline": "An H2-Console-style SQL playground for JavaScript.",
+        "tagline": "An in-browser SQL playground, published on npm",
         "year": "2026",
         "role": "Solo project — published npm package",
         "description": "A zero-setup SQL playground that runs a real SQLite database entirely in your browser via WebAssembly. Practice SQL with no server and no install — published on npm.",
@@ -60,13 +69,21 @@
             { "category": "Frontend", "items": ["React 18", "TypeScript", "Vite"] },
             { "category": "Database", "items": ["SQLite (sql.js)", "WebAssembly"] },
             { "category": "Tooling & Distribution", "items": ["npm package", "Node.js CLI", "tsup"] }
-        ]
+        ],
+        "architecture": {
+            "summary": "SQLPlay runs entirely in the browser — there is no server. The React UI drives sql.js (SQLite compiled to WebAssembly), which runs a full in-memory SQLite database client-side. The npm CLI simply serves the static app locally.",
+            "flow": [
+                { "title": "React + Vite UI", "detail": "query editor · schema · ER view" },
+                { "title": "sql.js engine", "detail": "SQLite compiled to WebAssembly" },
+                { "title": "In-memory SQLite", "detail": "runs 100% client-side" }
+            ]
+        }
     },
     {
         "id": 2,
         "slug": "insightblog",
         "title": "InsightBlog",
-        "tagline": "Write better content. Understand your audience.",
+        "tagline": "A serverless, AI-powered publishing platform",
         "year": "2024 – 2026",
         "role": "Solo project — full-stack architecture & build",
         "description": "A developer publishing platform with an AI writing assistant, a multi-source trending hub, and built-in creator analytics dashboards.",
@@ -91,13 +108,22 @@
             { "category": "Backend", "items": ["Hono", "Cloudflare Workers", "Prisma (Accelerate)", "Neon PostgreSQL"] },
             { "category": "Auth & Validation", "items": ["JWT", "Zod"] },
             { "category": "AI", "items": ["Google Gemini"] }
-        ]
+        ],
+        "architecture": {
+            "summary": "A domain-driven, serverless request flow running on Cloudflare's edge. The React SPA calls a Hono API on Cloudflare Workers, which reaches Neon PostgreSQL through Prisma Accelerate (connection pooling) and calls Google Gemini for the AI writing assistant.",
+            "flow": [
+                { "title": "React + Vite SPA", "detail": "TanStack Query · Tailwind · Chart.js" },
+                { "title": "Hono API", "detail": "Cloudflare Workers · JWT · Zod" },
+                { "title": "Prisma Accelerate", "detail": "connection pooling" },
+                { "title": "Neon PostgreSQL", "detail": "serverless Postgres" }
+            ]
+        }
     },
     {
         "id": 3,
         "slug": "woco-pms",
         "title": "WoCo PMS",
-        "tagline": "Real-time performance intelligence for HR teams.",
+        "tagline": "A multi-tenant HR performance-management platform",
         "year": "2024 – Present",
         "role": "Software Engineer @ WoCo (enterprise product)",
         "description": "Multi-tenant HR platform for performance reviews — goal & KPI tracking, 360° feedback, cycle timelines, and AI-generated appraisal questions.",
@@ -122,6 +148,23 @@
             { "category": "AI", "items": ["OpenAI (gpt-4.1-mini)"] },
             { "category": "Infrastructure", "items": ["AWS S3", "GitHub Actions CI"] }
         ],
+        "architecture": {
+            "summary": "A multi-tenant SaaS: three React SPAs (Employee, Manager, HR) talk to a layered Node/Express API, which serves data from MongoDB, MySQL, and Redis and calls OpenAI for AI features. High-level overview.",
+            "flow": [
+                { "title": "React SPAs", "detail": "Employee · Manager · HR" },
+                { "title": "Node/Express API", "detail": "layered · multi-tenant" },
+                { "title": "MongoDB · MySQL · Redis", "detail": "data · cache" },
+                { "title": "OpenAI", "detail": "AI question generator" }
+            ]
+        },
+        "metrics": {
+            "note": "Backend optimization program",
+            "items": [
+                { "label": "Auth latency", "value": "145 → 35ms" },
+                { "label": "Code quality", "value": "4.5 → 8.6/10" },
+                { "label": "Throughput", "value": "~4–5×" }
+            ]
+        },
         "contribution": [
             "Core engineer and #1 frontend contributor — integrated 100+ APIs, built 200+ reusable MUI components, and implemented Redux Toolkit state management",
             "Led a backend refactoring & performance initiative that raised the codebase's documented quality score from 4.5 to 8.6/10",

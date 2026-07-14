@@ -1,0 +1,221 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\classesList}[4]{
+    \item\small{
+        {#1 #2 #3 #4 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Huge \scshape Yogesh Chauhan} \\ \vspace{1pt}
+    New Delhi, India \\ \vspace{1pt}
+    \small \raisebox{-0.1\height}\faPhone\ 7838780046 ~ \href{mailto:chauhanyogesh950@gmail.com}{\raisebox{-0.2\height}\faEnvelope\  \underline{chauhanyogesh950@gmail.com}} ~
+    \href{https://yogeshchauhan.dev}{\raisebox{-0.2\height}\faGlobe\ \underline{yogeshchauhan.dev}} ~
+    \href{https://www.linkedin.com/in/yogeshchauhan-dev}{\raisebox{-0.2\height}\faLinkedin\ \underline{yogeshchauhan-dev}}  ~
+    \href{https://github.com/Yogesh0627}{\raisebox{-0.2\height}\faGithub\ \underline{Yogesh0627}}
+    \vspace{-8pt}
+\end{center}
+
+
+%-----------SUMMARY-----------
+\section{Summary}
+\small{Full-stack software engineer with 2 years building and scaling production web apps in \textbf{TypeScript} across the \textbf{MERN/MEVN} stack. \#1 contributor on a multi-tenant HR SaaS, where I owned the frontend and led a backend optimization program that raised documented code quality \textbf{4.5$\rightarrow$8.6/10} and cut authentication latency \textbf{76\%}. I own features end-to-end, from schema and APIs to React UI, focused on performance, clean architecture, and AI-powered features.}
+\vspace{-6pt}
+
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+  {WorkCompanion LLP}{Oct 2024 -- Present}
+  {Software Engineer}{Gurugram, Haryana}
+  \resumeItemListStart
+
+  \resumeItem{\#1 contributor and frontend owner across a multi-tenant Performance Management System (PMS) SaaS: a Node.js/TypeScript backend and three React/TypeScript portals (Employee, Manager, HR), shipping features end-to-end from MongoDB models to REST APIs to Redux/React UI (\textbf{$\sim$1,500 commits across 3 repositories}).}
+
+  \resumeItem{Led a backend optimization program that raised code quality \textbf{4.5$\rightarrow$8.6/10} and delivered documented internal improvements of approximately \textbf{4--5$\times$ throughput}: reduced authentication latency \textbf{76\% (145$\rightarrow$35ms)} with Redis caching, eliminated an N+1 bottleneck \textbf{(2.5s$\rightarrow$300ms)}, and added \textbf{44 MongoDB indexes}.}
+
+  \resumeItem{Built AI-powered enterprise features including an \textbf{OpenAI GPT-4.1-mini} appraisal-question generator supporting prompt and document (PDF/DOCX/CSV) inputs, and integrated \textbf{tl;dv} meeting intelligence to automatically generate performance-review summaries from meeting transcripts.}
+
+  \resumeItem{Re-architected the backend into a layered design with \textbf{26 services}, \textbf{13 aggregation pipelines}, and shared business modules while improving multi-tenant reliability, transaction safety, observability, and maintainability.}
+
+  \resumeItem{Delivered core PMS modules end-to-end including the Appraisal Cycle Engine, 360$^{\circ}$ Feedback, RBAC, Timeline Engine, Question Bank, Notifications, and Excel Import/Export, serving production enterprise customers.}
+
+  \resumeItemListEnd
+  \vspace{8pt}
+
+    \resumeSubheading
+      {Agami Technologies}{June 2024 -- Oct 2024}
+      {Software Specialist}{Greater Noida, Uttar Pradesh}
+      \resumeItemListStart
+        \resumeItem{Resolved \textbf{398+ bugs} across modules through effective debugging and close collaboration with QA and product teams.}
+        \resumeItem{Delivered \textbf{7+ core features} and contributed to \textbf{24+ system improvements}, optimizing UI behavior, usability, and backend efficiency.}
+        \resumeItem{Integrated \textbf{OpenAI} into the \textbf{BeGenieus} platform: direct GPT chat for instant answers, AI-powered image generation, and AI-driven features across multiple modules.}
+        \resumeItem{Worked across the \textbf{MEVN stack} (MongoDB, Express, Vue.js, Node.js) with Socket.io for real-time features.}
+    \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+\vspace{-9pt}
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \vspace{-5pt}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{Candor} $|$ \emph{Next.js, TypeScript, MongoDB, Gemini, Redis}}{\href{https://candor-cyan.vercel.app}{\underline{Live}} $|$ \href{https://github.com/Yogesh0627/anonymous-message-app}{\underline{Code}}}
+          \resumeItemListStart
+            \resumeItem{\textbf{AI growth loop:} Gemini-powered safety moderation + an AI Feedback Coach that clusters anonymous feedback into a trackable growth plan, with AI reply suggestions streamed to senders.}
+            \resumeItem{Real-time inbox via \textbf{Server-Sent Events + MongoDB change streams}; idempotent credit ledger with per-user AI quotas (atomic Redis \texttt{INCRBY}), NextAuth (Credentials + Google OAuth), an admin console, and full CI.}
+          \resumeItemListEnd
+          \vspace{-13pt}
+      \resumeProjectHeading
+          {\textbf{InsightBlog} $|$ \emph{React, Hono, Prisma, Neon Postgres, Cloudflare Workers}}{\href{https://insightblog-one.vercel.app}{\underline{Live}} $|$ \href{https://github.com/Yogesh0627/Full_Stack_Project}{\underline{Code}}}
+          \resumeItemListStart
+            \resumeItem{\textbf{Domain-driven serverless backend} across 5 phases: JWT auth (access/refresh, RBAC), full blog lifecycle, and a social graph (comments, likes, follows, notifications, recommendations).}
+            \resumeItem{AI writing assistant (Gemini) with a grounded engagement forecast, a multi-source Trending Hub, and author/admin analytics dashboards; shared Zod DTOs via npm workspaces.}
+          \resumeItemListEnd
+          \vspace{-13pt}
+      \resumeProjectHeading
+          {\textbf{SQLPlay} $|$ \emph{React, TypeScript, Vite, SQLite (WebAssembly)}}{\href{https://sqlplay.vercel.app}{\underline{Live}} $|$ \href{https://www.npmjs.com/package/sqlplay}{\underline{npm}} $|$ \href{https://github.com/Yogesh0627/sqlplay}{\underline{Code}}}
+          \resumeItemListStart
+            \resumeItem{A zero-setup, H2-Console-style SQL playground running a real in-memory SQLite database 100\% in the browser via WebAssembly (sql.js) --- \textbf{published on npm} and launched with a single \texttt{npx sqlplay}.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+\vspace{-9pt}
+
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: TypeScript, JavaScript (ES2022+), HTML/CSS, SQL} \\
+     \textbf{Frontend}{: React, Next.js, Redux Toolkit, TanStack Query, Vue.js, Tailwind CSS, MUI, Vite} \\
+     \textbf{Backend}{: Node.js, Express.js, Hono, Cloudflare Workers, AWS S3, REST APIs, SSE, Socket.io, Zod, JWT / NextAuth} \\
+     \textbf{Databases \& Caching}{: MongoDB / Mongoose, PostgreSQL / Neon, MySQL, Prisma, Redis / Upstash} \\
+     \textbf{AI}{: Google Gemini, OpenAI (GPT), Vercel AI SDK} \\
+     \textbf{Tools \& Testing}{: Git, GitHub Actions (CI/CD), Vitest, Jest, Playwright, ESLint, Prettier} \\
+    }}
+ \end{itemize}
+\vspace{-9pt}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Ganga Institute of Technology \& Management (GITAM)}{Aug. 2021 -- Aug. 2024}
+      {Bachelor of Technology (B.Tech), Mechanical Engineering}{Jhajjar, Haryana}
+  \resumeSubHeadingListEnd
+
+\end{document}

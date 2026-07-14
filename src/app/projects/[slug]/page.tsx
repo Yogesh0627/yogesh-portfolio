@@ -1,3 +1,4 @@
+import { Fragment } from "react"
 import { Scales } from "@/components"
 import { Container, Heading, SectionHeading, SubHeading } from "@/components/ui"
 import projectsData from "@/data/projectsData.json"
@@ -123,6 +124,22 @@ const ProjectCaseStudy = async ({ params }: { params: Promise<{ slug: string }> 
                     />
                 </div>
 
+                {project.metrics?.items?.length ? (
+                    <div className="mt-8 px-4">
+                        <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                            {project.metrics.items.map((m) => (
+                                <div key={m.label} className="rounded-xl border border-neutral-200 bg-neutral-50 px-2 py-4 text-center dark:border-neutral-800 dark:bg-neutral-900">
+                                    <p className="text-base font-bold tracking-tight text-neutral-900 sm:text-xl md:text-2xl dark:text-neutral-50">{m.value}</p>
+                                    <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">{m.label}</p>
+                                </div>
+                            ))}
+                        </div>
+                        {project.metrics.note && (
+                            <p className="mt-2 text-right text-xs text-neutral-400 dark:text-neutral-500">{project.metrics.note}</p>
+                        )}
+                    </div>
+                ) : null}
+
                 {project.overview && (
                     <Section title="Overview">
                         <Prose>{project.overview}</Prose>
@@ -140,6 +157,28 @@ const ProjectCaseStudy = async ({ params }: { params: Promise<{ slug: string }> 
                         <Prose>{project.solution}</Prose>
                     </Section>
                 )}
+
+                {project.architecture?.flow?.length ? (
+                    <Section title="Architecture">
+                        {project.architecture.summary && <Prose>{project.architecture.summary}</Prose>}
+                        <div className="mt-5 flex flex-col items-stretch gap-2 md:flex-row md:items-center">
+                            {project.architecture.flow.map((step, i, arr) => (
+                                <Fragment key={step.title}>
+                                    <div className="flex-1 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-3 text-center dark:border-neutral-800 dark:bg-neutral-900">
+                                        <p className="text-sm font-medium text-neutral-800 dark:text-neutral-100">{step.title}</p>
+                                        {step.detail && <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">{step.detail}</p>}
+                                    </div>
+                                    {i < arr.length - 1 && (
+                                        <span className="self-center text-lg text-neutral-400 dark:text-neutral-600" aria-hidden="true">
+                                            <span className="md:hidden">↓</span>
+                                            <span className="hidden md:inline">→</span>
+                                        </span>
+                                    )}
+                                </Fragment>
+                            ))}
+                        </div>
+                    </Section>
+                ) : null}
 
                 {project.features && project.features.length > 0 && (
                     <Section title="Key features">
