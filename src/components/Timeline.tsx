@@ -47,7 +47,7 @@ const timelineData: TimelineDataType[] = [
         title: "2024",
         content: [
             {
-                title: "Joined Work Companion (WoCo) as a Software Engineer",
+                title: "Joined Work Companion LLP as a Software Engineer",
                 description: "Started as a core engineer on WoCo PMS, a multi-tenant HR performance-management platform built with React, TypeScript, and Node.js."
             },
             {

@@ -76,7 +76,7 @@ export default function RootLayout({
                 "jobTitle": "Software Engineer",
                 "worksFor": {
                   "@type": "Organization",
-                  "name": "Work Companion (WoCo)",
+                  "name": "Work Companion LLP",
                   "url": "https://woco.co.in"
                 },
                 "alumniOf": {
