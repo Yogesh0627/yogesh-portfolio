@@ -24,7 +24,7 @@ const MyPortfolio = () => {
         <SubHeading>
           I&apos;m a full-stack developer who builds scalable web apps end-to-end — from
           database schemas and Node.js APIs to polished React interfaces. Currently a
-          Software Engineer at Work Companion LLP.
+          Software Engineer at Work Companion.
         </SubHeading>
 
         <div className="px-4 pt-6">

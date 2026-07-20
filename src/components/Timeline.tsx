@@ -21,6 +21,10 @@ const timelineData: TimelineDataType[] = [
         title: "2026",
         content: [
             {
+                title: "Shipped EcoExpress — an AI-assisted organic grocery platform",
+                description: "Stepped outside the JS stack to build a Java 21 / Spring Boot modular monolith behind a Next.js storefront, pushing the money- and stock-critical rules down into Postgres constraints so a bug in application code can't corrupt an order or oversell inventory."
+            },
+            {
                 title: "Led a backend performance overhaul at WoCo",
                 description: "Refactored god-controllers into a clean layered architecture, raised the codebase's documented quality score from 4.5 to 8.6/10, and cut authenticated-request overhead ~4× with a Redis cache and 44 MongoDB indexes."
             },
@@ -47,7 +51,7 @@ const timelineData: TimelineDataType[] = [
         title: "2024",
         content: [
             {
-                title: "Joined Work Companion LLP as a Software Engineer",
+                title: "Joined Work Companion (WoCo) as a Software Engineer",
                 description: "Started as a core engineer on WoCo PMS, a multi-tenant HR performance-management platform built with React, TypeScript, and Node.js."
             },
             {

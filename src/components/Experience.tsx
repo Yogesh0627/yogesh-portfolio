@@ -8,7 +8,7 @@ const Experience = async () => {
     const experienceData = [
         {
             id: 1,
-            company: "Work Companion LLP",
+            company: "Work Companion (WoCo)",
             role: "Software Engineer",
             duration: "Oct 2024 - Present",
             description:

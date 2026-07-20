@@ -76,7 +76,7 @@ export default function RootLayout({
                 "jobTitle": "Software Engineer",
                 "worksFor": {
                   "@type": "Organization",
-                  "name": "Work Companion LLP",
+                  "name": "Work Companion (WoCo)",
                   "url": "https://woco.co.in"
                 },
                 "alumniOf": {
@@ -86,7 +86,7 @@ export default function RootLayout({
                 },
                 "sameAs": [
                   "https://github.com/Yogesh0627",
-                  "https://www.linkedin.com/in/yogesh-chauhan-318172119/",
+                  "https://www.linkedin.com/in/yogeshchauhan-dev/",
                   "https://x.com/Yogesh0130"
                 ],
                 "email": "chauhanyogesh950@gmail.com",

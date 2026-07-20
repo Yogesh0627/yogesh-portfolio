@@ -1,5 +1,56 @@
 [
     {
+        "id": 6,
+        "slug": "ecoexpress",
+        "title": "EcoExpress",
+        "tagline": "An AI-assisted organic grocery platform on a Java modular monolith",
+        "year": "2026",
+        "role": "Solo project — architecture, Spring Boot backend & Next.js storefront",
+        "description": "An organic grocery e-commerce platform for the Indian market, built on a Spring Boot modular monolith where correctness lives in the database — plus a Smart Cart, Smart Fridge, and AI meal planner.",
+        "src": "/projects/ecoexpress.png",
+        "href": "https://ecoexpress-nu.vercel.app",
+        "github": "https://github.com/Yogesh0627/ecom-exp",
+        "tech": ["Java", "Spring Boot", "Next.js", "TypeScript", "PostgreSQL", "Gemini"],
+        "overview": "EcoExpress is a production-shaped organic grocery platform for the Indian market — a Next.js 14 storefront and admin console over a Java 21 / Spring Boot modular monolith. The storefront is table stakes; the differentiator is the nutrition intelligence layered on top: a Smart Cart that scores the health of your basket, a Smart Fridge that reads a photo and suggests recipes plus the missing ingredients, a weekly meal planner, and a pantry that stops the app recommending what you already own.",
+        "problem": "Most e-commerce side projects put correctness in application code — and application code is exactly where the money bugs live. Overselling, double-charging on a replayed webhook, an invoice whose lines don't add up, a stock history quietly rewritten by a bad UPDATE: every one of those is a one-line mistake away in a typical CRUD service. On top of that, groceries in India carry real regulatory weight — GST invoicing, MRP price ceilings, FSSAI licensing, organic certification — that a generic store template simply ignores.",
+        "solution": "The governing idea is to push correctness into the database, so a bug in application code cannot corrupt money or stock. Eleven invariants are enforced as constraints — you cannot charge above printed MRP, cannot oversell, cannot create a >100% coupon, cannot UPDATE or DELETE a row in the stock ledger, and a replayed Razorpay webhook cannot double-credit. Each one was proven by attempting to violate it; all eleven were rejected by Postgres. The backend is a 12-module monolith where modules talk through each other's services rather than reaching into each other's tables, and the AI features route through a single doorway that owns budget, cost accounting, and failure shape.",
+        "features": [
+            "Full commerce flow — catalog with variants, guest-to-user cart merge, checkout, Razorpay payments, partial shipments, and GST invoice PDFs",
+            "Smart Cart health score — per-100g nutrition scaled by real pack weight and graded against UK FSA traffic-light bands",
+            "Smart Fridge — upload a photo, Gemini Vision detects ingredients, matched to sellable SKUs into recipes plus a missing-ingredients basket",
+            "Weekly AI meal planner grounded in your pantry, which auto-stocks on delivery and sends expiry reminders",
+            "Recommendations that AI can only re-rank — candidates always come from a database query, so the model can never invent a product that isn't sold",
+            "Append-only stock ledger with FEFO batch allocation, purchase orders, stock adjustments, and a ledger-drift reconciliation endpoint",
+            "Admin console — inventory, purchase orders, coupons, banners, review moderation, dashboard analytics, and an AI-spend view",
+            "Permission-based RBAC with rotating refresh tokens and reuse detection; tokens stored as hashes, never plaintext",
+            "Organic-certification tracking (NPOP / PGS-India / Jaivik Bharat) with validity windows, and AI product copy constrained by FSSAI/ASCI rules"
+        ],
+        "stack": [
+            { "category": "Backend", "items": ["Java 21", "Spring Boot 3.3", "Spring Security", "JPA / Hibernate", "MapStruct", "Flyway"] },
+            { "category": "Frontend", "items": ["Next.js 14 (App Router)", "React 18", "TypeScript", "Tailwind CSS", "shadcn/ui", "TanStack Query"] },
+            { "category": "Data", "items": ["PostgreSQL 17 (Neon)", "Redis (Upstash)", "Caffeine"] },
+            { "category": "AI", "items": ["Spring AI", "Google Gemini (vision + text)"] },
+            { "category": "Integrations", "items": ["Razorpay", "Cloudflare R2 (S3 API)", "Resend", "OpenPDF"] },
+            { "category": "Infrastructure", "items": ["Docker", "Vercel", "Render", "Actuator", "OpenAPI / Swagger"] }
+        ],
+        "architecture": {
+            "summary": "A Next.js storefront on Vercel calls a Spring Boot modular monolith on Render over /api/v1, which owns PostgreSQL (Neon) as the source of truth, caches through Redis, and reaches Gemini, Razorpay, and R2 behind narrow adapters. Payments only advance order state on an HMAC-verified webhook — never on a client callback.",
+            "flow": [
+                { "title": "Next.js 14 storefront", "detail": "Vercel · TanStack Query · shadcn/ui" },
+                { "title": "Spring Boot API", "detail": "12 modules · JWT · permission RBAC" },
+                { "title": "PostgreSQL + Redis", "detail": "constraints as the safety net" },
+                { "title": "Gemini · Razorpay · R2", "detail": "AI · payments webhook · storage" }
+            ]
+        },
+        "contribution": [
+            "Designed a 58-table schema with 116 check constraints and 78 foreign keys, then proved all 11 money- and stock-critical invariants by attempting to violate each one",
+            "Built the backend as a 12-module monolith with service-level boundaries — modules call each other's services, never each other's tables — as a deliberate, defensible alternative to microservices for a solo product",
+            "Made Flyway the sole schema owner with Hibernate set to validate-only, turning entity/schema drift into loud boot failures that caught four real bugs before a single request",
+            "Routed every AI call through one doorway owning a fail-closed monthly budget, per-call token and INR cost accounting, and a JSON repair pass for Gemini's truncated responses under load",
+            "Shipped reconciliation as product surface — a ledger-drift endpoint and payment-mismatch counters on the admin dashboard, both expected to read zero"
+        ]
+    },
+    {
         "id": 1,
         "slug": "candor",
         "title": "Candor",
