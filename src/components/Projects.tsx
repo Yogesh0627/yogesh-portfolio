@@ -22,6 +22,7 @@ import {
     IconFlame,
     IconLeaf,
     IconCoffee,
+    IconBrandPython,
     IconServer,
     IconSparkles,
 } from "@tabler/icons-react";
@@ -44,6 +45,7 @@ const techIcon: Record<string, ReactElement> = {
     "Hono": <IconFlame className={chipClass} aria-hidden="true" />,
     "Java": <IconCoffee className={chipClass} aria-hidden="true" />,
     "Spring Boot": <IconLeaf className={chipClass} aria-hidden="true" />,
+    "Python": <IconBrandPython className={chipClass} aria-hidden="true" />,
     "Gemini": <IconSparkles className={chipClass} aria-hidden="true" />,
     "OpenAI": <IconBrandOpenai className={chipClass} aria-hidden="true" />,
     "Vite": <IconBrandVite className={chipClass} aria-hidden="true" />,

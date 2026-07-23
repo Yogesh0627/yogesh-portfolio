@@ -6,7 +6,7 @@ import { cn } from "@/utils"
 const ResumeButton = ({ className }: { className?: string }) => {
     return (
         <motion.a
-            href="/Yogesh_CV.pdf"
+            href="/resume/Yogesh_CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
             download="Yogesh CV.pdf"

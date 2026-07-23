@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Yogesh Chauhan">
+  <title>Yogesh Chauhan</title>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7">
+    <path d="M20 17 L32 33" stroke="currentColor" />
+    <path d="M32 47 L32 33" stroke="currentColor" />
+    <path d="M44 17 L32 33" stroke="#f43f5e" />
+  </g>
+</svg>

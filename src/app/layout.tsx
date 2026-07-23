@@ -16,17 +16,21 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://yogeshchauhan.dev"),
   title: {
-    default: 'Yogesh Chauhan | Full Stack Developer (React & Node.js)',
+    default: 'Yogesh Chauhan | Full Stack Developer (Node.js, Java & React)',
     template: '%s | Yogesh Chauhan'
   },
-  description: 'Full-stack developer who ships web apps end-to-end — from MongoDB schemas and Node.js APIs to polished React interfaces. Software Engineer at Work Companion.',
+  description: 'Full-stack developer who ships web apps end-to-end — from Node.js and Spring Boot APIs to polished React interfaces. Software Engineer at Work Companion.',
   keywords: [
     'Full Stack Developer',
     'Node.js',
     'React',
     'Next.js',
     'TypeScript',
+    'Java',
+    'Spring Boot',
+    'PostgreSQL',
     'MongoDB',
+    'AI Integration',
     'Software Engineer',
     'Backend Developer'
   ],
@@ -38,7 +42,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Yogesh Chauhan | Portfolio',
-    description: 'Full-stack developer building scalable web apps with React, Node.js, and TypeScript.',
+    description: 'Full-stack developer building scalable web apps with React, Node.js, Java and Spring Boot.',
     type: 'website',
     url: 'https://yogeshchauhan.dev',
     siteName: 'Yogesh Chauhan Portfolio',
@@ -47,7 +51,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Yogesh Chauhan | Portfolio',
-    description: 'Full-stack developer building scalable web apps with React, Node.js, and TypeScript.',
+    description: 'Full-stack developer building scalable web apps with React, Node.js, Java and Spring Boot.',
     creator: '@Yogesh0130',
   },
 }
@@ -90,7 +94,21 @@ export default function RootLayout({
                   "https://x.com/Yogesh0130"
                 ],
                 "email": "chauhanyogesh950@gmail.com",
-                "description": "Full-stack software engineer specializing in scalable web applications with React, Node.js, TypeScript, and MongoDB."
+                "knowsAbout": [
+                  "Full Stack Development",
+                  "Node.js",
+                  "React",
+                  "Next.js",
+                  "TypeScript",
+                  "Java",
+                  "Spring Boot",
+                  "PostgreSQL",
+                  "MongoDB",
+                  "Redis",
+                  "AI Integration",
+                  "AWS"
+                ],
+                "description": "Full-stack software engineer specializing in scalable web applications with React, Node.js, TypeScript, Java and Spring Boot."
               })
             }}
           />

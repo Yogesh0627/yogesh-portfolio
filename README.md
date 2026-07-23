@@ -1,6 +1,6 @@
 # Yogesh Chauhan — Portfolio
 
-Personal portfolio of a Full Stack Developer specializing in Node.js, MongoDB, and AWS. Built with Next.js 16, React 19, and Tailwind CSS 4.
+Personal portfolio of a Full Stack Developer specializing in Node.js, Java/Spring Boot, and AWS. Built with Next.js 16, React 19, and Tailwind CSS 4.
 
 🔗 **Live:** [yogeshchauhan.dev](https://yogeshchauhan.dev)
 

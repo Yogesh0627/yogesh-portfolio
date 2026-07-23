@@ -15,16 +15,18 @@ const MyPortfolio = () => {
           <LayoutTextFlip
             words={[
               "Software Engineer",
+              "Full-Stack Engineer",
+              "Backend Engineer",
+              "Java Developer",
               "Front-end Engineer",
-              "Design Engineer",
-              "Vibe Coding Engineer"
+              "AI Integration Engineer"
             ]}
           />
         </div>
         <SubHeading>
           I&apos;m a full-stack developer who builds scalable web apps end-to-end — from
-          database schemas and Node.js APIs to polished React interfaces. Currently a
-          Software Engineer at Work Companion.
+          database schemas and Node.js or Spring Boot APIs to polished React interfaces.
+          Currently a Software Engineer at Work Companion.
         </SubHeading>
 
         <div className="px-4 pt-6">

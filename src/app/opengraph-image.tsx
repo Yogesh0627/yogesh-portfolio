@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og'
 
-export const alt = 'Yogesh Chauhan — Full Stack Developer | Node.js & AWS Specialist'
+export const alt = 'Yogesh Chauhan — Full Stack Developer | Node.js, Java & React'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -45,7 +45,7 @@ export default function OpengraphImage() {
                     Full Stack Developer
                 </div>
                 <div style={{ display: 'flex', gap: 16, marginTop: 40 }}>
-                    {['Node.js', 'React', 'AWS', 'MongoDB'].map((tag) => (
+                    {['Node.js', 'React', 'Java', 'AWS'].map((tag) => (
                         <div
                             key={tag}
                             style={{

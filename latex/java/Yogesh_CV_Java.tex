@@ -1,0 +1,174 @@
+%-------------------------
+% Resume in Latex  --  JAVA / SPRING BOOT full-stack variant
+% Author : Jake Gutierrez  |  License : MIT
+% Content: Yogesh Chauhan
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Huge \scshape Yogesh Chauhan} \\ \vspace{1pt}
+    New Delhi, India \\ \vspace{1pt}
+    \small \raisebox{-0.1\height}\faPhone\ 7838780046 ~ \href{mailto:chauhanyogesh950@gmail.com}{\raisebox{-0.2\height}\faEnvelope\  \underline{chauhanyogesh950@gmail.com}} ~
+    \href{https://yogeshchauhan.dev}{\raisebox{-0.2\height}\faGlobe\ \underline{yogeshchauhan.dev}} ~
+    \href{https://www.linkedin.com/in/yogeshchauhan-dev}{\raisebox{-0.2\height}\faLinkedin\ \underline{yogeshchauhan-dev}}  ~
+    \href{https://github.com/Yogesh0627}{\raisebox{-0.2\height}\faGithub\ \underline{Yogesh0627}}
+    \vspace{-8pt}
+\end{center}
+
+%-----------SUMMARY-----------
+\section{Summary}
+\small{Full-stack engineer with 2 years of professional experience shipping scalable, multi-tenant backends end-to-end. Deep hands-on \textbf{Java 21 / Spring Boot} through two production-shaped systems --- \textbf{ClaimLens} (a multi-tenant insurance platform with OCR, an explainable fraud engine and RAG) and \textbf{EcoExpress} (an 11-module Spring Boot monolith where correctness is enforced by 120+ database constraints). Strong on domain-driven design, data modeling, security (JWT, RBAC, multi-tenancy), and AI integration.}
+\vspace{-6pt}
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {WorkCompanion LLP}{Oct 2024 -- Present}
+      {Software Engineer}{Gurugram, Haryana}
+      \resumeItemListStart
+        \resumeItem{\#1 contributor across a multi-tenant Performance Management System (PMS) SaaS, shipping features end-to-end from data models to REST APIs to three React/TypeScript portals (\textbf{$\sim$1,500 commits across 3 repositories}).}
+        \resumeItem{Led a backend optimization program that raised code quality \textbf{4.5$\rightarrow$8.6/10} and delivered documented internal improvements of approximately \textbf{4--5$\times$ throughput}: reduced authentication latency \textbf{76\% (145$\rightarrow$35ms)} with Redis caching, eliminated an N+1 bottleneck \textbf{(2.5s$\rightarrow$300ms)}, and added \textbf{44 database indexes}.}
+        \resumeItem{Re-architected the backend into a clean layered design with \textbf{26 services}, \textbf{13 aggregation pipelines}, and shared business modules while improving multi-tenant reliability, transaction safety, observability, and maintainability.}
+        \resumeItem{Built AI-powered enterprise features including an \textbf{OpenAI GPT-4.1-mini} appraisal-question generator supporting prompt and document (PDF/DOCX/CSV) inputs, plus meeting-intelligence summaries generated from transcripts.}
+        \resumeItem{Delivered core PMS modules end-to-end including the Appraisal Cycle Engine, 360$^{\circ}$ Feedback, RBAC, Timeline Engine, Question Bank, Notifications, and Excel Import/Export, serving production enterprise customers.}
+      \resumeItemListEnd
+  \vspace{8pt}
+
+    \resumeSubheading
+      {Agami Technologies}{June 2024 -- Oct 2024}
+      {Software Specialist}{Greater Noida, Uttar Pradesh}
+      \resumeItemListStart
+        \resumeItem{Worked across a full-stack JavaScript stack with Socket.io for real-time features; resolved \textbf{398+ bugs} in close collaboration with QA and product teams.}
+        \resumeItem{Delivered \textbf{7+ core features} and contributed to \textbf{24+ system improvements}, optimizing usability and backend efficiency.}
+        \resumeItem{Integrated \textbf{OpenAI} into the \textbf{BeGenieus} platform: GPT chat, AI-powered image generation, and AI-driven features across multiple modules.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+\vspace{-9pt}
+
+%-----------PROJECTS-----------
+\section{Java Projects}
+    \vspace{-5pt}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{ClaimLens} $|$ \emph{Java 21, Spring Boot 4, PostgreSQL, Python/FastAPI, Gemini}}{\href{https://claimlens-ten.vercel.app}{\underline{Live}} $|$ \href{https://github.com/Yogesh0627/Claim-Lens}{\underline{Code}}}
+          \resumeItemListStart
+            \resumeItem{Multi-tenant insurance-claims SaaS where tenancy is a \textbf{Hibernate \texttt{@TenantId}} discriminator appended to every query --- a cross-tenant read returns \textbf{404, not 403} --- plus a second ownership gate for the customer portal and \textbf{permission-based RBAC} resolved per-request from the database.}
+            \resumeItem{Explainable fraud engine (per-rule scoring) fed by \textbf{OCR} (Google Vision) and image forensics (perceptual hash, ORB, EXIF) in a Python/FastAPI service, and \textbf{RAG} policy Q\&A with clause citations; backed by \textbf{92 integration tests} against real PostgreSQL.}
+          \resumeItemListEnd
+          \vspace{-13pt}
+      \resumeProjectHeading
+          {\textbf{EcoExpress} $|$ \emph{Java 21, Spring Boot, PostgreSQL, Gemini, Razorpay}}{\href{https://ecoexpress-nu.vercel.app}{\underline{Live}} $|$ \href{https://github.com/Yogesh0627/ecom-exp}{\underline{Code}}}
+          \resumeItemListStart
+            \resumeItem{\textbf{11-module Spring Boot modular monolith} for an organic-grocery platform; pushed correctness into the database --- \textbf{60+ tables} with \textbf{120+ check constraints} enforcing \textbf{11 money/stock invariants} (no overselling, no double-charge on a replayed webhook), each proven by attempting to violate it.}
+            \resumeItem{AI features (Gemini vision + text) behind a single doorway with a fail-closed budget and per-call cost accounting; Razorpay payments advance order state only on \textbf{HMAC-verified webhooks}; Flyway owns the schema with Hibernate set to validate-only.}
+          \resumeItemListEnd
+          \vspace{-13pt}
+      \resumeProjectHeading
+          {\textbf{SQLPlay} $|$ \emph{TypeScript, SQLite (WebAssembly), React, Vite}}{\href{https://sqlplay.vercel.app}{\underline{Live}} $|$ \href{https://www.npmjs.com/package/sqlplay}{\underline{npm}} $|$ \href{https://github.com/Yogesh0627/sqlplay}{\underline{Code}}}
+          \resumeItemListStart
+            \resumeItem{A zero-setup SQL playground running a real in-memory SQLite database 100\% in the browser via WebAssembly (sql.js) --- \textbf{published on npm} and launched with a single \texttt{npx sqlplay}.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+\vspace{-9pt}
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: Java, TypeScript, JavaScript (ES2022+), SQL, HTML/CSS} \\
+     \textbf{Java \& Backend}{: Java 21, Spring Boot, Spring Security, Spring Data JPA / Hibernate, Flyway, Maven, REST APIs; Node.js, Express.js, Hono} \\
+     \textbf{Databases \& Caching}{: PostgreSQL, MongoDB / Mongoose, MySQL, Redis / Upstash, pgvector, Prisma} \\
+     \textbf{AI}{: Google Gemini, OpenAI (GPT), RAG, Google Vision (OCR), Vercel AI SDK} \\
+     \textbf{Frontend}{: React, Next.js, TypeScript, Redux Toolkit, TanStack Query, Tailwind CSS} \\
+     \textbf{Tools \& Infra}{: Git, GitHub Actions (CI/CD), Docker, JUnit, Render, Vercel, Cloudflare R2} \\
+    }}
+ \end{itemize}
+\vspace{-9pt}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Ganga Institute of Technology \& Management (GITAM)}{Aug. 2021 -- Aug. 2024}
+      {Bachelor of Technology (B.Tech), Mechanical Engineering}{Jhajjar, Haryana}
+  \resumeSubHeadingListEnd
+
+\end{document}

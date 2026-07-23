@@ -21,6 +21,10 @@ const timelineData: TimelineDataType[] = [
         title: "2026",
         content: [
             {
+                title: "Built ClaimLens — a multi-tenant insurance claims platform",
+                description: "A four-service system — Spring Boot, Next.js, and two Python/FastAPI services — that reads claim documents with OCR, checks damage photos for reuse and tampering, and scores fraud risk with a rules engine that explains every decision it makes."
+            },
+            {
                 title: "Shipped EcoExpress — an AI-assisted organic grocery platform",
                 description: "Stepped outside the JS stack to build a Java 21 / Spring Boot modular monolith behind a Next.js storefront, pushing the money- and stock-critical rules down into Postgres constraints so a bug in application code can't corrupt an order or oversell inventory."
             },
