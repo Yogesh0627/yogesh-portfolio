@@ -158,7 +158,8 @@
             "Append-only stock ledger with FEFO batch allocation, purchase orders, stock adjustments, and a ledger-drift reconciliation endpoint",
             "Admin console — inventory, purchase orders, coupons, banners, review moderation, dashboard analytics, and an AI-spend view",
             "Permission-based RBAC with rotating refresh tokens and reuse detection; tokens stored as hashes, never plaintext",
-            "Organic-certification tracking (NPOP India Organic / Jaivik Bharat / USDA & EU Organic) with validity windows, and AI product copy constrained by FSSAI/ASCI rules"
+            "Organic-certification tracking (NPOP India Organic / Jaivik Bharat / USDA & EU Organic) with validity windows, and AI product copy constrained by FSSAI/ASCI rules",
+            "Back-in-stock alerts that email a shopper the moment a sold-out item is restocked (fired on the 0→positive inventory transition), one-tap Buy Now, secure password reset, and a fully mobile-responsive storefront"
         ],
         "stack": [
             {
@@ -243,7 +244,8 @@
             "Built the backend as an 11-module monolith with service-level boundaries — modules call each other's services, never each other's tables — as a deliberate, defensible alternative to microservices for a solo product",
             "Made Flyway the sole schema owner with Hibernate set to validate-only, turning entity/schema drift into loud boot failures that caught four real bugs before a single request",
             "Routed every AI call through one doorway owning a fail-closed monthly budget, per-call token and INR cost accounting, and a JSON repair pass for Gemini's truncated responses under load",
-            "Shipped reconciliation as product surface — a ledger-drift endpoint and payment-mismatch counters on the admin dashboard, both expected to read zero"
+            "Shipped reconciliation as product surface — a ledger-drift endpoint and payment-mismatch counters on the admin dashboard, both expected to read zero",
+            "Hardened it with an adversarial pass — browser, API, and raw-SQL attacks on the invariants below the app layer — that caught and fixed real bugs (a stored XSS in JSON-LD structured data, a duplicate-webhook 500 that would have looped the payment gateway, a stock cache that lied after a restock), then seeded a Testcontainers-backed test suite that proves the constraints on real PostgreSQL, not H2"
         ]
     },
     {
@@ -279,7 +281,7 @@
             "Admin console — user management, moderation queue, roadmap editor, app settings, platform stats, and a full audit log",
             "Pluggable KV store — Upstash Redis for shared rate limiting, caching and quotas, with an in-memory fallback for single-instance dev",
             "Dark / light / system theme, and production-grade SEO — Metadata API, sitemap, robots, JSON-LD, and an auto-generated Open Graph image",
-            "Server-side rate limiting on messaging, sign-up and OTP endpoints, with Zod validation shared across client forms and API routes"
+            "Server-side rate limiting on messaging, sign-up and OTP endpoints, defense-in-depth Zod validation at every API boundary, and baseline security headers (X-Frame-Options, nosniff, Referrer-Policy, HSTS)"
         ],
         "stack": [
             {
@@ -352,7 +354,8 @@
             "Made the credit ledger idempotent and append-only with a unique index on userId + reason + refId, so retries and races can never double-award or double-spend",
             "Treated AI as a metered resource — per-user daily quotas granted atomically, moderation that fails open for availability, and structured Gemini output (generateObject) so coach and moderation results are typed",
             "Hardened one-time codes end to end — generated with a CSPRNG, bcrypt-hashed at rest, compared in constant time, single-use, and rate-limited even on the consuming request",
-            "Abstracted scale infra behind a pluggable KV store (Upstash Redis with an in-memory fallback) and validated every environment variable at startup, so the app degrades gracefully and misconfiguration fails fast"
+            "Abstracted scale infra behind a pluggable KV store (Upstash Redis with an in-memory fallback) and validated every environment variable at startup, so the app degrades gracefully and misconfiguration fails fast",
+            "Enforced authorization on the server, never the client — the admin role is resolved server-side (a non-admin can't reach an admin route even by calling the API directly), every delete is scoped to the caller's own document so no one can touch another user's messages, and user input crosses a Zod boundary that also rejects NoSQL operator injection"
         ]
     },
     {
@@ -440,8 +443,10 @@
             "Designed the core around an injectable WASM loader, so a single engine ships four ways — CLI, headless library, React component, and Express middleware — without duplicating the SQL layer",
             "Embedded the SQLite WASM binary into the published package so it runs in Node and any bundler (Vite, webpack, Next.js) with zero configuration",
             "Built a Challenge mode that grades answers by comparing result sets — order-sensitive where it matters, with numeric tolerance for floats — plus hints, solutions, and locally tracked progress",
-            "Kept everything client-side and shareable: datasets and queries encode into the URL hash, and user-created datasets and query history persist in the browser, so nothing is ever sent to a server",
-            "Published and versioned it on npm, launchable instantly with `npx sqlplay`"
+            "Hardened the data path through an adversarial audit — reproduced and fixed a second-order SQL injection in CSV import (values are now quoted by column affinity) and a read-only-console bypass (every statement is validated and mutating PRAGMAs rejected), each verified with an attack case before and after",
+            "Kept the client XSS-safe by construction (React-escaped rendering, no innerHTML) and added a top-level error boundary so a single render fault degrades to a recoverable message instead of blanking the app",
+            "Backed it with a Playwright end-to-end suite (12 checks, including a crash regression test), HTTP tests for the server guard, and a script that validates all 50 challenge solutions against themselves so the answer key can't rot",
+            "Kept everything client-side and shareable — datasets and queries encode into the URL hash, and user datasets and query history persist in the browser, so nothing is ever sent to a server — and published it on npm, launchable instantly with `npx sqlplay`"
         ]
     },
     {
@@ -469,12 +474,12 @@
         "features": [
             "Secure auth — JWT access/refresh tokens, RBAC, Google OAuth sign-in, email verification, and password reset",
             "Full blog lifecycle — TipTap rich-text editor, draft, scheduled publishing, version history, categories, and R2 image upload",
-            "Social graph — comments, likes, bookmarks, follows, notifications, and recommendations",
+            "Social graph — threaded comments, likes, bookmarks, follows, notifications, and tag-based recommendations",
             "AI assistant — improve-writing, SEO and topic suggestions, cover ideas, and engagement forecast",
             "Multi-source Trending Hub surfacing what to write next",
             "Reading progress tracking and history feeding personalized recommendations",
             "Author and admin analytics dashboards with charts",
-            "Production-hardened — HTML sanitization against stored XSS, security headers, CORS allowlist, per-user rate limiting, and a GitHub Actions CI pipeline",
+            "Production-hardened — stored-XSS sanitization, security headers, CORS allowlist, ownership-enforced access control, per-IP auth brute-force + per-user AI rate limiting, and a GitHub Actions CI pipeline",
             "Shared Zod DTOs across client and server in an npm-workspaces monorepo"
         ],
         "stack": [
@@ -549,7 +554,7 @@
             "Kept every external dependency optional behind a graceful fallback: the AI assistant drops to a deterministic mock without a Gemini key, image uploads no-op without an R2 binding, and email logs to the console without Resend — the app never hard-fails on missing config",
             "Made the engagement forecast an honest heuristic over readability, structure, and history rather than a fabricated number, with the AI only writing the human explanation",
             "Aggregated a multi-source Trending Hub through a single provider interface, fanning out keyless sources (Hacker News, GitHub, Dev.to, Reddit, RSS) with Promise.allSettled and ranking them to a 0–100 heat score",
-            "Hardened it for production — stored-XSS sanitization on save and render, a CORS allowlist, security headers, per-user AI rate limiting, and a GitHub Actions CI pipeline that builds, type-checks, and tests all three workspace packages"
+            "Hardened it for production — stored-XSS sanitization on save and render, per-resource ownership checks (a rival user gets a 403, never someone else's data), a CORS allowlist, security headers, per-IP auth brute-force plus per-user AI rate limiting, and a GitHub Actions CI pipeline that builds, type-checks, and tests all three workspace packages"
         ]
     },
     {
