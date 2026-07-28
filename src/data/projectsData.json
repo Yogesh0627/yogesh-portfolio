@@ -27,6 +27,8 @@
             "OCR document intake (Google Cloud Vision) extracting registration numbers, policy numbers and amounts from RC books, FIRs and repair estimates",
             "Image fraud forensics — perceptual-hash duplicate detection, ORB feature matching, three-state EXIF checks, and a synthetic-image signal",
             "Config-driven fraud engine that scores each claim and shows exactly which rules fired and why",
+            "Offline evaluation harness that scores the fraud engine on labelled outcomes — precision, recall, ROC AUC and AUPRC — with a live feedback loop (investigators confirm fraud at decision time) and A/B ruleset comparison for tuning",
+            "Organisation modelling — regions, branches, departments, designations and a reporting chain, with staff placed across multiple branches",
             "RAG policy Q&A grounded in the claim's pinned policy version, with citations back to the clauses",
             "Permission-based RBAC resolved server-side from the database — the JWT carries only a role id, never a permissions array, so a signed token can never carry stale authority",
             "Rate limiting on sign-in per client IP and on the cost-bearing AI and upload endpoints per user, shared across instances via Redis — and failing open, because a throttle outage must never become a login outage",
@@ -124,7 +126,7 @@
             "Wrote an explainable fraud engine that keeps a per-rule breakdown behind every score, and image forensics that treats missing EXIF as neutral rather than suspicious — social apps strip it, so punishing it would flag honest claimants",
             "Made every external dependency swappable behind an interface with an offline default, so OCR, embeddings, chat, email and storage can each degrade instead of hanging a claim",
             "Treated shared infrastructure as optional rather than assumed: the permission cache and the rate limiter both fail open, so a Redis outage costs a cache hit instead of taking the service down",
-            "Backed it with 92 integration and unit tests running against real PostgreSQL rather than H2, plus a 240-check sweep verifying every role can do exactly what it should and nothing more"
+            "Backed it with 106 integration and unit tests running against real PostgreSQL rather than H2, plus a 240-check sweep verifying every role can do exactly what it should and nothing more"
         ]
     },
     {
