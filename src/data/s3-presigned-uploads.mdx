@@ -1,7 +1,7 @@
 ---
 
 title: "Secure File Uploads with S3 Pre-Signed URLs"
-description: "Why you should never proxy file uploads through your server — and how S3 pre-signed URLs let clients upload directly, securely, and at scale."
+description: "Why you should never proxy file uploads through your server, and how S3 pre-signed URLs let clients upload directly, securely, and at scale."
 date: "2026-06-20"
 image: "/blog/s3-presigned-uploads.png"
 tags:
@@ -14,7 +14,7 @@ tags:
 
 # Secure File Uploads with S3 Pre-Signed URLs
 
-Almost every app needs file uploads — avatars, documents, exports. The naive approach is to send the file to your server, then have the server forward it to storage. It works in a demo and falls apart in production: your server burns memory and bandwidth buffering large files, requests time out, and one big upload can starve every other user.
+Almost every app needs file uploads: avatars, documents, exports. The naive approach is to send the file to your server, then have the server forward it to storage. It works in a demo and falls apart in production: your server burns memory and bandwidth buffering large files, requests time out, and one big upload can starve every other user.
 
 **S3 pre-signed URLs** solve this elegantly: the browser uploads *directly* to S3, and your server never touches the bytes.
 
@@ -74,7 +74,7 @@ export async function createUploadUrl(userId: string, fileName: string) {
 }
 ```
 
-Notice the server decides the key — namespacing it under `userId` so a user can't overwrite someone else's files.
+Notice the server decides the key, namespacing it under `userId` so a user can't overwrite someone else's files.
 
 ---
 
@@ -86,7 +86,7 @@ const { url, key } = await fetch("/api/upload-url", {
   body: JSON.stringify({ fileName: file.name }),
 }).then(r => r.json());
 
-// The file goes straight to S3 — never through your API.
+// The file goes straight to S3, never through your API.
 await fetch(url, {
   method: "PUT",
   headers: { "Content-Type": file.type },
@@ -117,7 +117,7 @@ The happy path is easy; these are the details that keep it safe:
 
 - **Constrain uploads.** Set `ContentType` and use an S3 bucket policy to cap object size, so a signed URL can't be abused to dump a 10GB file.
 - **Short expiry.** 60 seconds is plenty for a PUT. The smaller the window, the smaller the risk if a URL leaks.
-- **Validate ownership.** Always derive the key prefix from the authenticated user server-side — never trust a key sent by the client.
+- **Validate ownership.** Always derive the key prefix from the authenticated user server-side. Never trust a key sent by the client.
 - **Verify after upload.** S3 can fire an event (or you can `HeadObject`) to confirm the file really landed before you mark it done.
 - **Block public access** at the bucket level and serve everything through signed URLs or a CDN with signed cookies.
 
@@ -127,4 +127,4 @@ The happy path is easy; these are the details that keep it safe:
 
 Pre-signed URLs move file transfer off your server and onto infrastructure built for exactly that job. Your API shrinks to a small, fast broker of permissions, uploads scale independently of your compute, and every object stays private by default.
 
-It's one of those patterns that feels like a small trick but changes how an entire system scales — the first time a user uploads a 200MB file without touching your Node process, you'll never proxy an upload again.
+It's one of those patterns that feels like a small trick but changes how an entire system scales. The first time a user uploads a 200MB file without touching your Node process, you'll never proxy an upload again.

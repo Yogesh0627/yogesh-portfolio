@@ -2,10 +2,10 @@
  * Guards the project preview images referenced by src/data/projectsData.json.
  *
  * Three failure modes this catches, all of which have bitten us:
- *   1. missing file        — next/image 404s silently at runtime, nothing fails the build
- *   2. wrong aspect ratio  — the card/hero box is aspect-16/10 with object-cover, so a
+ *   1. missing file: next/image 404s silently at runtime, nothing fails the build
+ *   2. wrong aspect ratio: the card/hero box is aspect-16/10 with object-cover, so a
  *                            wider image gets its sides sliced off
- *   3. letterboxed content — a screenshot resized-to-fit instead of re-captured carries
+ *   3. letterboxed content: a screenshot resized-to-fit instead of re-captured carries
  *                            pure-black bars inside the file, so the frame looks unfilled
  *                            even though object-cover is filling it correctly
  *
@@ -60,7 +60,7 @@ for (const project of projects) {
     const file = path.join(root, "public", project.src)
 
     if (!existsSync(file)) {
-        failures.push(`${label}: missing image — expected public${project.src}`)
+        failures.push(`${label}: missing image, expected public${project.src}`)
         continue
     }
 
@@ -69,14 +69,14 @@ for (const project of projects) {
 
     if (Math.abs(ratio - TARGET_RATIO) > RATIO_TOLERANCE) {
         failures.push(
-            `${label}: ${width}x${height} is ${ratio.toFixed(3)}, needs ${TARGET_RATIO} (16:10) — ` +
+            `${label}: ${width}x${height} is ${ratio.toFixed(3)}, needs ${TARGET_RATIO} (16:10): ` +
             `object-cover will crop ${Math.round((1 - TARGET_RATIO / ratio) * 100)}% off the sides`
         )
     }
 
     if (top > MAX_BAR_PX || bottom > MAX_BAR_PX) {
         failures.push(
-            `${label}: letterboxed — ${top}px top / ${bottom}px bottom of pure black baked into the file. ` +
+            `${label}: letterboxed, ${top}px top / ${bottom}px bottom of pure black baked into the file. ` +
             `Re-capture at a 1280x800 viewport instead of resizing a wider shot to fit.`
         )
     }

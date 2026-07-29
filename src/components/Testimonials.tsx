@@ -25,7 +25,7 @@ const Testimonials = () => {
         },
         {
             quote:
-                "Integrating with the APIs Yogesh builds is effortless — reliable, well-documented, and thoughtfully designed. A great teammate to work alongside.",
+                "Integrating with the APIs Yogesh builds is effortless: reliable, well-documented, and thoughtfully designed. A great teammate to work alongside.",
             name: "Vivek Vishwakarma",
             role: "Flutter Developer at Work Companion",
         },
@@ -49,7 +49,7 @@ const Testimonials = () => {
         },
         {
             quote:
-                "Yogesh took my project from idea to launch with zero hassle — clear communication, on-time delivery, and quality work. I'd hire him again in a heartbeat.",
+                "Yogesh took my project from idea to launch with zero hassle: clear communication, on-time delivery, and quality work. I'd hire him again in a heartbeat.",
             name: "Sandeep Sharma",
             role: "Freelance Client",
         },

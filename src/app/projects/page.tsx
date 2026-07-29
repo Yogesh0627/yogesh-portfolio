@@ -7,7 +7,7 @@ import projectsData from "@/data/projectsData.json"
 
 export const metadata: Metadata = {
     title: "Projects",
-    description: "Explore Yogesh Chauhan's projects — ClaimLens (multi-tenant insurance claims platform with OCR and fraud detection), EcoExpress (AI-assisted organic grocery platform on Spring Boot), Candor (AI-coached feedback), SQLPlay (an in-browser SQL playground on npm), InsightBlog (AI publishing platform), and WoCo PMS (multi-tenant HR platform).",
+    description: "Explore Yogesh Chauhan's projects: ClaimLens (multi-tenant insurance claims platform with OCR and fraud detection), EcoExpress (AI-assisted organic grocery platform on Spring Boot), Candor (AI-coached feedback), SQLPlay (an in-browser SQL playground on npm), InsightBlog (AI publishing platform), and WoCo PMS (multi-tenant HR platform).",
     keywords: ["Software Projects", "React Projects", "Node.js Projects", "Java Projects", "Spring Boot", "Next.js", "AI Integration", "Full Stack Developer"]
 }
 
@@ -47,7 +47,7 @@ const ProjectPage = () => {
                     <Scales />
                     <Heading >Projects</Heading>
                     <SubHeading>
-                        A selection of things I&apos;ve built — from AI-powered products to a
+                        A selection of things I&apos;ve built, from AI-powered products to a
                         multi-tenant enterprise platform. Each one taught me something about
                         shipping real software end-to-end.
                     </SubHeading>

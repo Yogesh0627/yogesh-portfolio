@@ -9,7 +9,7 @@ const ContactPage = () => {
                 <Scales />
                 <Heading >Contact Me</Heading>
                 <SubHeading>
-                    I'm open to freelancing offers. Reach  out to me to inquire more about my work.
+                    I'm looking for full-time software engineering roles, and open to freelance projects on the side. Reach out to talk about a role or a project.
                 </SubHeading>
 
                 <ContactForm />

@@ -24,7 +24,7 @@ const MyPortfolio = () => {
           />
         </div>
         <SubHeading>
-          I&apos;m a full-stack developer who builds scalable web apps end-to-end — from
+          I&apos;m a full-stack developer who builds scalable web apps end-to-end, from
           database schemas and Node.js or Spring Boot APIs to polished React interfaces.
           Currently a Software Engineer at Work Companion.
         </SubHeading>

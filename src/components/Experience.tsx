@@ -30,7 +30,7 @@ const Experience = async () => {
             role: "Software Specialist",
             duration: "Jun 2024 - Oct 2024",
             description:
-                "Worked on the BeGenieus platform — integrated OpenAI-powered chat and image generation, and delivered features across modules while collaborating closely with QA and product teams.",
+                "Worked on the BeGenieus platform: integrated OpenAI-powered chat and image generation, and delivered features across modules while collaborating closely with QA and product teams.",
             logo: "/logos/agami.png",
             technologies: [
                 { id: 1, logo: <IconBrandVue className={techClass} />, title: "Vue.js" },

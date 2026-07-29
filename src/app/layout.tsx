@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     default: 'Yogesh Chauhan | Full Stack Developer (Node.js, Java & React)',
     template: '%s | Yogesh Chauhan'
   },
-  description: 'Full-stack developer who ships web apps end-to-end — from Node.js and Spring Boot APIs to polished React interfaces. Software Engineer at Work Companion.',
+  description: 'Full-stack developer who ships web apps end-to-end, from Node.js and Spring Boot APIs to polished React interfaces. Software Engineer at Work Companion.',
   keywords: [
     'Full Stack Developer',
     'Node.js',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
     types: {
-      'application/rss+xml': [{ url: '/rss.xml', title: 'Yogesh Chauhan — Blog' }],
+      'application/rss+xml': [{ url: '/rss.xml', title: 'Yogesh Chauhan | Blog' }],
     },
   },
   openGraph: {

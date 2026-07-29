@@ -1,7 +1,7 @@
 ---
 
 title: "Understanding RAG: Retrieval-Augmented Generation from Scratch"
-description: "How to give an LLM access to your own data — the anatomy of a RAG pipeline, from chunking and embeddings to retrieval and grounded generation."
+description: "How to give an LLM access to your own data: the anatomy of a RAG pipeline, from chunking and embeddings to retrieval and grounded generation."
 date: "2026-07-05"
 image: "/blog/understanding-rag.png"
 tags:
@@ -14,7 +14,7 @@ tags:
 
 # Understanding RAG: Retrieval-Augmented Generation from Scratch
 
-Large language models are impressive, but they have two stubborn limitations: they only know what was in their training data, and they happily make things up when they don't. **Retrieval-Augmented Generation (RAG)** fixes both by giving the model the right context *at question time* — so instead of answering from memory, it answers from your documents.
+Large language models are impressive, but they have two stubborn limitations: they only know what was in their training data, and they happily make things up when they don't. **Retrieval-Augmented Generation (RAG)** fixes both by giving the model the right context *at question time*, so instead of answering from memory, it answers from your documents.
 
 In this post I'll walk through what RAG actually is, why it works, and how to build a pipeline end to end.
 
@@ -24,8 +24,8 @@ In this post I'll walk through what RAG actually is, why it works, and how to bu
 
 A RAG system answers a question in two steps:
 
-1. **Retrieve** — find the chunks of your data most relevant to the user's question.
-2. **Generate** — hand those chunks to the LLM as context and ask it to answer *using only that context*.
+1. **Retrieve**: find the chunks of your data most relevant to the user's question.
+2. **Generate**: hand those chunks to the LLM as context and ask it to answer *using only that context*.
 
 That's it. The "intelligence" is still the LLM; RAG just makes sure it's reading the right page of the right book before it speaks.
 
@@ -37,7 +37,7 @@ Question ─▶ [Retriever] ─▶ relevant chunks ─▶ [LLM + prompt] ─▶ 
 
 ## Step 1: Chunking
 
-You can't embed a 40-page PDF as one vector — you'd lose all the detail. So you split documents into **chunks** (say 300–800 tokens each), usually with a small overlap so ideas that straddle a boundary aren't cut in half.
+You can't embed a 40-page PDF as one vector. You'd lose all the detail. So you split documents into **chunks** (say 300–800 tokens each), usually with a small overlap so ideas that straddle a boundary aren't cut in half.
 
 ```ts
 function chunkText(text: string, size = 800, overlap = 100) {
@@ -49,13 +49,13 @@ function chunkText(text: string, size = 800, overlap = 100) {
 }
 ```
 
-Good chunking matters more than people expect. Split on semantic boundaries (paragraphs, headings) where you can — a chunk that contains one coherent idea retrieves far better than one that ends mid-sentence.
+Good chunking matters more than people expect. Split on semantic boundaries (paragraphs, headings) where you can. A chunk that contains one coherent idea retrieves far better than one that ends mid-sentence.
 
 ---
 
 ## Step 2: Embeddings
 
-An **embedding** turns a piece of text into a vector — a list of numbers that captures its meaning. Texts about similar things end up close together in vector space, even if they share no exact words.
+An **embedding** turns a piece of text into a vector: a list of numbers that captures its meaning. Texts about similar things end up close together in vector space, even if they share no exact words.
 
 ```ts
 const { embedding } = await embed({
@@ -71,7 +71,7 @@ You embed every chunk once, up front, and store the vectors in a **vector databa
 
 ## Step 3: Retrieval
 
-When a question comes in, you embed *the question* with the same model, then ask the vector store for the nearest chunks — typically by **cosine similarity**.
+When a question comes in, you embed *the question* with the same model, then ask the vector store for the nearest chunks, typically by **cosine similarity**.
 
 ```ts
 const { embedding: queryVec } = await embed({
@@ -87,7 +87,7 @@ const topChunks = await db.query(
 );
 ```
 
-Because both the question and the chunks live in the same vector space, "how do I reset my password?" will match a chunk titled "Account recovery" — no keyword overlap required. That's the magic semantic search gives you that plain `LIKE '%...%'` never could.
+Because both the question and the chunks live in the same vector space, "how do I reset my password?" will match a chunk titled "Account recovery", no keyword overlap required. That's the magic semantic search gives you that plain `LIKE '%...%'` never could.
 
 ---
 
@@ -110,7 +110,7 @@ const { text } = await generateText({
 });
 ```
 
-That single instruction — *"if it isn't in the context, say you don't know"* — is what turns a confident hallucinator into a trustworthy assistant.
+That single instruction, *"if it isn't in the context, say you don't know"*, is what turns a confident hallucinator into a trustworthy assistant.
 
 ---
 
@@ -128,6 +128,6 @@ Getting a demo working is easy. Making RAG *reliable* is where the real engineer
 
 ## Conclusion
 
-RAG isn't a model — it's an **architecture**. You embed your knowledge once, retrieve the relevant slice at question time, and let the LLM reason over it. The result is an assistant that answers from *your* data, cites its sources, and admits when it doesn't know.
+RAG isn't a model. It's an **architecture**. You embed your knowledge once, retrieve the relevant slice at question time, and let the LLM reason over it. The result is an assistant that answers from *your* data, cites its sources, and admits when it doesn't know.
 
-Start simple: chunk, embed, retrieve top-5, ground the prompt. Then iterate on the parts that move your accuracy — usually chunking and retrieval, rarely the model itself.
+Start simple: chunk, embed, retrieve top-5, ground the prompt. Then iterate on the parts that move your accuracy: usually chunking and retrieval, rarely the model itself.

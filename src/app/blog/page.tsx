@@ -25,7 +25,7 @@ const Blogs = async () => {
                 <Scales />
                 <Heading>All Blogs</Heading>
                 <SubHeading>
-                    Notes on the things I&apos;m building and learning — React, Node.js, and the
+                    Notes on the things I&apos;m building and learning: React, Node.js, and the
                     tools I work with day to day.
                 </SubHeading>
 

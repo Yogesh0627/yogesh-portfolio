@@ -1,7 +1,7 @@
 ---
 
 title: "Real-Time Updates with Server-Sent Events"
-description: "You don't always need WebSockets. How Server-Sent Events give you live, one-way updates over plain HTTP — and when to reach for them."
+description: "You don't always need WebSockets. How Server-Sent Events give you live, one-way updates over plain HTTP, and when to reach for them."
 date: "2026-05-18"
 image: "/blog/realtime-with-sse.png"
 tags:
@@ -14,7 +14,7 @@ tags:
 
 # Real-Time Updates with Server-Sent Events
 
-When people want "live" features — a notification badge, a feed that updates itself, a progress bar — they reach for WebSockets by reflex. But WebSockets are a bidirectional, stateful protocol, and most "live" features only need updates flowing *one way*: server to client. For those, **Server-Sent Events (SSE)** are simpler, lighter, and built right into the browser.
+When people want "live" features (a notification badge, a feed that updates itself, a progress bar), they reach for WebSockets by reflex. But WebSockets are a bidirectional, stateful protocol, and most "live" features only need updates flowing *one way*: server to client. For those, **Server-Sent Events (SSE)** are simpler, lighter, and built right into the browser.
 
 ---
 
@@ -31,7 +31,7 @@ events.onmessage = (e) => {
 };
 ```
 
-That's the entire client side. No library, no handshake, no connection management — the browser even **reconnects automatically** if the connection drops.
+That's the entire client side. No library, no handshake, no connection management. The browser even **reconnects automatically** if the connection drops.
 
 ---
 
@@ -83,11 +83,11 @@ for await (const change of changeStream) {
 }
 ```
 
-Now a write anywhere in your system — even from another service — flows through the change stream and out to the user's browser in real time, with no polling.
+Now a write anywhere in your system, even from another service, flows through the change stream and out to the user's browser in real time, with no polling.
 
 ---
 
-## SSE vs WebSockets — how to choose
+## SSE vs WebSockets: how to choose
 
 Reach for **SSE** when:
 
@@ -105,9 +105,9 @@ A good rule: *if the client mostly listens, use SSE. If the client and server ar
 ## Gotchas worth knowing
 
 - **Connection limits.** Over HTTP/1.1 a browser allows only ~6 connections per domain; one SSE stream eats one. Serve over **HTTP/2** (default on most hosts) and this effectively disappears.
-- **Proxies and buffering.** Some proxies buffer responses and break streaming — disable buffering (e.g. `X-Accel-Buffering: no` on nginx).
+- **Proxies and buffering.** Some proxies buffer responses and break streaming: disable buffering (e.g. `X-Accel-Buffering: no` on nginx).
 - **Heartbeats.** Send a comment line (`: ping\n\n`) every 20–30s to keep idle connections and load balancers from timing out.
-- **Serverless caveat.** Long-lived streams fight short function timeouts — run SSE on a platform that supports streaming/edge runtimes.
+- **Serverless caveat.** Long-lived streams fight short function timeouts. Run SSE on a platform that supports streaming/edge runtimes.
 
 ---
 

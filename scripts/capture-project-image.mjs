@@ -2,7 +2,7 @@
  * Re-captures a project preview image from its live site at a true 1280x800 viewport.
  *
  * The rule this exists to enforce: screenshot the viewport AT the target size. Never
- * capture wider and resize to fit — that bakes pure-black letterbox bars into the PNG,
+ * capture wider and resize to fit: that bakes pure-black letterbox bars into the PNG,
  * and the card then looks unfilled even though object-cover is working correctly.
  * check-project-images.mjs is the guard; this is the fix.
  *
@@ -17,7 +17,7 @@
  *
  *   --url=<url>        override the live URL (defaults to the project's `href`)
  *   --click=<selector> click something before capturing (dismiss a banner, pin a carousel)
- *   --expect=<text>    refuse to write unless this text is visible — use with --click
+ *   --expect=<text>    refuse to write unless this text is visible. Use with --click
  *   --scroll=<px>      scroll down before capturing
  *   --settle=<ms>      wait before capturing (default 4000; raise for slow hydration)
  *   --wait=<state>     goto wait: networkidle (default) | domcontentloaded | load
@@ -76,14 +76,14 @@ const projects = JSON.parse(await readFile(path.join(root, "src/data/projectsDat
 if (!slug) {
     console.error("usage: npm run capture:images -- <slug> [--dry] [--click=…] [--expect=…]\n")
     console.error(`  slugs: ${projects.map((p) => p.slug).join(", ")}\n`)
-    console.error("  one project at a time — this overwrites public/projects/<file>.")
+    console.error("  one project at a time: this overwrites public/projects/<file>.")
     console.error("  add --dry first to preview into scripts/.preview.png without touching it.")
     process.exit(1)
 }
 
 const project = projects.find((p) => p.slug === slug)
 if (!project) {
-    console.error(`unknown slug "${slug}" — have: ${projects.map((p) => p.slug).join(", ")}`)
+    console.error(`unknown slug "${slug}", have: ${projects.map((p) => p.slug).join(", ")}`)
     process.exit(1)
 }
 
@@ -102,7 +102,7 @@ const out = has("dry")
 
 const chrome = CHROME_CANDIDATES.find((p) => p && existsSync(p))
 if (!chrome) {
-    console.error("no Chrome/Edge found — set CHROME_PATH to the executable")
+    console.error("no Chrome/Edge found: set CHROME_PATH to the executable")
     process.exit(1)
 }
 
@@ -150,7 +150,7 @@ try {
     if (expect) {
         const seen = await page.getByText(expect).first().isVisible().catch(() => false)
         console.log(`  expect "${expect}": ${seen ? "visible" : "NOT VISIBLE"}`)
-        if (!seen) throw new Error("expected content not on screen — refusing to write a wrong capture")
+        if (!seen) throw new Error("expected content not on screen: refusing to write a wrong capture")
     }
 
     const buffer = await page.screenshot({ type: "png" })   // viewport-only: never fullPage
@@ -172,7 +172,7 @@ try {
 
     console.log(`  ${info.width}x${info.height}  bars ${top}/${bottom}`)
     if (top > MAX_BAR_PX || bottom > MAX_BAR_PX) {
-        throw new Error(`letterboxed (${top}px/${bottom}px) — the page is shorter than the viewport, not a capture bug`)
+        throw new Error(`letterboxed (${top}px/${bottom}px): the page is shorter than the viewport, not a capture bug`)
     }
 
     await sharp(buffer).toFile(out)

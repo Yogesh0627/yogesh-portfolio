@@ -92,43 +92,8 @@
 
 %-----------SUMMARY-----------
 \section{Summary}
-\small{Full-stack engineer with 2 years of professional experience building multi-tenant SaaS backends. Hands-on \textbf{Java 21 / Spring Boot} across two deployed systems --- multi-tenant security, JPA/Hibernate data modeling, REST APIs, and AI integration --- with a strong record of measurable backend performance work.}
+\small{Full-stack engineer with 2 years of professional experience building multi-tenant SaaS backends. Hands-on \textbf{Java 21 / Spring Boot} across two deployed systems (multi-tenant security, JPA/Hibernate data modeling, REST APIs, and AI integration) with a strong record of measurable backend performance work.}
 \vspace{-6pt}
-
-%-----------PROJECTS-----------
-\section{Java Projects}
-    \vspace{-5pt}
-    \resumeSubHeadingListStart
-      \resumeProjectHeading
-          {\textbf{ClaimLens} --- multi-tenant insurance claims SaaS $|$ \emph{Java 21, Spring Boot, PostgreSQL, Python/FastAPI, Gemini}}{\href{https://claimlens-ten.vercel.app}{\underline{Live}} $|$ \href{https://github.com/Yogesh0627/Claim-Lens}{\underline{Code}}}
-          \resumeItemListStart
-            \resumeItem{Enforced tenant isolation as a \textbf{Hibernate \texttt{@TenantId}} discriminator on every query (cross-tenant reads return 404), with a second ownership gate for the customer portal and \textbf{permission-based RBAC} resolved per-request.}
-            \resumeItem{Built an explainable fraud engine over \textbf{Google Vision OCR} and image forensics, plus \textbf{RAG} policy Q\&A with clause citations; Redis-backed rate limiting and an append-only audit trail.}
-            \resumeItem{Covered by \textbf{92 integration tests} running against real PostgreSQL, plus a 240-check sweep verifying every role's permissions.}
-          \resumeItemListEnd
-          \vspace{-13pt}
-      \resumeProjectHeading
-          {\textbf{EcoExpress} --- e-commerce platform $|$ \emph{Java 21, Spring Boot, PostgreSQL, Razorpay, Gemini}}{\href{https://ecoexpress-nu.vercel.app}{\underline{Live}} $|$ \href{https://github.com/Yogesh0627/ecom-exp}{\underline{Code}}}
-          \resumeItemListStart
-            \resumeItem{Designed an \textbf{11-module Spring Boot modular monolith} over a \textbf{60+ table} schema, enforcing \textbf{11 money/stock invariants} in \textbf{120+ database constraints} --- overselling and double-charging are structurally impossible.}
-            \resumeItem{Integrated \textbf{Razorpay} payments advancing order state only on \textbf{HMAC-verified webhooks}, GST invoicing, and Gemini AI behind a fail-closed budget with per-call cost accounting; \textbf{Flyway}-owned schema with Hibernate validate-only.}
-            \resumeItem{Built an \textbf{append-only stock ledger} with FEFO batch allocation, purchase-order and stock-adjustment workflows, and a ledger-drift reconciliation endpoint, behind an admin console for inventory, coupons, moderation and AI spend.}
-          \resumeItemListEnd
-    \resumeSubHeadingListEnd
-\vspace{-9pt}
-
-%-----------OTHER PROJECTS-----------
-\section{Other Projects}
-    \vspace{-5pt}
-    \resumeSubHeadingListStart
-      \resumeProjectHeading
-          {\textbf{InsightBlog} --- AI publishing platform $|$ \emph{TypeScript, Hono, Prisma, PostgreSQL, Gemini}}{\href{https://insightblog-one.vercel.app}{\underline{Live}} $|$ \href{https://github.com/Yogesh0627/Full_Stack_Project}{\underline{Code}}}
-          \resumeItemListStart
-            \resumeItem{Domain-driven backend layered as \textbf{routes $\rightarrow$ controller $\rightarrow$ service $\rightarrow$ repository} per domain, with \textbf{JWT} access/refresh auth, RBAC, and \textbf{PostgreSQL} accessed through an ORM.}
-            \resumeItem{Hardened for production --- stored-XSS sanitization, CORS allowlist, security headers, and per-user rate limiting --- with a \textbf{GitHub Actions CI} pipeline that builds, type-checks and tests all three workspace packages.}
-          \resumeItemListEnd
-    \resumeSubHeadingListEnd
-\vspace{-9pt}
 
 %-----------EXPERIENCE-----------
 \section{Experience}
@@ -141,7 +106,8 @@
         \resumeItem{\#1 contributor on a multi-tenant Performance Management SaaS, shipping end-to-end from data models to REST APIs to three portals (\textbf{$\sim$1,500 commits across 3 repositories}).}
         \resumeItem{Led a backend optimization program raising code quality \textbf{4.5$\rightarrow$8.6/10} with \textbf{$\sim$4--5$\times$ throughput}: cut auth latency \textbf{76\% (145$\rightarrow$35ms)} via caching, fixed an N+1 bottleneck \textbf{(2.5s$\rightarrow$300ms)}, and added \textbf{44 database indexes}.}
         \resumeItem{Re-architected the backend into a clean layered design with \textbf{26 services}, \textbf{13 aggregation pipelines}, and shared business modules, improving multi-tenant reliability, transaction safety, and observability.}
-        \resumeItem{Delivered core PMS modules end-to-end --- Appraisal Cycle Engine, 360$^{\circ}$ Feedback, RBAC, Timeline Engine, Question Bank, Notifications, and Excel Import/Export --- plus an \textbf{OpenAI GPT-4.1-mini} appraisal-question generator supporting prompt and document (PDF/DOCX/CSV) inputs.}
+        \resumeItem{Delivered core PMS modules end-to-end: Appraisal Cycle Engine, 360$^{\circ}$ Feedback, RBAC, Timeline Engine, Question Bank, Notifications, and Excel Import/Export, serving production enterprise customers.}
+        \resumeItem{Built AI-powered enterprise features: an \textbf{OpenAI GPT-4.1-mini} appraisal-question generator (prompt + PDF/DOCX/CSV inputs) and \textbf{tl;dv} meeting intelligence that auto-generates performance-review summaries from meeting transcripts.}
       \resumeItemListEnd
   \vspace{6pt}
 
@@ -149,11 +115,38 @@
       {Agami Technologies}{June 2024 -- Oct 2024}
       {Software Specialist}{Greater Noida, Uttar Pradesh}
       \resumeItemListStart
-        \resumeItem{Delivered \textbf{7+ core features} and \textbf{24+ system improvements} across a full-stack JavaScript platform with Socket.io real-time features; resolved \textbf{398+ bugs} with QA and product.}
+        \resumeItem{Delivered \textbf{7+ core features} and \textbf{24+ system improvements} across a full-stack JavaScript platform with Socket.io real-time features, in close collaboration with QA and product.}
         \resumeItem{Integrated \textbf{OpenAI} into the \textbf{BeGenieus} platform: GPT chat, image generation, and AI features across multiple modules.}
       \resumeItemListEnd
 
   \resumeSubHeadingListEnd
+\vspace{-9pt}
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \vspace{-5pt}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{ClaimLens}: multi-tenant insurance claims SaaS $|$ \emph{Java 21, Spring Boot, PostgreSQL, Python/FastAPI, Gemini}}{\href{https://claimlens-ten.vercel.app}{\underline{Live}} $|$ \href{https://github.com/Yogesh0627/Claim-Lens}{\underline{Code}}}
+          \resumeItemListStart
+            \resumeItem{Enforced tenant isolation as a \textbf{Hibernate \texttt{@TenantId}} discriminator on every query (cross-tenant reads return 404), with a second ownership gate for the customer portal and \textbf{permission-based RBAC} resolved per-request.}
+            \resumeItem{Built an explainable fraud engine over \textbf{Google Vision OCR} and image forensics, plus \textbf{RAG} policy Q\&A with clause citations; Redis-backed rate limiting and an append-only audit trail.}
+          \resumeItemListEnd
+          \vspace{-13pt}
+      \resumeProjectHeading
+          {\textbf{EcoExpress}: e-commerce platform $|$ \emph{Java 21, Spring Boot, PostgreSQL, Razorpay, Gemini}}{\href{https://ecoexpress-nu.vercel.app}{\underline{Live}} $|$ \href{https://github.com/Yogesh0627/ecom-exp}{\underline{Code}}}
+          \resumeItemListStart
+            \resumeItem{Designed an \textbf{11-module Spring Boot modular monolith} over a \textbf{60+ table} schema, enforcing \textbf{11 money/stock invariants} in \textbf{120+ database constraints}: overselling and double-charging are structurally impossible.}
+            \resumeItem{Integrated \textbf{Razorpay} payments advancing order state only on \textbf{HMAC-verified webhooks}, GST invoicing, and Gemini AI behind a fail-closed budget with per-call cost accounting; \textbf{Flyway}-owned schema with Hibernate validate-only.}
+            \resumeItem{Built an \textbf{append-only stock ledger} with FEFO batch allocation, purchase-order and stock-adjustment workflows, and a ledger-drift reconciliation endpoint, behind an admin console for inventory, coupons, moderation and AI spend.}
+          \resumeItemListEnd
+          \vspace{-13pt}
+      \resumeProjectHeading
+          {\textbf{Candor}: AI-coached feedback platform $|$ \emph{Next.js, TypeScript, MongoDB, Redis, Gemini}}{\href{https://candor-cyan.vercel.app}{\underline{Live}} $|$ \href{https://github.com/Yogesh0627/anonymous-message-app}{\underline{Code}}}
+          \resumeItemListStart
+            \resumeItem{Designed an \textbf{idempotent, append-only credit ledger} (a unique constraint blocks any double-award or double-spend under retries and races) and a real-time inbox over \textbf{Server-Sent Events} backed by MongoDB change streams, with per-user AI quotas, rate limiting, and CI.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
 \vspace{-9pt}
 
 %-----------TECHNICAL SKILLS-----------

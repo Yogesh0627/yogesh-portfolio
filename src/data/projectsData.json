@@ -5,7 +5,7 @@
         "title": "ClaimLens",
         "tagline": "Settle honest claims faster. Catch the ones that aren't.",
         "year": "2026",
-        "role": "Solo project — architecture, Spring Boot backend, Python services & Next.js frontend",
+        "role": "Solo project: architecture, Spring Boot backend, Python services & Next.js frontend",
         "description": "A multi-tenant insurance SaaS that reads claim documents with OCR, checks damage photos for fraud, scores risk with an explainable rules engine, and answers coverage questions from the policy wording itself.",
         "src": "/projects/claimlens.png",
         "href": "https://claimlens-ten.vercel.app",
@@ -18,23 +18,23 @@
             "Python",
             "Gemini"
         ],
-        "overview": "ClaimLens is a multi-tenant motor-insurance claims platform: a customer files a claim, OCR reads the documents, the damage photos are checked for tampering and reuse, a rules engine scores the risk and explains itself, an investigator is assigned, and the claim is approved or rejected — every step scoped to one insurer and written to an append-only audit trail. It runs as a Spring Boot API, a Next.js frontend and a Python/FastAPI image-forensics service, with a fourth Tesseract OCR service kept as an offline alternative to Google Vision.",
-        "problem": "Insurance claims sit in a permanent tension between speed and caution. Settle too fast and you leak money to fraud; scrutinize everything and you punish honest customers while burying investigators in paperwork. Both failure modes are expensive, and a regulator will still ask why any given decision was made — a question most automated systems can't answer.",
-        "solution": "Do the mechanical work automatically, surface only the claims that genuinely look suspicious, and record why every decision was made — so a human still owns each real decision. That demands two things most demos skip: isolation that can't be forgotten, and automation that can explain itself. Tenancy is a Hibernate @TenantId discriminator appended to every query including load-by-id, so a cross-tenant read returns 404 rather than a 403 that would confirm the record exists. And every fraud score keeps its per-rule breakdown, every RAG answer keeps its citations, every state change is audited.",
+        "overview": "ClaimLens is a multi-tenant motor-insurance claims platform: a customer files a claim, OCR reads the documents, the damage photos are checked for tampering and reuse, a rules engine scores the risk and explains itself, an investigator is assigned, and the claim is approved or rejected, every step scoped to one insurer and written to an append-only audit trail. It runs as a Spring Boot API, a Next.js frontend and a Python/FastAPI image-forensics service, with a fourth Tesseract OCR service kept as an offline alternative to Google Vision.",
+        "problem": "Insurance claims sit in a permanent tension between speed and caution. Settle too fast and you leak money to fraud; scrutinize everything and you punish honest customers while burying investigators in paperwork. Both failure modes are expensive, and a regulator will still ask why any given decision was made, a question most automated systems can't answer.",
+        "solution": "Do the mechanical work automatically, surface only the claims that genuinely look suspicious, and record why every decision was made, so a human still owns each real decision. That demands two things most demos skip: isolation that can't be forgotten, and automation that can explain itself. Tenancy is a Hibernate @TenantId discriminator appended to every query including load-by-id, so a cross-tenant read returns 404 rather than a 403 that would confirm the record exists. And every fraud score keeps its per-rule breakdown, every RAG answer keeps its citations, every state change is audited.",
         "features": [
-            "Multi-tenant isolation enforced by a database discriminator on every query — a rival tenant gets a 404, never a 403",
+            "Multi-tenant isolation enforced by a database discriminator on every query: a rival tenant gets a 404, never a 403",
             "Customer portal with a second ownership gate below the tenant, scoped from the JWT rather than the request body",
             "OCR document intake (Google Cloud Vision) extracting registration numbers, policy numbers and amounts from RC books, FIRs and repair estimates",
-            "Image fraud forensics — perceptual-hash duplicate detection, ORB feature matching, three-state EXIF checks, and a synthetic-image signal",
+            "Image fraud forensics: perceptual-hash duplicate detection, ORB feature matching, three-state EXIF checks, and a synthetic-image signal",
             "Config-driven fraud engine that scores each claim and shows exactly which rules fired and why",
-            "Offline evaluation harness that scores the fraud engine on labelled outcomes — precision, recall, ROC AUC and AUPRC — with a live feedback loop (investigators confirm fraud at decision time) and A/B ruleset comparison for tuning",
-            "Organisation modelling — regions, branches, departments, designations and a reporting chain, with staff placed across multiple branches",
+            "Offline evaluation harness that scores the fraud engine on labelled outcomes (precision, recall, ROC AUC and AUPRC) with a live feedback loop (investigators confirm fraud at decision time) and A/B ruleset comparison for tuning",
+            "Organisation modelling: regions, branches, departments, designations and a reporting chain, with staff placed across multiple branches",
             "RAG policy Q&A grounded in the claim's pinned policy version, with citations back to the clauses",
-            "Permission-based RBAC resolved server-side from the database — the JWT carries only a role id, never a permissions array, so a signed token can never carry stale authority",
-            "Rate limiting on sign-in per client IP and on the cost-bearing AI and upload endpoints per user, shared across instances via Redis — and failing open, because a throttle outage must never become a login outage",
-            "Invitation-based onboarding — a new user gets a single-use, expiring link to set their own password, so an administrator never knows anyone else's credential",
-            "Two-way information requests — an investigator asks for a document, the customer uploads it from the portal, and the claim re-opens and reprocesses itself",
-            "Full lifecycle — three-step intake, auto-assignment, investigation, decision — with document versioning and an append-only audit trail",
+            "Permission-based RBAC resolved server-side from the database: the JWT carries only a role id, never a permissions array, so a signed token can never carry stale authority",
+            "Rate limiting on sign-in per client IP and on the cost-bearing AI and upload endpoints per user, shared across instances via Redis, and failing open, because a throttle outage must never become a login outage",
+            "Invitation-based onboarding: a new user gets a single-use, expiring link to set their own password, so an administrator never knows anyone else's credential",
+            "Two-way information requests: an investigator asks for a document, the customer uploads it from the portal, and the claim re-opens and reprocesses itself",
+            "Full lifecycle (three-step intake, auto-assignment, investigation, decision) with document versioning and an append-only audit trail",
             "Branded HTML claim emails with an attached PDF report carrying the incident description, the decision and who made it, and the customer's uploaded photos embedded in the PDF",
             "Cross-tenant platform console with analytics, tenant lifecycle and impersonation"
         ],
@@ -121,9 +121,9 @@
             ]
         },
         "contribution": [
-            "Designed tenancy as a database concern — a Hibernate @TenantId discriminator appended to every query and set automatically on insert, so isolation can't be forgotten at a call site",
+            "Designed tenancy as a database concern: a Hibernate @TenantId discriminator appended to every query and set automatically on insert, so isolation can't be forgotten at a call site",
             "Built a second ownership boundary for the customer portal, since tenant scoping alone doesn't separate two customers who share an insurer",
-            "Wrote an explainable fraud engine that keeps a per-rule breakdown behind every score, and image forensics that treats missing EXIF as neutral rather than suspicious — social apps strip it, so punishing it would flag honest claimants",
+            "Wrote an explainable fraud engine that keeps a per-rule breakdown behind every score, and image forensics that treats missing EXIF as neutral rather than suspicious. Social apps strip it, so punishing it would flag honest claimants",
             "Made every external dependency swappable behind an interface with an offline default, so OCR, embeddings, chat, email and storage can each degrade instead of hanging a claim",
             "Treated shared infrastructure as optional rather than assumed: the permission cache and the rate limiter both fail open, so a Redis outage costs a cache hit instead of taking the service down",
             "Backed it with 106 integration and unit tests running against real PostgreSQL rather than H2, plus a 240-check sweep verifying every role can do exactly what it should and nothing more"
@@ -135,8 +135,8 @@
         "title": "EcoExpress",
         "tagline": "An AI-assisted organic grocery platform on a Java modular monolith",
         "year": "2026",
-        "role": "Solo project — architecture, Spring Boot backend & Next.js storefront",
-        "description": "An organic grocery e-commerce platform for the Indian market, built on a Spring Boot modular monolith where correctness lives in the database — plus a Smart Cart, Smart Fridge, and AI meal planner.",
+        "role": "Solo project: architecture, Spring Boot backend & Next.js storefront",
+        "description": "An organic grocery e-commerce platform for the Indian market, built on a Spring Boot modular monolith where correctness lives in the database, plus a Smart Cart, Smart Fridge, and AI meal planner.",
         "src": "/projects/ecoexpress.png",
         "href": "https://ecoexpress-nu.vercel.app",
         "github": "https://github.com/Yogesh0627/ecom-exp",
@@ -148,17 +148,17 @@
             "PostgreSQL",
             "Gemini"
         ],
-        "overview": "EcoExpress is a production-shaped organic grocery platform for the Indian market — a Next.js 14 storefront and admin console over a Java 21 / Spring Boot modular monolith. The storefront is table stakes; the differentiator is the nutrition intelligence layered on top: a Smart Cart that scores the health of your basket, a Smart Fridge that reads a photo and suggests recipes plus the missing ingredients, a weekly meal planner, and a pantry that stops the app recommending what you already own.",
-        "problem": "Most e-commerce side projects put correctness in application code — and application code is exactly where the money bugs live. Overselling, double-charging on a replayed webhook, an invoice whose lines don't add up, a stock history quietly rewritten by a bad UPDATE: every one of those is a one-line mistake away in a typical CRUD service. On top of that, groceries in India carry real regulatory weight — GST invoicing, MRP price ceilings, FSSAI licensing, organic certification — that a generic store template simply ignores.",
-        "solution": "The governing idea is to push correctness into the database, so a bug in application code cannot corrupt money or stock. Eleven invariants are enforced as constraints — you cannot charge above printed MRP, cannot oversell, cannot create a >100% coupon, cannot UPDATE or DELETE a row in the stock ledger, and a replayed Razorpay webhook cannot double-credit. Each one was proven by attempting to violate it; all eleven were rejected by Postgres. The backend is an 11-module monolith where modules talk through each other's services rather than reaching into each other's tables, and the AI features route through a single doorway that owns budget, cost accounting, and failure shape.",
+        "overview": "EcoExpress is a production-shaped organic grocery platform for the Indian market: a Next.js 14 storefront and admin console over a Java 21 / Spring Boot modular monolith. The storefront is table stakes; the differentiator is the nutrition intelligence layered on top: a Smart Cart that scores the health of your basket, a Smart Fridge that reads a photo and suggests recipes plus the missing ingredients, a weekly meal planner, and a pantry that stops the app recommending what you already own.",
+        "problem": "Most e-commerce side projects put correctness in application code, and application code is exactly where the money bugs live. Overselling, double-charging on a replayed webhook, an invoice whose lines don't add up, a stock history quietly rewritten by a bad UPDATE: every one of those is a one-line mistake away in a typical CRUD service. On top of that, groceries in India carry real regulatory weight (GST invoicing, MRP price ceilings, FSSAI licensing, organic certification) that a generic store template simply ignores.",
+        "solution": "The governing idea is to push correctness into the database, so a bug in application code cannot corrupt money or stock. Eleven invariants are enforced as constraints: you cannot charge above printed MRP, cannot oversell, cannot create a >100% coupon, cannot UPDATE or DELETE a row in the stock ledger, and a replayed Razorpay webhook cannot double-credit. Each one was proven by attempting to violate it; all eleven were rejected by Postgres. The backend is an 11-module monolith where modules talk through each other's services rather than reaching into each other's tables, and the AI features route through a single doorway that owns budget, cost accounting, and failure shape.",
         "features": [
-            "Full commerce flow — catalog with variants, guest-to-user cart merge, checkout, Razorpay payments, partial shipments, and GST invoice PDFs",
-            "Smart Cart health score — per-100g nutrition scaled by real pack weight and graded against UK FSA traffic-light bands",
-            "Smart Fridge — upload a photo, Gemini Vision detects ingredients, matched to sellable SKUs into recipes plus a missing-ingredients basket",
+            "Full commerce flow: catalog with variants, guest-to-user cart merge, checkout, Razorpay payments, partial shipments, and GST invoice PDFs",
+            "Smart Cart health score: per-100g nutrition scaled by real pack weight and graded against UK FSA traffic-light bands",
+            "Smart Fridge: upload a photo, Gemini Vision detects ingredients, matched to sellable SKUs into recipes plus a missing-ingredients basket",
             "Weekly AI meal planner grounded in your pantry, which auto-stocks on delivery and sends expiry reminders",
-            "Recommendations that AI can only re-rank — candidates always come from a database query, so the model can never invent a product that isn't sold",
+            "Recommendations that AI can only re-rank: candidates always come from a database query, so the model can never invent a product that isn't sold",
             "Append-only stock ledger with FEFO batch allocation, purchase orders, stock adjustments, and a ledger-drift reconciliation endpoint",
-            "Admin console — inventory, purchase orders, coupons, banners, review moderation, dashboard analytics, and an AI-spend view",
+            "Admin console: inventory, purchase orders, coupons, banners, review moderation, dashboard analytics, and an AI-spend view",
             "Permission-based RBAC with rotating refresh tokens and reuse detection; tokens stored as hashes, never plaintext",
             "Organic-certification tracking (NPOP India Organic / Jaivik Bharat / USDA & EU Organic) with validity windows, and AI product copy constrained by FSSAI/ASCI rules",
             "Back-in-stock alerts that email a shopper the moment a sold-out item is restocked (fired on the 0→positive inventory transition), one-tap Buy Now, secure password reset, and a fully mobile-responsive storefront"
@@ -221,7 +221,7 @@
             }
         ],
         "architecture": {
-            "summary": "A Next.js storefront on Vercel calls a Spring Boot modular monolith on Render over /api/v1, which owns PostgreSQL (Neon) as the source of truth, caches through Redis, and reaches Gemini, Razorpay, and R2 behind narrow adapters. Payments only advance order state on an HMAC-verified webhook — never on a client callback.",
+            "summary": "A Next.js storefront on Vercel calls a Spring Boot modular monolith on Render over /api/v1, which owns PostgreSQL (Neon) as the source of truth, caches through Redis, and reaches Gemini, Razorpay, and R2 behind narrow adapters. Payments only advance order state on an HMAC-verified webhook, never on a client callback.",
             "flow": [
                 {
                     "title": "Next.js 14 storefront",
@@ -243,11 +243,11 @@
         },
         "contribution": [
             "Designed a 60+-table schema with 120+ check constraints and 80+ foreign keys, then proved all 11 money- and stock-critical invariants by attempting to violate each one",
-            "Built the backend as an 11-module monolith with service-level boundaries — modules call each other's services, never each other's tables — as a deliberate, defensible alternative to microservices for a solo product",
+            "Built the backend as an 11-module monolith with service-level boundaries (modules call each other's services, never each other's tables) as a deliberate, defensible alternative to microservices for a solo product",
             "Made Flyway the sole schema owner with Hibernate set to validate-only, turning entity/schema drift into loud boot failures that caught four real bugs before a single request",
             "Routed every AI call through one doorway owning a fail-closed monthly budget, per-call token and INR cost accounting, and a JSON repair pass for Gemini's truncated responses under load",
-            "Shipped reconciliation as product surface — a ledger-drift endpoint and payment-mismatch counters on the admin dashboard, both expected to read zero",
-            "Hardened it with an adversarial pass — browser, API, and raw-SQL attacks on the invariants below the app layer — that caught and fixed real bugs (a stored XSS in JSON-LD structured data, a duplicate-webhook 500 that would have looped the payment gateway, a stock cache that lied after a restock), then seeded a Testcontainers-backed test suite that proves the constraints on real PostgreSQL, not H2"
+            "Shipped reconciliation as product surface: a ledger-drift endpoint and payment-mismatch counters on the admin dashboard, both expected to read zero",
+            "Hardened it with an adversarial pass (browser, API, and raw-SQL attacks on the invariants below the app layer) that caught and fixed real bugs (a stored XSS in JSON-LD structured data, a duplicate-webhook 500 that would have looped the payment gateway, a stock cache that lied after a restock), then seeded a Testcontainers-backed test suite that proves the constraints on real PostgreSQL, not H2"
         ]
     },
     {
@@ -256,7 +256,7 @@
         "title": "Candor",
         "tagline": "An AI-coached anonymous-feedback platform",
         "year": "2024 – 2026",
-        "role": "Solo project — design, development & deployment",
+        "role": "Solo project: design, development & deployment",
         "description": "Anonymous feedback platform that uses AI to moderate messages and turn your inbox into a trackable growth plan, with a real-time inbox.",
         "src": "/projects/candor.png",
         "href": "https://candor-cyan.vercel.app",
@@ -268,21 +268,21 @@
             "Gemini",
             "Redis"
         ],
-        "overview": "Candor lets anyone collect anonymous feedback through a personal link — but instead of stopping at \"you got a message,\" it uses an AI coach to turn that feedback into a structured, trackable growth plan. It ships with a credit economy, real-time updates, AI moderation, and a full admin console.",
-        "problem": "Most anonymous-message apps dump feedback on you and stop there — no moderation, no structure, and no way to actually act on what you hear. Honest feedback is valuable, but raw and unorganized it rarely turns into real change.",
-        "solution": "Candor treats feedback as the start of a loop, not the end. Incoming messages are screened by Gemini for abuse, then an AI coach clusters your inbox into themes and drafts a concrete growth plan that flows through To Do → In Progress → Completed — every task mapped back to the exact feedback that inspired it. An idempotent credit ledger and per-user AI quotas keep the AI usage sustainable, and a real-time inbox streams new messages the moment they arrive.",
+        "overview": "Candor lets anyone collect anonymous feedback through a personal link, but instead of stopping at \"you got a message,\" it uses an AI coach to turn that feedback into a structured, trackable growth plan. It ships with a credit economy, real-time updates, AI moderation, and a full admin console.",
+        "problem": "Most anonymous-message apps dump feedback on you and stop there: no moderation, no structure, and no way to actually act on what you hear. Honest feedback is valuable, but raw and unorganized it rarely turns into real change.",
+        "solution": "Candor treats feedback as the start of a loop, not the end. Incoming messages are screened by Gemini for abuse, then an AI coach clusters your inbox into themes and drafts a concrete growth plan that flows through To Do → In Progress → Completed, every task mapped back to the exact feedback that inspired it. An idempotent credit ledger and per-user AI quotas keep the AI usage sustainable, and a real-time inbox streams new messages the moment they arrive.",
         "features": [
             "Anonymous messaging through a shareable personal link (/user/{username}), with an accept-messages toggle to pause your inbox",
             "Real-time inbox streamed via Server-Sent Events backed by MongoDB change streams",
-            "Inbox analytics — total volume, a 7-day trend, and status breakdowns from a MongoDB aggregation pipeline",
+            "Inbox analytics: total volume, a 7-day trend, and status breakdowns from a MongoDB aggregation pipeline",
             "AI safety moderation (Gemini) that flags abusive content before it reaches you, failing open and backstopped by an admin review queue",
             "AI Feedback Coach that clusters messages into themes and drafts a trackable growth board (To Do → In Progress → Completed), each task mapped to the feedback that inspired it",
             "Progress check-ins against plan tasks, plus a Gemini-powered composer that streams message suggestions to senders",
             "Idempotent, append-only credit ledger with per-user daily AI quotas, redeemable credit bundles, and graceful degradation",
             "NextAuth (email + password and Google OAuth) with email verification and password reset via one-time codes, plus one-click guest login",
-            "Admin console — user management, moderation queue, roadmap editor, app settings, platform stats, and a full audit log",
-            "Pluggable KV store — Upstash Redis for shared rate limiting, caching and quotas, with an in-memory fallback for single-instance dev",
-            "Dark / light / system theme, and production-grade SEO — Metadata API, sitemap, robots, JSON-LD, and an auto-generated Open Graph image",
+            "Admin console: user management, moderation queue, roadmap editor, app settings, platform stats, and a full audit log",
+            "Pluggable KV store: Upstash Redis for shared rate limiting, caching and quotas, with an in-memory fallback for single-instance dev",
+            "Dark / light / system theme, and production-grade SEO: Metadata API, sitemap, robots, JSON-LD, and an auto-generated Open Graph image",
             "Server-side rate limiting on messaging, sign-up and OTP endpoints, defense-in-depth Zod validation at every API boundary, and baseline security headers (X-Frame-Options, nosniff, Referrer-Policy, HSTS)"
         ],
         "stack": [
@@ -351,13 +351,13 @@
             ]
         },
         "contribution": [
-            "Designed feedback as a loop rather than a dead end — an AI coach turns a raw inbox into a themed, trackable growth board, with every task traceable back to the message that prompted it",
+            "Designed feedback as a loop rather than a dead end: an AI coach turns a raw inbox into a themed, trackable growth board, with every task traceable back to the message that prompted it",
             "Built the real-time inbox on Server-Sent Events over MongoDB change streams, so new messages stream in live without polling",
             "Made the credit ledger idempotent and append-only with a unique index on userId + reason + refId, so retries and races can never double-award or double-spend",
-            "Treated AI as a metered resource — per-user daily quotas granted atomically, moderation that fails open for availability, and structured Gemini output (generateObject) so coach and moderation results are typed",
-            "Hardened one-time codes end to end — generated with a CSPRNG, bcrypt-hashed at rest, compared in constant time, single-use, and rate-limited even on the consuming request",
+            "Treated AI as a metered resource: per-user daily quotas granted atomically, moderation that fails open for availability, and structured Gemini output (generateObject) so coach and moderation results are typed",
+            "Hardened one-time codes end to end: generated with a CSPRNG, bcrypt-hashed at rest, compared in constant time, single-use, and rate-limited even on the consuming request",
             "Abstracted scale infra behind a pluggable KV store (Upstash Redis with an in-memory fallback) and validated every environment variable at startup, so the app degrades gracefully and misconfiguration fails fast",
-            "Enforced authorization on the server, never the client — the admin role is resolved server-side (a non-admin can't reach an admin route even by calling the API directly), every delete is scoped to the caller's own document so no one can touch another user's messages, and user input crosses a Zod boundary that also rejects NoSQL operator injection"
+            "Enforced authorization on the server, never the client: the admin role is resolved server-side (a non-admin can't reach an admin route even by calling the API directly), every delete is scoped to the caller's own document so no one can touch another user's messages, and user input crosses a Zod boundary that also rejects NoSQL operator injection"
         ]
     },
     {
@@ -366,8 +366,8 @@
         "title": "SQLPlay",
         "tagline": "An in-browser SQL playground, published on npm",
         "year": "2026",
-        "role": "Solo project — published npm package",
-        "description": "A zero-setup SQL playground that runs a real SQLite database entirely in your browser via WebAssembly — with a schema browser, ER diagrams, and 50 graded SQL challenges. Published on npm and packaged four ways from one codebase.",
+        "role": "Solo project: published npm package",
+        "description": "A zero-setup SQL playground that runs a real SQLite database entirely in your browser via WebAssembly, with a schema browser, ER diagrams, and 50 graded SQL challenges. Published on npm and packaged four ways from one codebase.",
         "src": "/projects/sqlplay.png",
         "href": "https://sqlplay.vercel.app",
         "github": "https://github.com/Yogesh0627/sqlplay",
@@ -378,19 +378,19 @@
             "SQLite",
             "WebAssembly"
         ],
-        "overview": "SQLPlay is an H2-Console-style SQL playground for JavaScript. It runs a real in-memory SQLite database — SQLite 3.49 compiled to WebAssembly via sql.js — entirely in the browser, so anyone can practice SQL with zero backend and zero setup. On top of the console it adds a LeetCode-style Challenge mode with 50 graded problems. It's published on npm and, from a single codebase, ships four ways: a `npx sqlplay` CLI, a headless library, an embeddable React console, and an Express middleware that runs an H2-style backend console.",
-        "problem": "Java developers have the H2 Console for quickly practicing SQL against a throwaway database. JavaScript had no comparable zero-setup equivalent — you either installed a database locally or signed up for an online sandbox. There was a clear gap for an instant, local, no-install SQL playground — and no single package that could double as a headless query engine and a drop-in database console for other apps.",
-        "solution": "SQLPlay puts a friendly console UI on top of sql.js (SQLite compiled to WebAssembly), so a full SQL database runs client-side in the browser with a query editor, schema-aware autocomplete, live schema browser, ER diagram, editable data grid, query history, and CSV/JSON import-export. The core is built around an injectable WASM loader, which lets the exact same engine be delivered four ways from one codebase — the `npx sqlplay` CLI, a headless `createDatabase()` library that also runs in Node, an embeddable `<SqlConsole />` React component, and an Express middleware that keeps the database in your Node process (the true H2 Console model). A Challenge mode compares your result set against a reference solution — order-sensitive where it matters, with numeric tolerance for floats.",
+        "overview": "SQLPlay is an H2-Console-style SQL playground for JavaScript. It runs a real in-memory SQLite database (SQLite 3.49 compiled to WebAssembly via sql.js) entirely in the browser, so anyone can practice SQL with zero backend and zero setup. On top of the console it adds a LeetCode-style Challenge mode with 50 graded problems. It's published on npm and, from a single codebase, ships four ways: a `npx sqlplay` CLI, a headless library, an embeddable React console, and an Express middleware that runs an H2-style backend console.",
+        "problem": "Java developers have the H2 Console for quickly practicing SQL against a throwaway database. JavaScript had no comparable zero-setup equivalent. You either installed a database locally or signed up for an online sandbox. There was a clear gap for an instant, local, no-install SQL playground, and no single package that could double as a headless query engine and a drop-in database console for other apps.",
+        "solution": "SQLPlay puts a friendly console UI on top of sql.js (SQLite compiled to WebAssembly), so a full SQL database runs client-side in the browser with a query editor, schema-aware autocomplete, live schema browser, ER diagram, editable data grid, query history, and CSV/JSON import-export. The core is built around an injectable WASM loader, which lets the exact same engine be delivered four ways from one codebase: the `npx sqlplay` CLI, a headless `createDatabase()` library that also runs in Node, an embeddable `<SqlConsole />` React component, and an Express middleware that keeps the database in your Node process (the true H2 Console model). A Challenge mode compares your result set against a reference solution, order-sensitive where it matters, with numeric tolerance for floats.",
         "features": [
-            "A real in-memory SQLite database (SQLite 3.49) running 100% in the browser via WebAssembly (sql.js) — JOINs, subqueries, window functions, recursive CTEs, triggers, and JSON functions",
-            "Packaged four ways from one codebase — a `npx sqlplay` CLI, a headless library (also runs in Node), an embeddable React console, and an Express middleware for an H2-style backend console",
-            "Challenge mode — 50 graded problems (Easy → Hard) across three datasets, auto-checked against a reference result set with hints, solutions, and local progress tracking",
+            "A real in-memory SQLite database (SQLite 3.49) running 100% in the browser via WebAssembly (sql.js): JOINs, subqueries, window functions, recursive CTEs, triggers, and JSON functions",
+            "Packaged four ways from one codebase: a `npx sqlplay` CLI, a headless library (also runs in Node), an embeddable React console, and an Express middleware for an H2-style backend console",
+            "Challenge mode: 50 graded problems (Easy → Hard) across three datasets, auto-checked against a reference result set with hints, solutions, and local progress tracking",
             "SQL editor with syntax highlighting, schema-aware autocomplete, keyboard-run (Ctrl / ⌘ + Enter), and run-selection",
             "Create and save your own datasets (full DDL with foreign keys) that persist in the browser, plus bundled HR, E-commerce, and University samples",
             "Live schema browser, an auto-laid-out ER diagram with foreign-key edges (exportable as SVG), and an inline editable data grid",
             "Query history, CSV/JSON import that auto-creates typed tables, and export to CSV or a real `.sqlite` file",
-            "Shareable links that encode the dataset and query in the URL hash — nothing is ever sent to a server",
-            "Published and versioned on npm — the SQLite WASM binary is embedded, so it works in Node and any bundler with zero configuration"
+            "Shareable links that encode the dataset and query in the URL hash: nothing is ever sent to a server",
+            "Published and versioned on npm: the SQLite WASM binary is embedded, so it works in Node and any bundler with zero configuration"
         ],
         "stack": [
             {
@@ -421,7 +421,7 @@
             }
         ],
         "architecture": {
-            "summary": "SQLPlay is built around an injectable WASM loader, so one core is delivered four ways. In the browser there is no server — the React UI drives sql.js (SQLite compiled to WebAssembly) running a full in-memory database client-side. As an Express middleware the same engine runs inside your Node process, H2-Console style, with the browser talking to it over an API. The CLI is a tiny dependency-free static server that serves the built app.",
+            "summary": "SQLPlay is built around an injectable WASM loader, so one core is delivered four ways. In the browser there is no server: the React UI drives sql.js (SQLite compiled to WebAssembly) running a full in-memory database client-side. As an Express middleware the same engine runs inside your Node process, H2-Console style, with the browser talking to it over an API. The CLI is a tiny dependency-free static server that serves the built app.",
             "flow": [
                 {
                     "title": "React + Vite UI",
@@ -442,13 +442,13 @@
             ]
         },
         "contribution": [
-            "Designed the core around an injectable WASM loader, so a single engine ships four ways — CLI, headless library, React component, and Express middleware — without duplicating the SQL layer",
+            "Designed the core around an injectable WASM loader, so a single engine ships four ways (CLI, headless library, React component, and Express middleware) without duplicating the SQL layer",
             "Embedded the SQLite WASM binary into the published package so it runs in Node and any bundler (Vite, webpack, Next.js) with zero configuration",
-            "Built a Challenge mode that grades answers by comparing result sets — order-sensitive where it matters, with numeric tolerance for floats — plus hints, solutions, and locally tracked progress",
-            "Hardened the data path through an adversarial audit — reproduced and fixed a second-order SQL injection in CSV import (values are now quoted by column affinity) and a read-only-console bypass (every statement is validated and mutating PRAGMAs rejected), each verified with an attack case before and after",
+            "Built a Challenge mode that grades answers by comparing result sets (order-sensitive where it matters, with numeric tolerance for floats) plus hints, solutions, and locally tracked progress",
+            "Hardened the data path through an adversarial audit: reproduced and fixed a second-order SQL injection in CSV import (values are now quoted by column affinity) and a read-only-console bypass (every statement is validated and mutating PRAGMAs rejected), each verified with an attack case before and after",
             "Kept the client XSS-safe by construction (React-escaped rendering, no innerHTML) and added a top-level error boundary so a single render fault degrades to a recoverable message instead of blanking the app",
             "Backed it with a Playwright end-to-end suite (12 checks, including a crash regression test), HTTP tests for the server guard, and a script that validates all 50 challenge solutions against themselves so the answer key can't rot",
-            "Kept everything client-side and shareable — datasets and queries encode into the URL hash, and user datasets and query history persist in the browser, so nothing is ever sent to a server — and published it on npm, launchable instantly with `npx sqlplay`"
+            "Kept everything client-side and shareable: datasets and queries encode into the URL hash, and user datasets and query history persist in the browser, so nothing is ever sent to a server. Published it on npm, launchable instantly with `npx sqlplay`"
         ]
     },
     {
@@ -457,7 +457,7 @@
         "title": "InsightBlog",
         "tagline": "A serverless, AI-powered publishing platform",
         "year": "2024 – 2026",
-        "role": "Solo project — full-stack architecture & build",
+        "role": "Solo project: full-stack architecture & build",
         "description": "A developer publishing platform with an AI writing assistant, a multi-source trending hub, and built-in creator analytics dashboards.",
         "src": "/projects/insightblog.png",
         "href": "https://insightblog-one.vercel.app",
@@ -471,17 +471,17 @@
             "Gemini"
         ],
         "overview": "InsightBlog is a publishing platform built to feel like a production SaaS product rather than a Medium clone. Beyond writing and publishing, it helps creators discover trending topics, improve drafts with AI, and understand exactly how their content performs.",
-        "problem": "A basic blog app is just CRUD. Real creators need more: to know what to write about, to improve their drafts, and to understand what actually lands with readers — capabilities that generic blogging tools simply don't provide.",
-        "solution": "A domain-driven, serverless platform delivered across five phases. The backend runs on Hono + Prisma + Neon Postgres on Cloudflare Workers, with JWT auth (access/refresh, RBAC), a full blog lifecycle, and a social graph. An AI assistant helps improve writing, suggests SEO and topics, and produces a grounded engagement forecast — a heuristic over readability and history rather than fabricated predictions — with a graceful mock fallback when AI is unavailable.",
+        "problem": "A basic blog app is just CRUD. Real creators need more: to know what to write about, to improve their drafts, and to understand what actually lands with readers, capabilities that generic blogging tools simply don't provide.",
+        "solution": "A domain-driven, serverless platform delivered across five phases. The backend runs on Hono + Prisma + Neon Postgres on Cloudflare Workers, with JWT auth (access/refresh, RBAC), a full blog lifecycle, and a social graph. An AI assistant helps improve writing, suggests SEO and topics, and produces a grounded engagement forecast (a heuristic over readability and history rather than fabricated predictions) with a graceful mock fallback when AI is unavailable.",
         "features": [
-            "Secure auth — JWT access/refresh tokens, RBAC, Google OAuth sign-in, email verification, and password reset",
-            "Full blog lifecycle — TipTap rich-text editor, draft, scheduled publishing, version history, categories, and R2 image upload",
-            "Social graph — threaded comments, likes, bookmarks, follows, notifications, and tag-based recommendations",
-            "AI assistant — improve-writing, SEO and topic suggestions, cover ideas, and engagement forecast",
+            "Secure auth: JWT access/refresh tokens, RBAC, Google OAuth sign-in, email verification, and password reset",
+            "Full blog lifecycle: TipTap rich-text editor, draft, scheduled publishing, version history, categories, and R2 image upload",
+            "Social graph: threaded comments, likes, bookmarks, follows, notifications, and tag-based recommendations",
+            "AI assistant: improve-writing, SEO and topic suggestions, cover ideas, and engagement forecast",
             "Multi-source Trending Hub surfacing what to write next",
             "Reading progress tracking and history feeding personalized recommendations",
             "Author and admin analytics dashboards with charts",
-            "Production-hardened — stored-XSS sanitization, security headers, CORS allowlist, ownership-enforced access control, per-IP auth brute-force + per-user AI rate limiting, and a GitHub Actions CI pipeline",
+            "Production-hardened: stored-XSS sanitization, security headers, CORS allowlist, ownership-enforced access control, per-IP auth brute-force + per-user AI rate limiting, and a GitHub Actions CI pipeline",
             "Shared Zod DTOs across client and server in an npm-workspaces monorepo"
         ],
         "stack": [
@@ -552,11 +552,11 @@
             ]
         },
         "contribution": [
-            "Structured the whole backend as a domain-driven, serverless Hono app on Cloudflare Workers — routes → controller → service → repository per domain — so features slot in without tangling the request flow",
-            "Kept every external dependency optional behind a graceful fallback: the AI assistant drops to a deterministic mock without a Gemini key, image uploads no-op without an R2 binding, and email logs to the console without Resend — the app never hard-fails on missing config",
+            "Structured the whole backend as a domain-driven, serverless Hono app on Cloudflare Workers (routes → controller → service → repository per domain) so features slot in without tangling the request flow",
+            "Kept every external dependency optional behind a graceful fallback: the AI assistant drops to a deterministic mock without a Gemini key, image uploads no-op without an R2 binding, and email logs to the console without Resend: the app never hard-fails on missing config",
             "Made the engagement forecast an honest heuristic over readability, structure, and history rather than a fabricated number, with the AI only writing the human explanation",
             "Aggregated a multi-source Trending Hub through a single provider interface, fanning out keyless sources (Hacker News, GitHub, Dev.to, Reddit, RSS) with Promise.allSettled and ranking them to a 0–100 heat score",
-            "Hardened it for production — stored-XSS sanitization on save and render, per-resource ownership checks (a rival user gets a 403, never someone else's data), a CORS allowlist, security headers, per-IP auth brute-force plus per-user AI rate limiting, and a GitHub Actions CI pipeline that builds, type-checks, and tests all three workspace packages"
+            "Hardened it for production: stored-XSS sanitization on save and render, per-resource ownership checks (a rival user gets a 403, never someone else's data), a CORS allowlist, security headers, per-IP auth brute-force plus per-user AI rate limiting, and a GitHub Actions CI pipeline that builds, type-checks, and tests all three workspace packages"
         ]
     },
     {
@@ -566,7 +566,7 @@
         "tagline": "A multi-tenant HR performance-management platform",
         "year": "2024 – Present",
         "role": "Software Engineer @ WoCo (enterprise product)",
-        "description": "Multi-tenant HR platform for performance reviews — goal & KPI tracking, 360° feedback, cycle timelines, and AI-generated appraisal questions.",
+        "description": "Multi-tenant HR platform for performance reviews: goal & KPI tracking, 360° feedback, cycle timelines, and AI-generated appraisal questions.",
         "src": "/projects/woco-pms.png",
         "href": "https://woco.co.in/performance-management-system/",
         "tech": [
@@ -578,8 +578,8 @@
             "Redis",
             "OpenAI"
         ],
-        "overview": "WoCo PMS is a multi-tenant HR performance-management platform used by client organizations to run their entire review process — a React SPA backed by a Node/TypeScript API. It replaces slow, spreadsheet-driven annual reviews with a continuous, real-time performance system.",
-        "problem": "Traditional performance reviews are annual, manual, and disconnected — HR teams juggle spreadsheets for goals, 360° feedback, and appraisals across many client organizations, with no single source of truth and no real-time visibility.",
+        "overview": "WoCo PMS is a multi-tenant HR performance-management platform used by client organizations to run their entire review process: a React SPA backed by a Node/TypeScript API. It replaces slow, spreadsheet-driven annual reviews with a continuous, real-time performance system.",
+        "problem": "Traditional performance reviews are annual, manual, and disconnected: HR teams juggle spreadsheets for goals, 360° feedback, and appraisals across many client organizations, with no single source of truth and no real-time visibility.",
         "solution": "A multi-tenant platform that runs the full review cycle in one place: goal and KPI tracking, 360° feedback with reviewer-visibility rules, per-cycle performance timelines, and an AI question generator (OpenAI) that drafts weightage-balanced KPI, 360, competency, and PLI questions. Each tenant is isolated with its own data, and a bulk Excel pipeline lets HR import questions at scale.",
         "features": [
             "Goal & KPI tracking across review cycles",
@@ -664,10 +664,10 @@
             ]
         },
         "contribution": [
-            "Core engineer and #1 frontend contributor — integrated 100+ APIs, built 200+ reusable MUI components, and implemented Redux Toolkit state management",
+            "Core engineer and #1 frontend contributor: integrated 100+ APIs, built 200+ reusable MUI components, and implemented Redux Toolkit state management",
             "Led a backend refactoring & performance initiative that raised the codebase's documented quality score from 4.5 to 8.6/10",
             "Cut authenticated-request overhead ~145ms → ~35ms (~4× faster) with a fail-open Redis cache, and added 44 MongoDB indexes for 100–500× faster indexed queries",
-            "Built the AI question-generator UI and the bulk Excel-upload flow, and hardened the platform — closing 10 SQL-injection points and fixing 25+ critical bugs"
+            "Built the AI question-generator UI and the bulk Excel-upload flow, and hardened the platform, closing 10 SQL-injection points and fixing 25+ critical bugs"
         ]
     }
 ]

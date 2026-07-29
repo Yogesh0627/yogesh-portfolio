@@ -21,11 +21,11 @@ const timelineData: TimelineDataType[] = [
         title: "2026",
         content: [
             {
-                title: "Built ClaimLens — a multi-tenant insurance claims platform",
-                description: "A four-service system — Spring Boot, Next.js, and two Python/FastAPI services — that reads claim documents with OCR, checks damage photos for reuse and tampering, and scores fraud risk with a rules engine that explains every decision it makes."
+                title: "Built ClaimLens: a multi-tenant insurance claims platform",
+                description: "A four-service system (Spring Boot, Next.js, and two Python/FastAPI services) that reads claim documents with OCR, checks damage photos for reuse and tampering, and scores fraud risk with a rules engine that explains every decision it makes."
             },
             {
-                title: "Shipped EcoExpress — an AI-assisted organic grocery platform",
+                title: "Shipped EcoExpress: an AI-assisted organic grocery platform",
                 description: "Stepped outside the JS stack to build a Java 21 / Spring Boot modular monolith behind a Next.js storefront, pushing the money- and stock-critical rules down into Postgres constraints so a bug in application code can't corrupt an order or oversell inventory."
             },
             {
@@ -33,11 +33,11 @@ const timelineData: TimelineDataType[] = [
                 description: "Refactored god-controllers into a clean layered architecture, raised the codebase's documented quality score from 4.5 to 8.6/10, and cut authenticated-request overhead ~4× with a Redis cache and 44 MongoDB indexes."
             },
             {
-                title: "Relaunched Candor — an AI-coached feedback platform",
-                description: "Completely rebuilt a project I first started in 2024 — anonymous feedback with Gemini-powered moderation and an AI growth coach (Next.js, MongoDB, Redis)."
+                title: "Relaunched Candor: an AI-coached feedback platform",
+                description: "Completely rebuilt a project I first started in 2024: anonymous feedback with Gemini-powered moderation and an AI growth coach (Next.js, MongoDB, Redis)."
             },
             {
-                title: "Rebuilt InsightBlog — an AI publishing platform",
+                title: "Rebuilt InsightBlog: an AI publishing platform",
                 description: "Revamped my developer publishing platform end-to-end, adding an AI writing assistant and analytics on Hono + Prisma + Cloudflare Workers."
             }
         ]
@@ -47,7 +47,7 @@ const timelineData: TimelineDataType[] = [
         content: [
             {
                 title: "Became the top frontend contributor on WoCo PMS",
-                description: "Owned the frontend architecture of the multi-tenant HR platform — a typed API service layer, route-level code-splitting, and skeleton loaders for a fast, polished UI."
+                description: "Owned the frontend architecture of the multi-tenant HR platform: a typed API service layer, route-level code-splitting, and skeleton loaders for a fast, polished UI."
             }
         ]
     },
@@ -73,7 +73,7 @@ const timelineData: TimelineDataType[] = [
         content: [
             {
                 title: "Completed intensive full-stack training",
-                description: "Sharpened my engineering fundamentals through the Masai School scholar program and the 100x Devs full-stack program — React, Node.js, and MongoDB."
+                description: "Sharpened my engineering fundamentals through the Masai School scholar program and the 100x Devs full-stack program: React, Node.js, and MongoDB."
             },
             {
                 title: "Built my first full-stack projects",
